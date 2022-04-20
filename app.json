@@ -1,0 +1,55 @@
+{
+	"name": "Bottus",
+	"description": " Whatsapp bot.",
+	"keywords": [
+		"whatsapp",
+		"bot"
+	],
+	"repository": "https://github.com/lyfe0010/whatsapp-bot-md",
+	"stack": "container",
+	"env": {
+		"ALWAYS_ONLINE": {
+			"description": "show online",
+			"required": false,
+			"value": "false"
+		},
+		"LOG_MSG": {
+			"description": "log whatsapp msgs",
+			"required": false,
+			"value": "false"
+		},
+		"SUDO": {
+			"description": "admin",
+			"required": true,
+			"value": "null"
+		},
+		"PREFIX": {
+			"description": "prefix",
+			"required": true,
+			"value": "."
+		},
+		"SESSION_ID": {
+			"description": "session id",
+			"required": true,
+			"value": ""
+		},
+		"STICKER_PACKNAME": {
+			"description": "sticker pack info",
+			"required": true,
+			"value": "❤️,LyFE"
+		},
+		"HEROKU_APP_NAME": {
+			"description": "Heroku app name, same as above entered",
+			"required": true
+		},
+		"HEROKU_API_KEY": {
+			"description": "Heroku account api key, https://dashboard.heroku.com/account",
+			"required": true
+		}
+	},
+	"addons": [
+		{
+			"plan": "heroku-postgresql"
+		}
+	]
+}

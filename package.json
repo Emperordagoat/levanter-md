@@ -1,0 +1,38 @@
+{
+	"name": "whatsapp-bot-md",
+	"version": "2.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "supervisor -w . index.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@adiwajshing/baileys": "git+https://github.com/adiwajshing/Baileys.git",
+		"axios": "^0.26.1",
+		"browser-id3-writer": "^4.4.0",
+		"cheerio": "^1.0.0-rc.10",
+		"cookie": "^0.5.0",
+		"dotenv": "^16.0.0",
+		"file-type": "^17.1.1",
+		"fluent-ffmpeg": "^2.1.2",
+		"form-data": "^4.0.0",
+		"fs-extra": "^10.0.1",
+		"got": "11.8.3",
+		"heroku-client": "^3.1.0",
+		"moment": "^2.29.1",
+		"node-fetch": "2.6.3",
+		"node-html-parser": "^5.3.3",
+		"node-webpmux": "^3.1.1",
+		"pg": "^8.7.3",
+		"qrcode-terminal": "^0.12.0",
+		"sequelize": "^6.19.0",
+		"sharp": "^0.30.3",
+		"simple-git": "^3.6.0",
+		"sqlite3": "^5.0.3",
+		"supervisor": "^0.12.0",
+		"youtubei.js": "^1.4.0-c"
+	}
+}
