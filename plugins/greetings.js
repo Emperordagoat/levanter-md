@@ -28,7 +28,7 @@ bot(
 						{
 							urlButton: {
 								text: 'Example',
-								url: 'https://github.com/lyfe00011/wa-bot/wiki/Greetings',
+								url: 'https://github.com/lyfe00011//whatsapp-bot-md/wiki/Greetings',
 							},
 						},
 						{ button: { id: 'welcome on', text: 'ON' } },
@@ -78,7 +78,7 @@ bot(
 					[
 						{
 							urlButton: {
-								url: 'https://github.com/lyfe00011/wa-bot/wiki/Greetings',
+								url: 'https://github.com/lyfe00011/whatsapp-bot-md/wiki/Greetings',
 								text: 'Example',
 							},
 						},
