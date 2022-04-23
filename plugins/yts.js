@@ -1,4 +1,11 @@
-const { bot, yts, song, video, addAudioMetaData } = require('../lib/')
+const {
+	bot,
+	yts,
+	song,
+	video,
+	addAudioMetaData,
+	genListMessage,
+} = require('../lib/')
 const ytIdRegex =
 	/(?:http(?:s|):\/\/|)(?:(?:www\.|)youtube(?:\-nocookie|)\.com\/(?:watch\?.*(?:|\&)v=|embed|shorts\/|v\/)|youtu\.be\/)([-_0-9A-Za-z]{11})/
 
@@ -32,19 +39,36 @@ bot(
 		match = match || message.reply_message.text
 		if (!match) return await message.sendMessage('*Example : song darari*')
 		const vid = ytIdRegex.exec(match)
-		const result = await yts((vid && vid[1]) || match)
-		const { id, author, title, metadata } = result[0]
-		return await message.sendMessage(
-			await addAudioMetaData(
-				await song(id),
-				title,
-				author,
-				'',
-				metadata.thumbnails[0].url.split('?')[0]
-			),
-			{ quoted: message.data, mimetype: 'audio/mpeg' },
-			'audio'
-		)
+		if (vid) {
+			const [result] = await yts(vid[1])
+			const { id, author, title, metadata } = result
+			return await message.sendMessage(
+				await addAudioMetaData(
+					await song(id),
+					title,
+					author,
+					'',
+					metadata.thumbnails[0].url.split('?')[0]
+				),
+				{ quoted: message.data, mimetype: 'audio/mpeg' },
+				'audio'
+			)
+		} else {
+			const result = await yts(match)
+			return await message.sendMessage(
+				genListMessage(
+					result.map(({ title, url, description }) => ({
+						text: title,
+						id: `song ${url}`,
+						desc: description,
+					})),
+					'Choose Your Song',
+					'DOWNLOAD'
+				),
+				{},
+				'list'
+			)
+		}
 	}
 )
 
