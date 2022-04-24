@@ -45,6 +45,11 @@
 		"HEROKU_API_KEY": {
 			"description": "Heroku account api key, https://dashboard.heroku.com/account",
 			"required": true
+		},
+		"RMBG_KEY":{
+			"description": "API key from remove.bg, required for plugin rmbg",
+			"required": true,
+			"value": "null"
 		}
 	},
 	"addons": [

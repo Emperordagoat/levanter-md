@@ -34,4 +34,5 @@ module.exports = {
 	STICKER_PACKNAME: process.env.STICKER_PACKNAME || '❤️,LyFE',
 	ALWAYS_ONLINE: toBool(process.env.ALWAYS_ONLINE) || false,
 	LOG_MSG: toBool(process.env.LOG_MSG) || false,
+	RMBG_KEY: process.env.RMBG_KEY || 'null',
 }
