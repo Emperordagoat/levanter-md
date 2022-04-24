@@ -9,7 +9,7 @@ bot(
 	},
 	async (message, match) => {
 		if (config.RMBG_KEY == 'null')
-			return await message.sendMessage(`1. Create a account in remove.bg
+			return await message.sendMessage(`    1. Create a account in remove.bg
     2. Verify your account.
     3. Copy your Key.
     4. .setvar RMBG_KEY:copied_key

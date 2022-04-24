@@ -20,10 +20,18 @@ bot(
 		const participants = await message.groupMetadata(message.jid)
 		const isImAdmin = await isAdmin(participants, message.client.user.jid)
 		if (!isImAdmin) return await message.sendMessage(`_I'm not admin._`)
-		const user = message.mention[0] || message.reply_message.jid
+		let user =
+			message.mention[0] ||
+			message.reply_message.jid ||
+			(match == 'all' && match)
 		if (!user) return await message.sendMessage(`_Give me a user_`)
-		const isUserAdmin = await isAdmin(participants, user)
+		const isUserAdmin = user != 'all' && (await isAdmin(participants, user))
 		if (isUserAdmin) return await message.sendMessage(`_User is admin._`)
+		if (user == 'all') {
+			user = participants
+				.filter((member) => !member.admin == true)
+				.map(({ id }) => id)
+		}
 		return await message.Kick(user)
 	}
 )
