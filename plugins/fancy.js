@@ -1,4 +1,4 @@
-const { bot, textToStylist, fontType } = require('../lib')
+const { bot, textToStylist, fontType, stylishTextGen } = require('../lib')
 bot(
 	{
 		pattern: 'fancy ?(.*)',
@@ -14,6 +14,6 @@ bot(
 				textToStylist(message.reply_message.text, fontType(match))
 			)
 		}
-		return await message.sendMessage('```' + stylishTextGen(match) + '```')
+		return await message.sendMessage(stylishTextGen(match))
 	}
 )
