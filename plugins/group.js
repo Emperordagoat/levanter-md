@@ -31,6 +31,10 @@ bot(
 			user = participants
 				.filter((member) => !member.admin == true)
 				.map(({ id }) => id)
+			await message.sendMessage(
+				`_kicking everyone(${user.length})_\n*Restart bot if u wanna stop.*`
+			)
+			await sleep(10 * 1000)
 		}
 		return await message.Kick(user)
 	}
