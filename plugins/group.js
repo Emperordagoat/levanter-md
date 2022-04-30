@@ -59,7 +59,7 @@ bot(
 		match = match.split(' ').map((num) => numToJid(num))
 		const res = await message.Add(match)
 		if (res == '403') return await message.sendMessage('_Failed, Invite sent_')
-		else if (res != '200')
+		else if (res && res != '200')
 			return await message.sendMessage(res, { quoted: message.data })
 	}
 )
