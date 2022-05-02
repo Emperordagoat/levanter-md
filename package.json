@@ -1,6 +1,6 @@
 {
 	"name": "whatsapp-bot-md",
-	"version": "2.2.3",
+	"version": "2.2.4",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
@@ -10,7 +10,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@adiwajshing/baileys": "git+https://github.com/lyfe00011/Baileys.git",
+		"@adiwajshing/baileys": "git+https://github.com/adiwajshing/Baileys.git",
 		"axios": "^0.26.1",
 		"browser-id3-writer": "^4.4.0",
 		"cheerio": "^1.0.0-rc.10",
@@ -20,6 +20,7 @@
 		"fluent-ffmpeg": "^2.1.2",
 		"form-data": "^4.0.0",
 		"fs-extra": "^10.0.1",
+		"google-tts-api": "^2.0.2",
 		"got": "11.8.3",
 		"heroku-client": "^3.1.0",
 		"moment": "^2.29.1",
