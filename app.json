@@ -9,12 +9,12 @@
 	"stack": "container",
 	"env": {
 		"ALWAYS_ONLINE": {
-			"description": "show online",
+			"description": "show bot number last seen as online",
 			"required": false,
 			"value": "false"
 		},
 		"LOG_MSG": {
-			"description": "log whatsapp msgs",
+			"description": "Show whatsapp msgs in log",
 			"required": false,
 			"value": "false"
 		},
@@ -24,7 +24,7 @@
 			"value": "null"
 		},
 		"PREFIX": {
-			"description": "prefix",
+			"description": "prefix, check for more",
 			"required": true,
 			"value": "."
 		},
@@ -46,10 +46,15 @@
 			"description": "Heroku account api key, https://dashboard.heroku.com/account",
 			"required": true
 		},
-		"RMBG_KEY":{
+		"RMBG_KEY": {
 			"description": "API key from remove.bg, required for plugin rmbg",
 			"required": true,
 			"value": "null"
+		},
+		"LANG": {
+			"description": "Default Language for tts or trt",
+			"required": false,
+			"value": "en"
 		}
 	},
 	"addons": [

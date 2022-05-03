@@ -16,7 +16,7 @@ bot(
 				quoted: message.quoted,
 			})
 		return await message.sendMessage(
-			genButtonMessage(
+			await genButtonMessage(
 				result.map((e) => ({
 					id: `upload ${e.url}`,
 					text: e.quality,

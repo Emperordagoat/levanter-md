@@ -11,7 +11,7 @@ bot(
 	async (message, match) => {
 		if (!match)
 			await message.sendMessage(
-				genButtonMessage(
+				await genButtonMessage(
 					[
 						{ id: 'pdm on', text: 'ON' },
 						{ id: 'pdm off', text: 'OFF' },

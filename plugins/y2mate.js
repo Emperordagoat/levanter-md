@@ -38,7 +38,7 @@ bot(
 				quoted: message.quoted,
 			})
 		return await message.sendMessage(
-			genButtonMessage(buttons, title, ''),
+			await genButtonMessage(buttons, title, ''),
 			{},
 			'button'
 		)

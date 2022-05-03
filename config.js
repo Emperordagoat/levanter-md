@@ -36,4 +36,5 @@ module.exports = {
 	LOG_MSG: toBool(process.env.LOG_MSG) || false,
 	RMBG_KEY: process.env.RMBG_KEY || 'null',
 	BAILEYS_LOG_LVL: process.env.BAILEYS_LOG_LVL || 'silent',
+	LANG: process.env.LANG || 'en',
 }
