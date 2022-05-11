@@ -21,7 +21,7 @@ bot(
 		await heroku
 			.get(baseURI + '/formation')
 			.then(async (formation) => {
-				await message.sendMessage(`_Shuttind down._`)
+				await message.sendMessage(`_Shutting down._`)
 				await heroku.patch(baseURI + '/formation/' + formation[0].id, {
 					body: {
 						quantity: 0,
@@ -189,7 +189,11 @@ bot(
 				'*Bot is up-to-date.*\n*Nothing to Update.*'
 			)
 		await message.sendMessage('_Updating..._')
-		await updateNow()
+		try {
+			await updateNow()
+		} catch (error) {
+			return await message.sendMessage(error)
+		}
 		return await message.sendMessage('_Updated_')
 	}
 )
