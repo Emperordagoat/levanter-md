@@ -61,20 +61,14 @@ bot(
 			})
 		const vid = ytIdRegex.exec(match)
 		const audio = await y2mate.get(vid[1])
-		const video = await yts((vid && vid[1]) || match)
-		const { author, title, metadata, thumbnail } = video[0]
+		const [video] = await yts(vid[1], true)
+		const { author, title, thumbnail } = video
 		const result = await y2mate.dl(vid[1], 'audio')
 		const { buffer } = await getBuffer(result)
 		if (!buffer)
 			return await message.sendMessage(result, { quoted: message.data })
 		return await message.sendMessage(
-			await addAudioMetaData(
-				buffer,
-				title,
-				author,
-				'',
-				thumbnail && thumbnail.url || metadata.thumbnails[0].url.split('?')[0]
-			),
+			await addAudioMetaData(buffer, title, author, '', thumbnail.url),
 			{ quoted: message.data, mimetype: 'audio/mpeg' },
 			'audio'
 		)

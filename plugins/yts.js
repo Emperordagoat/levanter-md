@@ -40,7 +40,7 @@ bot(
 		if (!match) return await message.sendMessage('*Example : song darari*')
 		const vid = ytIdRegex.exec(match)
 		if (vid) {
-			const [result] = await yts(vid[1])
+			const [result] = await yts(vid[1], true)
 			const { id, author, title, thumbnail } = result
 			return await message.sendMessage(
 				await addAudioMetaData(
