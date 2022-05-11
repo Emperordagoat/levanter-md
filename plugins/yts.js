@@ -41,14 +41,14 @@ bot(
 		const vid = ytIdRegex.exec(match)
 		if (vid) {
 			const [result] = await yts(vid[1])
-			const { id, author, title, metadata } = result
+			const { id, author, title, thumbnail } = result
 			return await message.sendMessage(
 				await addAudioMetaData(
 					await song(id),
 					title,
 					author,
 					'',
-					metadata.thumbnails[0].url.split('?')[0]
+					thumbnail.url
 				),
 				{ quoted: message.data, mimetype: 'audio/mpeg' },
 				'audio'
