@@ -7,7 +7,7 @@ const DATABASE_URL =
 		? './database.db'
 		: process.env.DATABASE_URL
 module.exports = {
-	VERSION: '2.2.6',
+	VERSION: '2.2.7',
 	SESSION_ID: process.env.SESSION_ID || '',
 	DATABASE:
 		DATABASE_URL === './database.db'
@@ -36,5 +36,5 @@ module.exports = {
 	LOG_MSG: toBool(process.env.LOG_MSG) || false,
 	RMBG_KEY: process.env.RMBG_KEY || 'null',
 	BAILEYS_LOG_LVL: process.env.BAILEYS_LOG_LVL || 'silent',
-	LANG: process.env.LANG || 'en',
+	LANG: (process.env.LANGUAG || 'en').toLowerCase(),
 }

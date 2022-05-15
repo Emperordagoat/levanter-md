@@ -51,7 +51,7 @@
 			"required": true,
 			"value": "null"
 		},
-		"LANG": {
+		"LANGUAG": {
 			"description": "Default Language for tts or trt",
 			"required": false,
 			"value": "en"
