@@ -32,7 +32,10 @@ bot(
 		const { title, video } = await y2mate.get(vid[1])
 		const buttons = []
 		for (const q in video)
-			buttons.push({ text: q, id: `ytv y2mate;${q};${vid[1]}` })
+			buttons.push({
+				text: `${q}(${video[q].fileSizeH})`,
+				id: `ytv y2mate;${q};${vid[1]}`,
+			})
 		if (!buttons.length)
 			return await message.sendMessage('*Not found*', {
 				quoted: message.quoted,
