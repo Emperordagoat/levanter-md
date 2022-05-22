@@ -6,7 +6,12 @@ const heroku = new Heroku({ token: Config.HEROKU_API_KEY })
 const baseURI = '/apps/' + Config.HEROKU_APP_NAME
 
 bot(
-	{ pattern: 'restart', fromMe: true, desc: 'Restart Dyno', type: 'heroku' },
+	{
+		pattern: 'restart',
+		fromMe: true,
+		desc: 'Restart Dyno',
+		type: 'heroku',
+	},
 	async (message, match) => {
 		await message.sendMessage(`_Restarting_`)
 		await heroku.delete(baseURI + '/dynos').catch(async (error) => {
@@ -16,12 +21,17 @@ bot(
 )
 
 bot(
-	{ pattern: 'shutdown', fromMe: true, desc: 'Dyno off', type: 'heroku' },
+	{
+		pattern: 'shutdown',
+		fromMe: true,
+		desc: 'Dyno off',
+		type: 'heroku',
+	},
 	async (message, match) => {
 		await heroku
 			.get(baseURI + '/formation')
 			.then(async (formation) => {
-				await message.sendMessage(`_Shutting down._`)
+				await message.sendMessage(`_Shuttind down._`)
 				await heroku.patch(baseURI + '/formation/' + formation[0].id, {
 					body: {
 						quantity: 0,
@@ -35,7 +45,12 @@ bot(
 )
 
 bot(
-	{ pattern: 'dyno', fromMe: true, desc: 'Show Quota info', type: 'heroku' },
+	{
+		pattern: 'dyno',
+		fromMe: true,
+		desc: 'Show Quota info',
+		type: 'heroku',
+	},
 	async (message, match) => {
 		try {
 			heroku
@@ -150,7 +165,12 @@ bot(
 )
 
 bot(
-	{ pattern: 'allvar', fromMe: true, desc: 'Heroku all env', type: 'heroku' },
+	{
+		pattern: 'allvar',
+		fromMe: true,
+		desc: 'Heroku all env',
+		type: 'heroku',
+	},
 	async (message, match) => {
 		let msg = '```Here your all Heroku vars\n\n\n'
 		heroku
@@ -168,7 +188,11 @@ bot(
 )
 
 bot(
-	{ pattern: 'update$', fromMe: true, desc: 'Check new updates.' },
+	{
+		pattern: 'update$',
+		fromMe: true,
+		desc: 'Check new updates.',
+	},
 	async (message, match) => {
 		const update = await isUpdate()
 		if (!update.length) return await message.sendMessage('*Bot is up-to-date.*')
@@ -189,11 +213,8 @@ bot(
 				'*Bot is up-to-date.*\n*Nothing to Update.*'
 			)
 		await message.sendMessage('_Updating..._')
-		try {
-			await updateNow()
-		} catch (error) {
-			return await message.sendMessage(error)
-		}
+		const e = await updateNow()
+		if(e) return await message.sendMessage(e)
 		return await message.sendMessage('_Updated_')
 	}
 )
