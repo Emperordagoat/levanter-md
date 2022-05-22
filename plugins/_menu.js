@@ -25,7 +25,7 @@ bot.addCommand(
 │ User : ${message.pushName}
 │ Time : ${date.toLocaleTimeString()}
 │ Day : ${date.toLocaleString('en', { weekday: 'long' })}
-│ Date : ${date.toLocaleDateString()}
+│ Date : ${date.toLocaleDateString('hi')}
 │ Version : ${VERSION}
 │ Plugins : ${PLUGINS.count}
 │ Uptime : ${getUptime()}
