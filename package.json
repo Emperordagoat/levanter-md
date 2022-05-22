@@ -1,6 +1,6 @@
 {
-	"name": "whatsapp-bot-md",
-	"version": "2.2.8",
+	"name": "levanter",
+	"version": "3.0.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {

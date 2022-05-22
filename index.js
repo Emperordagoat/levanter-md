@@ -1,8 +1,8 @@
 const client = require('./lib/client')
-const { DATABASE } = require('./config')
+const { DATABASE, VERSION } = require('./config')
 const start = async () => {
 	try {
-		console.log('whatsapp-bot-md')
+		console.log(`levanter ${VERSION}`)
 		await DATABASE.sync()
 		console.log('DB syncing')
 		await client.connect()

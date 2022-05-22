@@ -1,13 +1,35 @@
 const bot = require('../lib/events')
-const { ctt, addSpace, textToStylist } = require('../lib/')
-
+const {
+	ctt,
+	addSpace,
+	textToStylist,
+	PREFIX,
+	getUptime,
+	PLUGINS,
+} = require('../lib/')
+const { VERSION } = require('../config')
 bot.addCommand(
-	{ pattern: 'menu ?(.*)', fromMe: true, dontAddCommandList: true },
+	{
+		pattern: 'menu ?(.*)',
+		fromMe: true,
+		dontAddCommandList: true,
+	},
 	async (message, match) => {
+		const date = new Date()
 		let CMD_HELP = `╭────────────────╮
-    				ᴡᴀ-ʙᴏᴛ
+						ʟᴇᴠᴀɴᴛᴇʀ
 ╰────────────────╯
 
+╭────────────────
+│ Prefix : ${PREFIX}
+│ User : ${message.pushName}
+│ Time : ${date.toLocaleTimeString()}
+│ Day : ${date.toLocaleString('en', { weekday: 'long' })}
+│ Date : ${date.toLocaleDateString()}
+│ Version : ${VERSION}
+│ Plugins : ${PLUGINS.count}
+│ Uptime : ${getUptime()}
+╰────────────────
 ╭────────────────
 `
 		const commands = []

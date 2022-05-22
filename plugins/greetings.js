@@ -19,7 +19,7 @@ bot(
 	async (message, match) => {
 		const welcome = await getMessage(message.jid, 'welcome')
 		if (!match && !welcome)
-			return await message.sendMessage('*Example : welcome Hi #mention*')
+			return await message.sendMessage('*Example : welcome Hi &mention*')
 		if (!match) {
 			await message.sendMessage(welcome.message)
 			return await message.sendMessage(
@@ -70,7 +70,7 @@ bot(
 	async (message, match) => {
 		const welcome = await getMessage(message.jid, 'goodbye')
 		if (!match && !welcome)
-			return await message.sendMessage('*Example : goodbye Bye #mention*')
+			return await message.sendMessage('*Example : goodbye Bye &mention*')
 		if (!match) {
 			await message.sendMessage(welcome.message)
 			return await message.sendMessage(
