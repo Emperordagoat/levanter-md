@@ -31,7 +31,7 @@ bot(
 		await heroku
 			.get(baseURI + '/formation')
 			.then(async (formation) => {
-				await message.sendMessage(`_Shuttind down._`)
+				await message.sendMessage(`_Shutting down._`)
 				await heroku.patch(baseURI + '/formation/' + formation[0].id, {
 					body: {
 						quantity: 0,
@@ -192,6 +192,7 @@ bot(
 		pattern: 'update$',
 		fromMe: true,
 		desc: 'Check new updates.',
+		type: 'heroku',
 	},
 	async (message, match) => {
 		const update = await isUpdate()
@@ -205,6 +206,7 @@ bot(
 		pattern: 'update now$',
 		fromMe: true,
 		desc: 'To-Up-Date bot.',
+		type: 'heroku',
 	},
 	async (message, match) => {
 		const isupdate = await isUpdate()
