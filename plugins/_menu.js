@@ -28,7 +28,7 @@ bot.addCommand(
 │ Date : ${date.toLocaleDateString('hi')}
 │ Version : ${VERSION}
 │ Plugins : ${PLUGINS.count}
-│ Uptime : ${getUptime()}
+│ Uptime : ${getUptime('t')}
 ╰────────────────
 ╭────────────────
 `
