@@ -6,6 +6,7 @@ const {
 	PREFIX,
 	getUptime,
 	PLUGINS,
+	getRam,
 } = require('../lib/')
 const { VERSION } = require('../config')
 bot.addCommand(
@@ -28,6 +29,7 @@ bot.addCommand(
 │ Date : ${date.toLocaleDateString('hi')}
 │ Version : ${VERSION}
 │ Plugins : ${PLUGINS.count}
+│ Ram : ${getRam()}
 │ Uptime : ${getUptime('t')}
 ╰────────────────
 ╭────────────────
