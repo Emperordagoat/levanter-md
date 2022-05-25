@@ -118,8 +118,11 @@ bot({ pattern: 'reverse', fromMe: true, desc: '' }, async (message, match) => {
 })
 
 bot({ pattern: 'cut ?(.*)', fromMe: fm, desc: '' }, async (message, match) => {
-	if (!message.reply_message || !message.reply_message.audio)
-		return await message.sendMessage('*Reply to a audio.*')
+	if (
+		!message.reply_message ||
+		(!message.reply_message.audio && !message.reply_message.video)
+	)
+		return await message.sendMessage('*Reply to a audio/video.*')
 	if (!match) return await message.sendMessage('*Example : trim 0;30*')
 	const [start, duration] = match.split(';')
 	if (!start || !duration || isNaN(start) || isNaN(duration))
@@ -273,8 +276,11 @@ bot(
 bot(
 	{ pattern: 'bass ?(.*)', fromMe: true, desc: '' },
 	async (message, match) => {
-		if (!message.reply_message || !message.reply_message.audio)
-			return await message.sendMessage('*Reply to a audio.*')
+		if (
+			!message.reply_message ||
+			(!message.reply_message.audio && !message.reply_message.video)
+		)
+			return await message.sendMessage('*Reply to a audio/video.*')
 		return await message.sendMessage(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('basso'),
@@ -290,8 +296,11 @@ bot(
 bot(
 	{ pattern: 'treble ?(.*)', fromMe: true, desc: '' },
 	async (message, match) => {
-		if (!message.reply_message || !message.reply_message.audio)
-			return await message.sendMessage('*Reply to a audio.*')
+		if (
+			!message.reply_message ||
+			(!message.reply_message.audio && !message.reply_message.video)
+		)
+			return await message.sendMessage('*Reply to a audio/video.*')
 		return await message.sendMessage(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('trebleo'),
@@ -305,8 +314,11 @@ bot(
 )
 
 bot({ pattern: 'histo', fromMe: true, desc: '' }, async (message, match) => {
-	if (!message.reply_message || !message.reply_message.audio)
-		return await message.sendMessage('*Reply to a audio.*')
+	if (
+		!message.reply_message ||
+		(!message.reply_message.audio && !message.reply_message.video)
+	)
+		return await message.sendMessage('*Reply to a audio/video.*')
 	return await message.sendMessage(
 		await getFfmpegBuffer(
 			await message.reply_message.downloadAndSaveMediaMessage('histo'),
@@ -319,8 +331,11 @@ bot({ pattern: 'histo', fromMe: true, desc: '' }, async (message, match) => {
 })
 
 bot({ pattern: 'vector', fromMe: true, desc: '' }, async (message, match) => {
-	if (!message.reply_message || !message.reply_message.audio)
-		return await message.sendMessage('*Reply to a audio.*')
+	if (
+		!message.reply_message ||
+		(!message.reply_message.audio && !message.reply_message.video)
+	)
+		return await message.sendMessage('*Reply to a audio/video.*')
 	return await message.sendMessage(
 		await getFfmpegBuffer(
 			await message.reply_message.downloadAndSaveMediaMessage('vector'),
@@ -371,8 +386,11 @@ bot(
 )
 
 bot({ pattern: 'low', fromMe: true, desc: '' }, async (message, match) => {
-	if (!message.reply_message || !message.reply_message.audio)
-		return await message.sendMessage('*Reply to a audio.*')
+	if (
+		!message.reply_message ||
+		(!message.reply_message.audio && !message.reply_message.video)
+	)
+		return await message.sendMessage('*Reply to a audio/video.*')
 	return await message.sendMessage(
 		await getFfmpegBuffer(
 			await message.reply_message.downloadAndSaveMediaMessage('lowmp3'),
@@ -384,8 +402,11 @@ bot({ pattern: 'low', fromMe: true, desc: '' }, async (message, match) => {
 	)
 })
 bot({ pattern: 'pitch', fromMe: true, desc: '' }, async (message, match) => {
-	if (!message.reply_message || !message.reply_message.audio)
-		return await message.sendMessage('*Reply to a audio.*')
+	if (
+		!message.reply_message ||
+		(!message.reply_message.audio && !message.reply_message.video)
+	)
+		return await message.sendMessage('*Reply to a audio/video.*')
 	return await message.sendMessage(
 		await getFfmpegBuffer(
 			await message.reply_message.downloadAndSaveMediaMessage('pitchmp3'),
@@ -397,8 +418,11 @@ bot({ pattern: 'pitch', fromMe: true, desc: '' }, async (message, match) => {
 	)
 })
 bot({ pattern: 'avec', fromMe: true, desc: '' }, async (message, match) => {
-	if (!message.reply_message || !message.reply_message.audio)
-		return await message.sendMessage('*Reply to a audio.*')
+	if (
+		!message.reply_message ||
+		(!message.reply_message.audio && !message.reply_message.video)
+	)
+		return await message.sendMessage('*Reply to a audio/video.*')
 	return await message.sendMessage(
 		await getFfmpegBuffer(
 			await message.reply_message.downloadAndSaveMediaMessage('avec'),
@@ -449,8 +473,11 @@ bot(
 bot(
 	{ pattern: 'black', fromMe: true, desc: 'Audio to video.' },
 	async (message, match) => {
-		if (!message.reply_message || !message.reply_message.audio)
-			return await message.sendMessage('*Reply to a audio!*')
+		if (
+			!message.reply_message ||
+			(!message.reply_message.audio && !message.reply_message.video)
+		)
+			return await message.sendMessage('*Reply to a audio/video.*')
 		await message.sendMessage(
 			await blackVideo(
 				await message.reply_message.downloadAndSaveMediaMessage('black')

@@ -22,7 +22,7 @@ bot(
 		delete movie.Ratings
 		for (const data in movie)
 			if (movie[data] != 'N/A') msg += `*${data} :* ${movie[data]}\n`
-		if (!url) return await message.sendMessage(msg.trim())
+		if (url == 'N/A') return await message.sendMessage(msg.trim())
 		return await message.sendFromUrl(url, { caption: msg.trim() })
 	}
 )
