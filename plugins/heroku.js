@@ -15,7 +15,7 @@ bot(
 	async (message, match) => {
 		await message.sendMessage(`_Restarting_`)
 		await heroku.delete(baseURI + '/dynos').catch(async (error) => {
-			await message.sendMessage(error)
+			await message.sendMessage(`HEROKU : ${error.body.message}`)
 		})
 	}
 )
@@ -31,7 +31,7 @@ bot(
 		await heroku
 			.get(baseURI + '/formation')
 			.then(async (formation) => {
-				await message.sendMessage(`_Shutting down._`)
+				await message.sendMessage(`_Shuttind down._`)
 				await heroku.patch(baseURI + '/formation/' + formation[0].id, {
 					body: {
 						quantity: 0,
@@ -39,7 +39,7 @@ bot(
 				})
 			})
 			.catch(async (error) => {
-				await message.sendMessage(error)
+				await message.sendMessage(`HEROKU : ${error.body.message}`)
 			})
 	}
 )
@@ -73,7 +73,7 @@ Remaning    : ${secondsToHms(remaining)}`
 					await message.sendMessage('```' + quota + '```')
 				})
 				.catch(async (error) => {
-					await message.sendMessage(error)
+					return await message.sendMessage(`HEROKU : ${error.body.message}`)
 				})
 		} catch (error) {
 			await message.sendMessage(error)
@@ -104,7 +104,7 @@ bot(
 				await message.sendMessage(`_${key.toUpperCase()}: ${value}_`)
 			})
 			.catch(async (error) => {
-				await message.sendMessage(error)
+				await message.sendMessage(`HEROKU : ${error.body.message}`)
 			})
 	}
 )
@@ -133,7 +133,7 @@ bot(
 				await message.sendMessage(`_${key} not found_`)
 			})
 			.catch(async (error) => {
-				await message.sendMessage(error)
+				await message.sendMessage(`HEROKU : ${error.body.message}`)
 			})
 	}
 )
@@ -159,7 +159,7 @@ bot(
 				await message.sendMessage(`${key} not found`)
 			})
 			.catch(async (error) => {
-				await message.sendMessage(error)
+				await message.sendMessage(`HEROKU : ${error.body.message}`)
 			})
 	}
 )
@@ -182,7 +182,7 @@ bot(
 				return await message.sendMessage(msg + '```')
 			})
 			.catch(async (error) => {
-				await message.sendMessage(error)
+				await message.sendMessage(`HEROKU : ${error.body.message}`)
 			})
 	}
 )
@@ -216,7 +216,7 @@ bot(
 			)
 		await message.sendMessage('_Updating..._')
 		const e = await updateNow()
-		if(e) return await message.sendMessage(e)
+		if (e) return await message.sendMessage(e)
 		return await message.sendMessage('_Updated_')
 	}
 )
