@@ -5,6 +5,7 @@ const {
 	setPlugin,
 	pluginsList,
 	delPlugin,
+	genButtonMessage,
 } = require('../lib/')
 const { writeFileSync, unlinkSync } = require('fs')
 const got = require('got')
@@ -79,8 +80,15 @@ bot(
 		const isDeleted = await delPlugin(match)
 		if (!isDeleted)
 			return await message.sendMessage(`*Plugin ${match} not found*`)
-		delete require.cache[require.resolve('./' + match + '.js')]
+		delete require.cache[require.resolve('../plugins/' + match + '.js')]
 		unlinkSync('./plugins/' + match + '.js')
-		return await message.sendMessage('_Plugin Deleted_\n*Restart BOT*')
+		return await message.sendMessage(
+			await genButtonMessage(
+				[{ text: 'RESTART NOW', id: 'restart' }],
+				'_Plugin Deleted_'
+			),
+			{},
+			'button'
+		)
 	}
 )
