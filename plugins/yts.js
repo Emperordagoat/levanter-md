@@ -17,12 +17,12 @@ bot(
 		type: 'misc',
 	},
 	async (message, match) => {
-		if (!match) return await message.sendMessage('*Example : yts darari*')
+		if (!match) return await message.sendMessage('*Example : yts baymax*')
 		const result = await yts(match)
 		let msg = ''
 		result.forEach(
-			({ title, description, url }) =>
-				(msg += `• ${title}\n${description}\n${url}\n\n`)
+			({ title, description, url, metadata }) =>
+				(msg += `• ${title}\nViews : ${metadata.view_count}\nTime : ${metadata.duration.accessibility_label}\nPublished : ${metadata.published}\nDesc : ${description}\nUrl : ${url}\n\n`)
 		)
 		return await message.sendMessage(msg.trim())
 	}
@@ -37,7 +37,8 @@ bot(
 	},
 	async (message, match) => {
 		match = match || message.reply_message.text
-		if (!match) return await message.sendMessage('*Example : song darari*')
+		if (!match)
+			return await message.sendMessage('*Example : song indila love story/ yt link*')
 		const vid = ytIdRegex.exec(match)
 		if (vid) {
 			const [result] = await yts(vid[1], true)
@@ -62,7 +63,7 @@ bot(
 						id: `song ${url}`,
 						desc: description,
 					})),
-					'Choose Your Song',
+					`Searched ${match}\nFound ${result.length} results`,
 					'DOWNLOAD'
 				),
 				{},
@@ -81,7 +82,8 @@ bot(
 	},
 	async (message, match) => {
 		match = match || message.reply_message.text
-		if (!match) return await message.sendMessage('*Example : video darari*')
+		if (!match)
+			return await message.sendMessage('*Example : video dandelions/yt url*')
 		const vid = ytIdRegex.exec(match)
 		if (!vid) {
 			const result = await yts(match)
