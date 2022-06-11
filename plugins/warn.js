@@ -12,7 +12,10 @@ bot(
 	async (message, match) => {
 		let [m, u] = match.split(' ')
 		if (m && m.toLowerCase() == 'reset') {
-			u = message.mention[0] || message.reply_message.jid || u
+			u = u.endsWith('@s.whatsapp.net')
+				? u
+				: message.mention[0] || message.reply_message.jid
+			if (!u) return await message.sendMessage('*Reply or Mention to a user*')
 			const count = await setWarn(u, message.jid, (!isNaN(u) && u) || -1)
 			return await message.sendMessage(
 				`WARN RESET\nUser : @${jidToNum(u)}\nRemaining : ${
@@ -24,7 +27,6 @@ bot(
 		const user = message.mention[0] || message.reply_message.jid
 		if (!user) return await message.sendMessage('*Reply or Mention to a user*')
 		const count = await setWarn(user, message.jid)
-		console.log(count, user)
 		if (count > config.WARN_LIMIT) {
 			const participants = await message.groupMetadata(message.jid)
 			const isImAdmin = await isAdmin(participants, message.client.user.jid)
