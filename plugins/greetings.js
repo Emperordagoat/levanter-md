@@ -15,6 +15,7 @@ bot(
 		fromMe: true,
 		desc: 'Welcome new members',
 		onlyGroup: true,
+		type: 'group',
 	},
 	async (message, match) => {
 		const welcome = await getMessage(message.jid, 'welcome')
@@ -66,6 +67,7 @@ bot(
 		fromMe: true,
 		desc: 'Goodbye members',
 		onlyGroup: true,
+		type: 'group',
 	},
 	async (message, match) => {
 		const welcome = await getMessage(message.jid, 'goodbye')

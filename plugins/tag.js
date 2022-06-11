@@ -5,6 +5,7 @@ bot(
 		fromMe: true,
 		onlyGroup: true,
 		desc: 'tag members or msg',
+		type: 'group',
 	},
 	async (message, match) => {
 		const participants = await message.groupMetadata(message.jid)

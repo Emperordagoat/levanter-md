@@ -11,6 +11,7 @@ bot(
 		pattern: 'mention ?(.*)',
 		fromMe: true,
 		desc: 'To set and Manage mention',
+		type: 'misc',
 	},
 	async (message, match) => {
 		if (!match)
