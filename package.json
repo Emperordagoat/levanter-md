@@ -1,6 +1,6 @@
 {
 	"name": "levanter",
-	"version": "3.0.4",
+	"version": "3.0.7",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
@@ -26,6 +26,7 @@
 		"jimp": "^0.16.1",
 		"link-preview-js": "^2.1.13",
 		"moment": "^2.29.1",
+		"node-cron": "^3.0.1",
 		"node-fetch": "2.6.7",
 		"node-html-parser": "^5.3.3",
 		"node-webpmux": "^3.1.1",
