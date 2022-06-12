@@ -5,7 +5,7 @@ bot(
 		pattern: 'movie ?(.*)',
 		fromMe: true,
 		desc: 'Movie info',
-		type: 'misc',
+		type: 'search',
 	},
 	async (message, match) => {
 		const movie = await getJson(

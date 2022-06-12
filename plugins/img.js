@@ -5,7 +5,7 @@ bot(
 		pattern: 'img ?(.*)',
 		fromMe: true,
 		desc: 'Download img from google',
-		type: 'download',
+		type: 'search',
 	},
 	async (message, match) => {
 		if (!match)

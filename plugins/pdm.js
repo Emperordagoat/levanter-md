@@ -5,7 +5,7 @@ bot(
 		pattern: 'pdm ?(.*)',
 		fromMe: true,
 		desc: 'To manage promote demote alert',
-		type: 'misc',
+		type: 'group',
 		onlyGroup: true,
 	},
 	async (message, match) => {

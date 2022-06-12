@@ -5,7 +5,7 @@ bot(
 		pattern: 'antifake ?(.*)',
 		fromMe: true,
 		desc: 'set antifake',
-		type: 'misc',
+		type: 'group',
 		onlyGroup: true,
 	},
 	async (message, match) => {

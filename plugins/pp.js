@@ -5,7 +5,7 @@ bot(
 		pattern: 'fullpp ?(.*)',
 		fromMe: true,
 		desc: 'set full size profile picture',
-		type: 'misc',
+		type: 'user',
 	},
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.image)

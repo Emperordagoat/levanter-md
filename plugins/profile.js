@@ -6,7 +6,7 @@ bot(
 		pattern: 'jid',
 		fromMe: fm,
 		desc: 'Give jid of chat/user',
-		type: 'misc',
+		type: 'user',
 	},
 	async (message, match) => {
 		return await message.sendMessage(
@@ -20,7 +20,7 @@ bot(
 		pattern: 'left',
 		fromMe: fm,
 		dec: 'To leave from group',
-		type: 'misc',
+		type: 'user',
 		onlyGroup: true,
 	},
 	async (message, match) => {
@@ -34,7 +34,7 @@ bot(
 		pattern: 'block',
 		fromMe: fm,
 		desc: 'Block a person',
-		type: 'misc',
+		type: 'user',
 	},
 	async (message, match) => {
 		const id =
@@ -52,7 +52,7 @@ bot(
 		pattern: 'unblock',
 		fromMe: fm,
 		desc: 'Unblock a person',
-		type: 'misc',
+		type: 'user',
 	},
 	async (message, match) => {
 		const id =
@@ -70,7 +70,7 @@ bot(
 		pattern: 'pp',
 		fromMe: fm,
 		desc: 'Change Profile Picture',
-		type: 'misc',
+		type: 'user',
 	},
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.image)

@@ -14,7 +14,7 @@ bot(
 		pattern: 'yts ?(.*)',
 		fromMe: true,
 		desc: 'YT search',
-		type: 'misc',
+		type: 'search',
 	},
 	async (message, match) => {
 		if (!match) return await message.sendMessage('*Example : yts baymax*')
