@@ -58,10 +58,10 @@ bot(
 			const result = await yts(match)
 			return await message.sendMessage(
 				genListMessage(
-					result.map(({ title, url, description }) => ({
+					result.map(({ title, url, metadata }) => ({
 						text: title,
 						id: `song ${url}`,
-						desc: description,
+						desc: metadata.duration.accessibility_label,
 					})),
 					`Searched ${match}\nFound ${result.length} results`,
 					'DOWNLOAD'

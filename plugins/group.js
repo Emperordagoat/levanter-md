@@ -53,10 +53,8 @@ bot(
 		const isImAdmin = await isAdmin(participants, message.client.user.jid)
 		if (!isImAdmin) return await message.sendMessage(`_I'm not admin._`)
 		match = match || message.reply_message.jid
-		if (!match || match.startsWith('+'))
-			return await message.sendMessage('Example : add 91987654321')
+		if (!match) return await message.sendMessage('Example : add 91987654321')
 		match = jidToNum(match)
-		match = match.split(' ').map((num) => numToJid(num))
 		const res = await message.Add(match)
 		if (res == '403') return await message.sendMessage('_Failed, Invite sent_')
 		else if (res && res != '200')
