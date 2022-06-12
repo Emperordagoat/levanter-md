@@ -15,5 +15,10 @@ bot(
 
 bot({ on: 'text', fromMe: false }, async (message, match) => {
 	const msg = await participateInVote(message)
-	if (msg) return await message.sendMessage(msg, { quoted: message.data })
+	if (msg)
+		return await message.sendMessage(
+			msg.msg,
+			{ quoted: message.data },
+			msg.type
+		)
 })

@@ -1,5 +1,12 @@
 const config = require('../config')
-const { bot, setWarn, jidToNum, genButtonMessage, isAdmin } = require('../lib/')
+const {
+	bot,
+	setWarn,
+	jidToNum,
+	genButtonMessage,
+	isAdmin,
+	deleteWarn,
+} = require('../lib/')
 
 bot(
 	{
@@ -31,10 +38,14 @@ bot(
 			const participants = await message.groupMetadata(message.jid)
 			const isImAdmin = await isAdmin(participants, message.client.user.jid)
 			if (!isImAdmin) return await message.sendMessage(`_I'm not admin._`)
+			const isUserAdmin = await isAdmin(participants, user)
+			if (isUserAdmin)
+				return await message.sendMessage(`_I can't Remove admin._`)
 			await message.sendMessage(
 				`_@${jidToNum(user)} Kicked, Reached Max warning._`,
 				{ contextInfo: { mentionedJid: [user] } }
 			)
+			await deleteWarn(user, message.jid)
 			return await message.Kick(user)
 		}
 		return await message.sendMessage(

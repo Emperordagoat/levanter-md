@@ -7,8 +7,8 @@ const DATABASE_URL =
 		? './database.db'
 		: process.env.DATABASE_URL
 module.exports = {
-	VERSION: '3.0.7',
-	SESSION_ID: process.env.SESSION_ID || '',
+	VERSION: '3.1.2',
+	SESSION_ID: (process.env.SESSION_ID || '').trim(),
 	DATABASE:
 		DATABASE_URL === './database.db'
 			? new Sequelize({
@@ -26,13 +26,15 @@ module.exports = {
 					},
 					logging: false,
 			  }),
-	HANDLERS: process.env.PREFIX || '^[.,!]',
+	HANDLERS: (process.env.PREFIX || '^[.,!]').trim(),
 	SUDO: process.env.SUDO || '',
 	HEROKU_APP_NAME: process.env.HEROKU_APP_NAME,
 	HEROKU_API_KEY: process.env.HEROKU_API_KEY,
 	BRANCH: 'master',
 	STICKER_PACKNAME: process.env.STICKER_PACKNAME || '❤️,LyFE',
-	ALWAYS_ONLINE: toBool(process.env.ALWAYS_ONLINE) || false,
+	ALWAYS_ONLINE: process.env.ALWAYS_ONLINE
+		? toBool(process.env.ALWAYS_ONLINE)
+		: false,
 	LOG_MSG: toBool(process.env.LOG_MSG) || false,
 	RMBG_KEY: process.env.RMBG_KEY || 'null',
 	BAILEYS_LOG_LVL: process.env.BAILEYS_LOG_LVL || 'silent',
