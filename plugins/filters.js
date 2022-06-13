@@ -1,4 +1,4 @@
-const { getFilter, bot, setFilter, deleteFilter } = require('../lib/')
+const { getFilter, bot, setFilter, deleteFilter, lydia } = require('../lib/')
 const fm = true
 
 bot(
@@ -58,13 +58,23 @@ bot(
 
 bot({ on: 'text', fromMe: false }, async (message, match) => {
 	const filters = await getFilter(message.jid)
-	if (!filters) return
-	filters.map(async ({ pattern, regex, text }) => {
-		pattern = new RegExp(regex ? pattern : `\\b(${pattern})\\b`, 'gm')
-		if (pattern.test(message.text)) {
-			await message.sendMessage(text, {
-				quoted: message.data,
-			})
-		}
-	})
+	if (filters)
+		filters.map(async ({ pattern, regex, text }) => {
+			pattern = new RegExp(regex ? pattern : `\\b(${pattern})\\b`, 'gm')
+			if (pattern.test(message.text)) {
+				await message.sendMessage(text, {
+					quoted: message.data,
+				})
+			}
+		})
+
+	const isLydia = await lydia(message)
+	if (isLydia)
+		return await message.sendMessage(isLydia, { quoted: message.data })
+})
+
+bot({ on: 'text', fromMe: true }, async (message, match) => {
+	const isLydia = await lydia(message)
+	if (isLydia)
+		return await message.sendMessage(isLydia, { quoted: message.data })
 })
