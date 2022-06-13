@@ -14,6 +14,10 @@ bot(
 			)
 		const user = message.mention[0] || message.reply_message.jid || message.jid
 		await setLydia(message.jid, match == 'on', user)
-		await message.sendMessage('onn')
+		await message.sendMessage(
+			`_Lydia ${
+				match == 'on' ? 'Activated' : 'Deactivated'
+			}_\n*Only works from reply msg.`
+		)
 	}
 )
