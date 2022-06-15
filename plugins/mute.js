@@ -37,7 +37,7 @@ bot(
 			if (!isMute) return await message.sendMessage('_Not Found AutoMute')
 			const task = await getMute(message.jid, 'mute')
 			if (!task || !task.hour)
-				return await message.sendMessage('_Not Found AutoMute')
+				return await message.sendMessage('_Not Found AutoMute_')
 			const isTask = addTask(
 				message.jid,
 				'mute',
