@@ -9,19 +9,19 @@ bot(
 		onlyGroup: true,
 	},
 	async (message, match) => {
-		match = message.mention[0] || message.reply_message.jid || match
-		if (match) {
-			if (match == 'all') {
-				await resetMsgs(message.jid)
-				return await message.sendMessage('_Everyones message count deleted._')
-			}
-			await resetMsgs(message.jid, match)
-			return await message.sendMessage(
-				`_@${jidToNum(match)} message count deleted._`,
-				{ contextInfo: { mentionedJid: [match] } }
-			)
-		}
-		const { participants } = await getMsg(message.jid)
+		const user = message.mention[0] || message.reply_message.jid
+		// if (match) {
+		// 	if (match == 'all') {
+		// 		await resetMsgs(message.jid)
+		// 		return await message.sendMessage('_Everyones message count deleted._')
+		// 	}
+		// 	await resetMsgs(message.jid, match)
+		// 	return await message.sendMessage(
+		// 		`_@${jidToNum(match)} message count deleted._`,
+		// 		{ contextInfo: { mentionedJid: [match] } }
+		// 	)
+		// }
+		const { participants } = await getMsg(message.jid, user)
 		let msg = ''
 		for (const participant in participants) {
 			msg += `*Number :* ${jidToNum(participant)}\n*Name :* ${
