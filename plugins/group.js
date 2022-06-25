@@ -173,7 +173,7 @@ bot(
 		if (!code)
 			return await message.sendMessage(`_Give me a Group invite link._`)
 		const res = await message.infoInvite(code)
-		if (res.size > 256) return await message.sendMessage('*Group full!*')
+		if (res.size > 512) return await message.sendMessage('*Group full!*')
 		await message.acceptInvite(code)
 		return await message.sendMessage(`_Joined_`)
 	}
