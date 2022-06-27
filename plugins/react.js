@@ -9,12 +9,13 @@ bot(
 	async (message, match) => {
 		if (!match || !message.reply_message)
 			return await message.sendMessage('_Example : react ❣_')
-		const reactionMessage = {
-			react: {
+		return await message.sendMessage(
+			{
 				text: match,
 				key: message.reply_message.key,
 			},
-		}
-		return await message.client.sendMessage(message.jid, reactionMessage)
+			{},
+			'react'
+		)
 	}
 )
