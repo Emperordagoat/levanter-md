@@ -227,3 +227,79 @@ bot(
 		return await message.sendFromUrl(result)
 	}
 )
+
+bot(
+	{
+		pattern: 'demon',
+		fromMe: fm,
+		type: 'editor',
+		desc: 'demon Look Photo editor.',
+	},
+	async (message, match) => {
+		if (!message.reply_message || !message.reply_message.image)
+			return await message.sendMessage('*Reply to a image.*')
+		const { status, result } = await photoEditor(
+			await message.reply_message.downloadAndSaveMediaMessage(),
+			'demon'
+		)
+		if (!status) return await message.sendMessage(result)
+		return await message.sendFromUrl(result)
+	}
+)
+
+bot(
+	{
+		pattern: 'bloody',
+		fromMe: fm,
+		type: 'editor',
+		desc: 'bloody Look Photo editor.',
+	},
+	async (message, match) => {
+		if (!message.reply_message || !message.reply_message.image)
+			return await message.sendMessage('*Reply to a image.*')
+		const { status, result } = await photoEditor(
+			await message.reply_message.downloadAndSaveMediaMessage(),
+			'bloody'
+		)
+		if (!status) return await message.sendMessage(result)
+		return await message.sendFromUrl(result)
+	}
+)
+
+bot(
+	{
+		pattern: 'zombie',
+		fromMe: fm,
+		type: 'editor',
+		desc: 'zombie Look Photo editor.',
+	},
+	async (message, match) => {
+		if (!message.reply_message || !message.reply_message.image)
+			return await message.sendMessage('*Reply to a image.*')
+		const { status, result } = await photoEditor(
+			await message.reply_message.downloadAndSaveMediaMessage(),
+			'zombie'
+		)
+		if (!status) return await message.sendMessage(result)
+		return await message.sendFromUrl(result)
+	}
+)
+
+bot(
+	{
+		pattern: 'horned',
+		fromMe: fm,
+		type: 'editor',
+		desc: 'horned Look Photo editor.',
+	},
+	async (message, match) => {
+		if (!message.reply_message || !message.reply_message.image)
+			return await message.sendMessage('*Reply to a image.*')
+		const { status, result } = await photoEditor(
+			await message.reply_message.downloadAndSaveMediaMessage(),
+			'horned'
+		)
+		if (!status) return await message.sendMessage(result)
+		return await message.sendFromUrl(result)
+	}
+)
