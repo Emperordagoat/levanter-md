@@ -18,6 +18,15 @@ bot(
 	},
 	async (message, match) => {
 		if (!match) return await message.sendMessage('*Example : yts baymax*')
+		const vid = ytIdRegex.exec(match)
+		if (vid) {
+			const [result] = await yts(vid[1], true)
+			const { title, description, metadata } = result
+			return await message.sendMessage(
+				`*Title :* ${title}\n*Desc :* ${description}\n*Time :* ${metadata.length_seconds}s\n*Views :* ${metadata.view_count}\n*Publish :* ${metadata.publish_date}`
+			)
+		}
+
 		const result = await yts(match)
 		let msg = ''
 		result.forEach(
@@ -38,7 +47,9 @@ bot(
 	async (message, match) => {
 		match = match || message.reply_message.text
 		if (!match)
-			return await message.sendMessage('*Example : song indila love story/ yt link*')
+			return await message.sendMessage(
+				'*Example : song indila love story/ yt link*'
+			)
 		const vid = ytIdRegex.exec(match)
 		if (vid) {
 			const [result] = await yts(vid[1], true)
