@@ -40,8 +40,12 @@ bot(
 				contextInfo: { mentionedJid },
 			})
 		}
+		if (match || message.reply_message.txt)
+			return await message.sendMessage(match || message.reply_message.text, {
+				contextInfo: { mentionedJid },
+			})
 		if (!message.reply_message)
-			return await message.sendMessage('*Reply to a message*')
+			return await message.sendMessage('*Example :*\ntag all\ntag admin\ntag notadmin\ntag text\nReply to a message')
 		forwardOrBroadCast(message.jid, message, { contextInfo: { mentionedJid } })
 	}
 )
