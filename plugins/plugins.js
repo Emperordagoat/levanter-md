@@ -83,8 +83,8 @@ bot(
 		const isDeleted = await delPlugin(match)
 		if (!isDeleted)
 			return await message.sendMessage(`*Plugin ${match} not found*`)
-		unlinkSync('./plugins/' + match + '.js')
 		delete require.cache[require.resolve('../plugins/' + match + '.js')]
+		unlinkSync('./plugins/' + match + '.js')
 		return await message.sendMessage(
 			await genButtonMessage(
 				[{ text: 'RESTART NOW', id: 'restart' }],

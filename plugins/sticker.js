@@ -4,11 +4,17 @@ const {
 	addExif,
 	bot,
 	addAudioMetaData,
+	circleSticker,
 } = require('../lib/')
 const fm = true
 
 bot(
-	{ pattern: 'sticker', fromMe: fm, desc: '', type: 'sticker' },
+	{
+		pattern: 'sticker',
+		fromMe: fm,
+		desc: 'image/video to sticker',
+		type: 'sticker',
+	},
 	async (message, match) => {
 		if (
 			!message.reply_message ||
@@ -32,7 +38,35 @@ bot(
 )
 
 bot(
-	{ pattern: 'take ?(.*)', fromMe: true, desc: '', type: 'sticker' },
+	{
+		pattern: 'circle',
+		fromMe: fm,
+		desc: 'image to circle sticker',
+		type: 'sticker',
+	},
+	async (message, match) => {
+		if (!message.reply_message || !message.reply_message.image)
+			return await message.sendMessage('*Reply to a image*')
+		return await message.sendMessage(
+			await circleSticker(
+				await message.reply_message.downloadAndSaveMediaMessage(
+					'circleSticker'
+				),
+				message.reply_message.video
+			),
+			{ isAnimated: false, quoted: message.quoted },
+			'sticker'
+		)
+	}
+)
+
+bot(
+	{
+		pattern: 'take ?(.*)',
+		fromMe: true,
+		desc: 'change sticker pack',
+		type: 'sticker',
+	},
 	async (message, match) => {
 		if (
 			!message.reply_message ||
@@ -68,7 +102,12 @@ bot(
 )
 
 bot(
-	{ pattern: 'mp4', fromMe: fm, desc: '', type: 'sticker' },
+	{
+		pattern: 'mp4',
+		fromMe: fm,
+		desc: 'animated sticker to video',
+		type: 'sticker',
+	},
 	async (message, match) => {
 		if (
 			!message.reply_message.sticker ||
