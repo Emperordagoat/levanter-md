@@ -41,4 +41,5 @@ module.exports = {
 	FORCE_LOGOUT: toBool(process.env.FORCE_LOGOUT),
 	BRAINSHOP: process.env.BRAINSHOP || '159501,6pq8dPiYt7PdqHz3',
 	DIS_BOT: process.env.DISABLE_BOT || 'null',
+	ANTILINK_MSG: process.env.ANTILINK_MSG || '_Antilink Detected_',
 }

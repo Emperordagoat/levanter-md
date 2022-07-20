@@ -70,6 +70,11 @@
 			"description": "Example : jid,jid,... where bot not works in both ways.",
 			"required": false,
 			"value": "null"
+		},
+		"ANTILINK_MSG": {
+			"description": "Message send when antilink and action is kick.",
+			"required": false,
+			"value": "_Antilink Detected_"
 		}
 	},
 	"addons": [
