@@ -60,7 +60,7 @@ bot(
 						{ id: 'amute off', text: 'OFF' },
 						{ id: 'amute info', text: 'INFO' },
 					],
-					'*Example : amute 6 0*\namute info\namute on/off'
+					'*Example : amute 6 0*\namute info\namute on/off\nReply to a text to set Msg'
 				),
 				{},
 				'button'
@@ -128,7 +128,7 @@ bot(
 						{ id: 'aunmute off', text: 'OFF' },
 						{ id: 'aunmute info', text: 'INFO' },
 					],
-					'*Example : aunmute 6 0*\naunmute info\naunmute on/off'
+					'*Example : aunmute 6 0*\naunmute info\naunmute on/off\nReply to a text to set Msg'
 				),
 				{},
 				'button'
