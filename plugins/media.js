@@ -8,7 +8,9 @@ const {
 	blackVideo,
 	cropVideo,
 	bot,
+	PDF,
 } = require('../lib/')
+const moment = require('moment')
 const fs = require('fs')
 const fm = true
 
@@ -200,64 +202,43 @@ bot(
 		)
 	}
 )
-// bot(
-//   { pattern: 'page ?(.*)', fromMe: fm, desc: 'To add images.' },
-//   async (message, match) => {
-//     if (!message.reply_message || !message.reply_message.image)
-//       return await message.sendMessage('*Reply to a image.*')
-//     if (isNaN(match))
-//       return await message.sendMessage(
-//         '*Reply with order number*\n*Ex: .page 1*'
-//       )
-//     if (!fs.existsSync('./pdf')) {
-//       fs.mkdirSync('./pdf')
-//     }
-//     await message.reply_message.downloadAndSaveMediaMessage(`./pdf/${match}`)
-//     return await message.sendMessage('```Added page``` ' + match)
-//   }
-// )
+bot(
+	{
+		pattern: 'page ?(.*)',
+		fromMe: fm,
+		desc: 'To add images.',
+		type: 'document',
+	},
+	async (message, match) => {
+		if (!message.reply_message || !message.reply_message.image)
+			return await message.sendMessage('*Reply to a image.*')
+		if (isNaN(match))
+			return await message.sendMessage('*Reply in order*\n*Ex: .page 1*')
+		await message.reply_message.downloadAndSaveMediaMessage(`./pdf/${match}`)
+		return await message.sendMessage('_Added page_' + match)
+	}
+)
 
-// bot(
-//   {
-//     pattern: 'pdf ?(.*)',
-//     fromMe: fm,
-//     desc: 'Convert images to pdf.',
-//   },
-//   async (message, match) => {
-//     if (!fs.existsSync('./pdf')) {
-//       fs.mkdirSync('./pdf')
-//     }
-//     const length = fs.readdirSync('./pdf').length
-//     if (length == 0)
-//       return await message.sendMessage(
-//         '```Add pages in order with``` _page_ *command.*'
-//       )
-//     const pages = []
-//     let i = 1
-//     while (i <= length) {
-//       let path = './pdf/' + i + '.jpeg'
-//       if (fs.existsSync(path)) {
-//         pages.push(path)
-//         i++
-//       } else return message.sendMessage('```' + `Missing page ${i}` + '```')
-//     }
-//     await message.sendMessage('```Uploading pdf...``` ')
-//     pdf(pages)
-//       .pipe(fs.createWriteStream('./pdf.pdf'))
-//       .on('finish', async () => {
-//         fsExtra.emptyDirSync('./pdf')
-//         return await message.sendMessage(
-//           fs.readFileSync('pdf.pdf'),
-//           {
-//             filename: Math.floor(Math.random() * 999999),
-//             mimetype: Mimetype.pdf,
-//             quoted: message.data,
-//           },
-//           'document'
-//         )
-//       })
-//   }
-// )
+bot(
+	{
+		pattern: 'pdf ?(.*)',
+		fromMe: fm,
+		desc: 'Convert images to pdf.',
+		type: 'document',
+	},
+	async (message, match) => {
+		await message.sendMessage('_Uploading pdf..._')
+		return await message.sendMessage(
+			await PDF(),
+			{
+				fileName: `${moment(new Date()).format('YYYY_MM_DD_HH_mm')}.pdf`,
+				mimetype: 'application/pdf',
+				quoted: message.data,
+			},
+			'document'
+		)
+	}
+)
 
 bot(
 	{

@@ -1,6 +1,6 @@
 {
 	"name": "levanter",
-	"version": "3.3.7",
+	"version": "3.3.8",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
@@ -30,6 +30,7 @@
 		"node-fetch": "2.6.7",
 		"node-html-parser": "^5.3.3",
 		"node-webpmux": "^3.1.1",
+				"pdfkit": "^0.13.0",
 		"pg": "^8.7.3",
 		"pm2": "^5.2.0",
 		"qrcode-reader": "^1.0.4",
