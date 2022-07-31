@@ -215,7 +215,7 @@ bot(
 		if (isNaN(match))
 			return await message.sendMessage('*Reply in order*\n*Ex: .page 1*')
 		await message.reply_message.downloadAndSaveMediaMessage(`./pdf/${match}`)
-		return await message.sendMessage('_Added page_' + match)
+		return await message.sendMessage('_Added page_ ' + match)
 	}
 )
 
