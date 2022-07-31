@@ -118,7 +118,7 @@ bot(
 			return await message.Kick(tokick)
 		}
 		for (let i = 0; i < tokick.length; i++)
-			msg += `\n${i + 1}${addSpace(i + 1, tokick.length)}. @${jidToNum(
+			msg += `\n*${i + 1}.*${addSpace(i + 1, tokick.length)} @${jidToNum(
 				tokick[i]
 			)}`
 		return await message.sendMessage(msg, {
