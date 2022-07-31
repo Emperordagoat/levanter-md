@@ -6,6 +6,7 @@ const {
 	getFloor,
 	sleep,
 	secondsToHms,
+	isAdmin,
 } = require('../lib')
 
 bot(
@@ -27,9 +28,9 @@ bot(
 			}\n*Total Msgs :* ${participants[participant].total}\n`
 			const { type } = participants[participant]
 			for (const item in type) msg += `*${item} :* ${type[item]}\n`
-			msg += `*lastSeen :* ${secondsToHms(
-				(now - participants[participant].time) / 1000
-			)} ago\n\n`
+			msg += `*lastSeen :* ${
+				secondsToHms((now - participants[participant].time) / 1000) || 0
+			} ago\n\n`
 		}
 		await message.sendMessage(msg.trim())
 	}
@@ -53,10 +54,10 @@ bot(
 			await resetMsgs(message.jid)
 			return await message.sendMessage('_Everyones message count deleted._')
 		}
-		await resetMsgs(message.jid, match)
+		await resetMsgs(message.jid, user)
 		return await message.sendMessage(
-			`_@${jidToNum(match)} message count deleted._`,
-			{ contextInfo: { mentionedJid: [match] } }
+			`_@${jidToNum(user)} message count deleted._`,
+			{ contextInfo: { mentionedJid: [user] } }
 		)
 	}
 )
@@ -70,6 +71,8 @@ bot(
 		onlyGroup: true,
 	},
 	async (message, match) => {
+		const members = await message.groupMetadata(message.jid)
+		const membersJids = members.map(({ id }) => id)
 		const [type, count, kick] = match.split(' ')
 		if (
 			!type ||
@@ -84,22 +87,35 @@ bot(
 		const now = new Date().getTime()
 		const inactive = Object.entries(participants)
 			.filter((participant) => {
-				if (type == 'total') return participant[1].total < count
-				else return getFloor((now - participant[1].time) / 1000 / 8400) > count
+				if (!membersJids.includes(participant[0]))
+					resetMsgs(message.jid, participant[0])
+				if (type == 'total')
+					return (
+						participant[1].total < count && membersJids.includes(participant[0])
+					)
+				else
+					return (
+						getFloor((now - participant[1].time) / 1000 / 8400) > count &&
+						membersJids.includes(participant[0])
+					)
 			})
 			.map((e) => e[0])
-		let msg = `_Total inactives are : ${inactive.length}_`
-		if (inactive.length < 1) return await message.sendMessage(msg)
+		const notText = membersJids.filter((id) => !inactive.includes(id))
+		const tokick = [...inactive, ...notText]
+		let msg = `_Total inactives are : ${tokick.length}_`
+		if (tokick.length < 1) return await message.sendMessage(msg)
 		if (kick == 'kick') {
+			const isImAdmin = await isAdmin(members, message.client.user.jid)
+			if (!isImAdmin) return await message.sendMessage(`_I'm not admin._`)
 			await message.sendMessage(
-				`_Removing ${inactive.length} inactive members in 7 seconds_`
+				`_Removing ${tokick.length} inactive members in 7 seconds_`
 			)
 			await sleep(7000)
-			return await message.Kick(inactive)
+			return await message.Kick(tokick)
 		}
-		for (const member of inactive) msg += `\n@${jidToNum(member)}`
+		for (const member of tokick) msg += `\n@${jidToNum(member)}`
 		return await message.sendMessage(msg, {
-			contextInfo: { mentionedJid: inactive },
+			contextInfo: { mentionedJid: tokick },
 		})
 	}
 )
