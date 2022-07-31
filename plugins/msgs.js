@@ -28,7 +28,7 @@ bot(
 			const { type } = participants[participant]
 			for (const item in type) msg += `*${item} :* ${type[item]}\n`
 			msg += `*lastSeen :* ${secondsToHms(
-				(now - participant[1].time) / 1000
+				(now - participants[participant].time) / 1000
 			)} ago\n\n`
 		}
 		await message.sendMessage(msg.trim())
