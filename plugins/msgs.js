@@ -7,6 +7,7 @@ const {
 	sleep,
 	secondsToHms,
 	isAdmin,
+	addSpace,
 } = require('../lib')
 
 bot(
@@ -85,6 +86,7 @@ bot(
 			)
 		const { participants } = await getMsg(message.jid)
 		const now = new Date().getTime()
+		const active = Object.keys(participants)
 		const inactive = Object.entries(participants)
 			.filter((participant) => {
 				if (!membersJids.includes(participant[0]))
@@ -100,7 +102,9 @@ bot(
 					)
 			})
 			.map((e) => e[0])
-		const notText = membersJids.filter((id) => !inactive.includes(id))
+		const notText = membersJids.filter(
+			(id) => !inactive.includes(id) && !active.includes(id)
+		)
 		const tokick = [...inactive, ...notText]
 		let msg = `_Total inactives are : ${tokick.length}_`
 		if (tokick.length < 1) return await message.sendMessage(msg)
@@ -113,7 +117,10 @@ bot(
 			await sleep(7000)
 			return await message.Kick(tokick)
 		}
-		for (const member of tokick) msg += `\n@${jidToNum(member)}`
+		for (let i = 0; i < tokick.length; i++)
+			msg += `\n${i + 1}${addSpace(i + 1, tokick.length)}. @${jidToNum(
+				tokick[i]
+			)}`
 		return await message.sendMessage(msg, {
 			contextInfo: { mentionedJid: tokick },
 		})
