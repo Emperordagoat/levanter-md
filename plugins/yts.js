@@ -94,11 +94,12 @@ bot(
 	async (message, match) => {
 		match = match || message.reply_message.text
 		if (!match)
-			return await message.sendMessage('*Example : video dandelions/yt url*')
+			return await message.sendMessage('*Example : video yt_url*')
 		const vid = ytIdRegex.exec(match)
 		if (!vid) {
-			const result = await yts(match)
-			match = result[0].id
+			return await message.sendMessage('*Example : video yt_url*')
+			// const result = await yts(match)
+			// match = result[0].id
 		} else match = vid[1]
 		return await message.sendMessage(
 			await video(match),

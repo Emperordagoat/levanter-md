@@ -38,9 +38,9 @@ bot(
 		type: 'misc',
 	},
 	async (message, match) => {
-		if (!message.reply_message || !message.reply_message.sticker)
-			return await message.sendMessage('*Reply to a sticker*')
-		const res = await delCmd(message.reply_message)
+		if (!match && (!message.reply_message || !message.reply_message.sticker))
+			return await message.sendMessage('*Example :*\ndelcmd cmdName\nReply to a sticker')
+		const res = await delCmd(match || message.reply_message)
 		return await message.sendMessage(res < 1 ? '_Failed_' : '_Success_')
 	}
 )

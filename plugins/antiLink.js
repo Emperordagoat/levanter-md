@@ -28,7 +28,7 @@ bot(
 						},
 						{ button: { id: 'antilink info', text: 'INFO' } },
 					],
-					'Antifake'
+					'AntiLink'
 				),
 				{},
 				'template'
