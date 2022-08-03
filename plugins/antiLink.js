@@ -45,15 +45,14 @@ bot(
 			return await message.sendMessage(
 				`*AntiLink :* ${antilink.enabled ? 'on' : 'off'}\n*AllowedUrl :* ${
 					antilink.allowedUrls
-				}\n*Action :* ${antilink.action ? 'kick' : 'warn'}`
+				}\n*Action :* ${antilink.action}`
 			)
 		if (match.startsWith('action/')) {
 			await setAntiLink(message.jid, match)
-			return await message.sendMessage(
-				`_AntiLink action updated as ${
-					match == 'action/kick' ? 'kick' : 'warn'
-				}_`
-			)
+			const action = match.replace('action/', '')
+			if (!['warn', 'kick', 'null'].includes(action))
+				return await message.sendMessage('*Invalid action*')
+			return await message.sendMessage(`_AntiLink action updated as ${action}_`)
 		}
 		await setAntiLink(message.jid, match)
 		return await message.sendMessage(`_AntiLink allowed urls are ${match}_`)
