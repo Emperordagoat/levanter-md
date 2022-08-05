@@ -7,9 +7,9 @@ bot(
 		type: 'misc',
 	},
 	async (message, match) => {
+		if (!match || (!match && message.reply_message.text) || isNaN(match) || match < 1 || match > 47)
+			return await message.sendMessage('Chooose font\n Ex: fancy 7')
 		if (message.reply_message.text) {
-			if (!match || isNaN(match) || match < 1 || match > 47)
-				return await message.sendMessage('Chooose font\n Ex: fancy 7')
 			return await message.sendMessage(
 				textToStylist(message.reply_message.text, fontType(match))
 			)

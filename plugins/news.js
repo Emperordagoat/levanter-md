@@ -12,9 +12,10 @@ bot(
 			const { result } = await getJson('https://levanter.up.railway.app/news')
 			return await message.sendMessage(
 				genListMessage(
-					result.map(({ title, url }) => ({
+					result.map(({ title, url, time }) => ({
 						text: title,
 						id: `news ${url}`,
+						desc: time,
 					})),
 					result.map(({ title }) => title).join('\n\n'),
 					'READ'
