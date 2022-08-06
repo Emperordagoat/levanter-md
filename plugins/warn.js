@@ -17,11 +17,16 @@ bot(
 		onlyGroup: true,
 	},
 	async (message, match) => {
+		if (!match && !message.reply_message)
+			return await message.sendMessage(
+				'*Example :*\nwarn mention/reply\nwarn reset mention/reply'
+			)
 		let [m, u] = match.split(' ')
 		if (m && m.toLowerCase() == 'reset') {
-			u = u.endsWith('@s.whatsapp.net')
-				? u
-				: message.mention[0] || message.reply_message.jid
+			u =
+				u && u.endsWith('@s.whatsapp.net')
+					? u
+					: message.mention[0] || message.reply_message.jid
 			if (!u) return await message.sendMessage('*Reply or Mention to a user*')
 			const count = await setWarn(u, message.jid, (!isNaN(u) && u) || -1)
 			return await message.sendMessage(
