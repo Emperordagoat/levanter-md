@@ -12,7 +12,7 @@ bot(
 			return await message.sendMessage(
 				'*Example : lydia on/off*\n_Reply or mention to activate for a person only._'
 			)
-		const user = message.mention[0] || message.reply_message.jid || message.jid
+		const user = message.mention[0] || message.reply_message.jid
 		await setLydia(message.jid, match == 'on', user)
 		await message.sendMessage(
 			`_Lydia ${
