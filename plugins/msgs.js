@@ -74,15 +74,17 @@ bot(
 	async (message, match) => {
 		const members = await message.groupMetadata(message.jid)
 		const membersJids = members.map(({ id }) => id)
-		const [type, count, kick] = match.split(' ')
+		const [type, count, kickOrType, COUNT, KICK] = match.split(' ')
 		if (
 			!type ||
 			!count ||
 			(type.toLowerCase() != 'total' && type.toLowerCase() != 'day') ||
-			isNaN(count)
+			isNaN(count) ||
+			(kickOrType && kickOrType != 'kick' && kickOrType != 'total') ||
+			(COUNT && isNaN(COUNT))
 		)
 			return await message.sendMessage(
-				`*Example :*\ninactive day 10\ninactive day 10 kick\ninactive total 100\ninactive total 100 kick\n\nif kick not mentioned, Just list`
+				`*Example :*\ninactive day 10\ninactive day 10 kick\ninactive total 100\ninactive total 100 kick\ninactive day 7 total 150\ninactive day 7 total 150 kick\n\nif kick not mentioned, Just list`
 			)
 		const { participants } = await getMsg(message.jid)
 		const now = new Date().getTime()
@@ -91,6 +93,12 @@ bot(
 			.filter((participant) => {
 				if (!membersJids.includes(participant[0]))
 					resetMsgs(message.jid, participant[0])
+				if (kickOrType && kickOrType == 'total')
+					return (
+						participant[1].total < COUNT &&
+						getFloor((now - participant[1].time) / 1000 / 8400) > count &&
+						membersJids.includes(participant[0])
+					)
 				if (type == 'total')
 					return (
 						participant[1].total < count && membersJids.includes(participant[0])
@@ -108,7 +116,7 @@ bot(
 		const tokick = [...inactive, ...notText]
 		let msg = `_Total inactives are : ${tokick.length}_`
 		if (tokick.length < 1) return await message.sendMessage(msg)
-		if (kick == 'kick') {
+		if (kickOrType == 'kick' || KICK == 'kick') {
 			const isImAdmin = await isAdmin(members, message.client.user.jid)
 			if (!isImAdmin) return await message.sendMessage(`_I'm not admin._`)
 			await message.sendMessage(
