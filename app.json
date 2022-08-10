@@ -74,7 +74,12 @@
 		"ANTILINK_MSG": {
 			"description": "Message send when antilink and action is kick.",
 			"required": false,
-			"value": "_Antilink Detected_"
+			"value": "_Antilink Detected &mention kicked_"
+		},
+		"ANTISPAM_MSG": {
+			"description": "Message send when antispam.",
+			"required": false,
+			"value": "_Antispam Detected &mention kicked_"
 		}
 	},
 	"addons": [
