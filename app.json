@@ -81,6 +81,11 @@
 			"required": false,
 			"value": "_Antispam Detected &mention kicked_"
 		},
+		"ANTIWORDS_MSG": {
+			"description": "Message send when antiword.",
+			"required": false,
+			"value": "_Antiword Detected &mention kicked_"
+		},
 		"ANTIWORDS": {
 			"description": "words that not allowed in chats.",
 			"required": false,
