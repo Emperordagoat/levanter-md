@@ -44,7 +44,7 @@ bot(
 		}
 		await setWord(message.jid, match == 'on')
 		await message.sendMessage(
-			`_AntiSpam ${match == 'on' ? 'activated' : 'deactivated.'}_`
+			`_AntiWord ${match == 'on' ? 'activated' : 'deactivated.'}_`
 		)
 	}
 )

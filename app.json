@@ -84,7 +84,7 @@
 		"ANTIWORDS": {
 			"description": "words that not allowed in chats.",
 			"required": false,
-			"value": "word,word,word,..."
+			"value": "word1,word2,word3"
 		}
 	},
 	"addons": [
