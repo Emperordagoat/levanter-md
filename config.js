@@ -47,5 +47,5 @@ module.exports = {
 		process.env.ANTISPAM_MSG || '_Antispam Detected &mention kicked_',
 	ANTIWORDS_MSG:
 		process.env.ANTIWORDS_MSG || '_AntiWord Detected &mention kicked_',
-	ANTIWORDS: process.env.ANTIWORDS || 'word',
+	ANTIWORDS: process.env.ANTIWORDS || 'test',
 }
