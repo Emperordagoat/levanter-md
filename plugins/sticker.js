@@ -20,8 +20,8 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.video && !message.reply_message.image)
 		)
-			return await message.sendMessage('*Reply to image/video*')
-		return await message.sendMessage(
+			return await message.send('*Reply to image/video*')
+		return await message.send(
 			await sticker(
 				'str',
 				await message.reply_message.downloadAndSaveMediaMessage('sticker'),
@@ -46,8 +46,8 @@ bot(
 	},
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.image)
-			return await message.sendMessage('*Reply to a image*')
-		return await message.sendMessage(
+			return await message.send('*Reply to a image*')
+		return await message.send(
 			await circleSticker(
 				await message.reply_message.downloadAndSaveMediaMessage(
 					'circleSticker'
@@ -72,9 +72,9 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.sticker && !message.reply_message.audio)
 		)
-			return await message.sendMessage('*Reply to sticker/audio*')
+			return await message.send('*Reply to sticker/audio*')
 		if (message.reply_message.sticker)
-			return await message.sendMessage(
+			return await message.send(
 				await addExif(
 					await message.reply_message.downloadMediaMessage('mp4'),
 					match
@@ -83,11 +83,11 @@ bot(
 				'sticker'
 			)
 		if (!match)
-			return await message.sendMessage(
+			return await message.send(
 				`*Give me title,artists,url*\n*aritists or url is optional*`
 			)
 		const [title, artists, url] = match.split(',')
-		return await message.sendMessage(
+		return await message.send(
 			await addAudioMetaData(
 				await message.reply_message.downloadMediaMessage(),
 				title,
@@ -114,7 +114,7 @@ bot(
 			!message.reply_message ||
 			!message.reply_message.animated
 		)
-			return await message.sendMessage('*Reply to animated sticker*')
+			return await message.send('*Reply to animated sticker*')
 		return await message.sendFromUrl(
 			await webpToMp4(
 				await message.reply_message.downloadAndSaveMediaMessage('sticker')

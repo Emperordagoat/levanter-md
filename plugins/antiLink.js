@@ -11,7 +11,7 @@ bot(
 	async (message, match) => {
 		const antilink = await getAntiLink(message.jid)
 		if (!match)
-			return await message.sendMessage(
+			return await message.send(
 				await genHydratedButtons(
 					[
 						{
@@ -35,14 +35,14 @@ bot(
 			)
 		if (match == 'on' || match == 'off') {
 			if (match == 'off' && !antilink)
-				return await message.sendMessage('_AntiLink is not enabled._')
+				return await message.send('_AntiLink is not enabled._')
 			await setAntiLink(message.jid, match == 'on')
-			return await message.sendMessage(
+			return await message.send(
 				`_AntiLink ${match == 'on' ? 'Enabled' : 'Disabled.'}_`
 			)
 		}
 		if (match == 'info')
-			return await message.sendMessage(
+			return await message.send(
 				`*AntiLink :* ${antilink.enabled ? 'on' : 'off'}\n*AllowedUrl :* ${
 					antilink.allowedUrls
 				}\n*Action :* ${antilink.action}`
@@ -51,10 +51,10 @@ bot(
 			await setAntiLink(message.jid, match)
 			const action = match.replace('action/', '')
 			if (!['warn', 'kick', 'null'].includes(action))
-				return await message.sendMessage('*Invalid action*')
-			return await message.sendMessage(`_AntiLink action updated as ${action}_`)
+				return await message.send('*Invalid action*')
+			return await message.send(`_AntiLink action updated as ${action}_`)
 		}
 		await setAntiLink(message.jid, match)
-		return await message.sendMessage(`_AntiLink allowed urls are ${match}_`)
+		return await message.send(`_AntiLink allowed urls are ${match}_`)
 	}
 )

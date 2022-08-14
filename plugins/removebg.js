@@ -9,7 +9,7 @@ bot(
 	},
 	async (message, match) => {
 		if (config.RMBG_KEY == 'null')
-			return await message.sendMessage(`    1. Create a account in remove.bg
+			return await message.send(`1. Create a account in remove.bg
     2. Verify your account.
     3. Copy your Key.
     4. .setvar RMBG_KEY:copied_key
@@ -26,14 +26,14 @@ bot(
     
     KEY LINK : https://www.remove.bg/dashboard#api-key`)
 		if (!message.reply_message || !message.reply_message.image)
-			return await message.sendMessage('*Reply to a image*')
+			return await message.send('*Reply to a image*')
 		const buffer = await removeBg(
 			await message.reply_message.downloadAndSaveMediaMessage('rmbg'),
 			config.RMBG_KEY
 		)
 		if (typeof buffer == 'string')
-			return await message.sendMessage(buffer, { quoted: message.data })
-		return await message.sendMessage(
+			return await message.send(buffer, { quoted: message.data })
+		return await message.send(
 			buffer,
 			{ quoted: message.quoted, mimetype: 'image/png' },
 			'image'

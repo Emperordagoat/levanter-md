@@ -12,7 +12,7 @@ bot(
 			`http://www.omdbapi.com/?apikey=742b2d09&t=${match}&plot=full`
 		)
 		if (movie.Response != 'True')
-			return await message.sendMessage('*Not found*', {
+			return await message.send('*Not found*', {
 				quoted: message.data,
 			})
 		let msg = ''
@@ -22,7 +22,7 @@ bot(
 		delete movie.Ratings
 		for (const data in movie)
 			if (movie[data] != 'N/A') msg += `*${data} :* ${movie[data]}\n`
-		if (url == 'N/A') return await message.sendMessage(msg.trim())
+		if (url == 'N/A') return await message.send(msg.trim())
 		return await message.sendFromUrl(url, { caption: msg.trim() })
 	}
 )

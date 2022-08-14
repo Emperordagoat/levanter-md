@@ -23,34 +23,34 @@ bot(
 	},
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.video)
-			return await message.sendMessage('*Reply to a video*')
+			return await message.send('*Reply to a video*')
 		if (match === '')
-			return await message.sendMessage('*Example : rotate right|left|flip*')
+			return await message.send('*Example : rotate right|left|flip*')
 		const location = await message.reply_message.downloadAndSaveMediaMessage(
 			'rotate'
 		)
 		if (/right/.test(match)) {
-			await message.sendMessage('_Converting..._')
-			return await message.sendMessage(
+			await message.send('_Converting..._')
+			return await message.send(
 				await getFfmpegBuffer(location, 'orotate.mp4', 'right'),
 				{ mimetype: 'video/mp4', quoted: message.data },
 				'video'
 			)
 		} else if (/left/.test(match)) {
-			await message.sendMessage('_Converting..._')
-			return await message.sendMessage(
+			await message.send('_Converting..._')
+			return await message.send(
 				await getFfmpegBuffer(location, 'orotate.mp4', 'left'),
 				{ mimetype: 'video/mp4', quoted: message.data },
 				'video'
 			)
 		} else if (/flip/.test(match)) {
-			await message.sendMessage('_Converting..._')
-			return await message.sendMessage(
+			await message.send('_Converting..._')
+			return await message.send(
 				await getFfmpegBuffer(location, 'orotate.mp4', 'flip'),
 				{ mimetype: 'video/mp4', quoted: message.data },
 				'video'
 			)
-		} else await message.sendMessage('*Example : rotate right|left|flip*')
+		} else await message.send('*Example : rotate right|left|flip*')
 	}
 )
 
@@ -66,8 +66,8 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.video && !message.reply_message.audio)
 		)
-			return await message.sendMessage('*Reply to a video/audio*')
-		return await message.sendMessage(
+			return await message.send('*Reply to a video/audio*')
+		return await message.send(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('mp3'),
 				'mp3.mp3',
@@ -92,8 +92,8 @@ bot(
 			message.reply_message === false ||
 			message.reply_message.animated
 		)
-			return await message.sendMessage('*Reply to photo sticker*')
-		return await message.sendMessage(
+			return await message.send('*Reply to photo sticker*')
+		return await message.send(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('photo'),
 				'photo.png',
@@ -118,18 +118,18 @@ bot(
 			!message.reply_message.video &&
 			!message.reply_message
 		)
-			return await message.sendMessage('*Reply to video/audio*')
+			return await message.send('*Reply to video/audio*')
 		const location = await message.reply_message.downloadAndSaveMediaMessage(
 			'reverse'
 		)
 		if (message.reply_message.video == true) {
-			return await message.sendMessage(
+			return await message.send(
 				await getFfmpegBuffer(location, 'revered.mp4', 'videor'),
 				{ mimetype: 'video/mp4', quoted: message.data },
 				'video'
 			)
 		} else if (message.reply_message.audio == true) {
-			return await message.sendMessage(
+			return await message.send(
 				await getFfmpegBuffer(location, 'revered.mp3', 'audior'),
 				{
 					filename: 'revered.mp3',
@@ -155,12 +155,12 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.audio && !message.reply_message.video)
 		)
-			return await message.sendMessage('*Reply to a audio/video.*')
-		if (!match) return await message.sendMessage('*Example : trim 0;30*')
+			return await message.send('*Reply to a audio/video.*')
+		if (!match) return await message.send('*Example : trim 0;30*')
 		const [start, duration] = match.split(';')
 		if (!start || !duration || isNaN(start) || isNaN(duration))
-			return await message.sendMessage('*Example : trim 10;30*')
-		return await message.sendMessage(
+			return await message.send('*Example : trim 10;30*')
+		return await message.send(
 			await audioCut(
 				await message.reply_message.downloadAndSaveMediaMessage('cut'),
 				start.trim(),
@@ -186,12 +186,12 @@ bot(
 	},
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.video)
-			return await message.sendMessage('*Reply to a video*')
-		if (!match) return await message.sendMessage('*Example : trim 10;30*')
+			return await message.send('*Reply to a video*')
+		if (!match) return await message.send('*Example : trim 10;30*')
 		const [start, duration] = match.split(';')
 		if (!start || !duration || isNaN(start) || isNaN(duration))
-			return await message.sendMessage('*Example : trim 60;30*')
-		return await message.sendMessage(
+			return await message.send('*Example : trim 60;30*')
+		return await message.send(
 			await videoTrim(
 				await message.reply_message.downloadAndSaveMediaMessage('trim'),
 				start,
@@ -211,11 +211,11 @@ bot(
 	},
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.image)
-			return await message.sendMessage('*Reply to a image.*')
+			return await message.send('*Reply to a image.*')
 		if (isNaN(match))
-			return await message.sendMessage('*Reply in order*\n*Ex: .page 1*')
+			return await message.send('*Reply in order*\n*Ex: .page 1*')
 		await message.reply_message.downloadAndSaveMediaMessage(`./pdf/${match}`)
-		return await message.sendMessage('_Added page_ ' + match)
+		return await message.send('_Added page_ ' + match)
 	}
 )
 
@@ -227,8 +227,8 @@ bot(
 		type: 'document',
 	},
 	async (message, match) => {
-		await message.sendMessage('_Uploading pdf..._')
-		return await message.sendMessage(
+		await message.send('_Uploading pdf..._')
+		return await message.send(
 			await PDF(),
 			{
 				fileName: `${moment(new Date()).format('YYYY_MM_DD_HH_mm')}.pdf`,
@@ -256,24 +256,24 @@ bot(
 			message.reply_message != false &&
 			!message.reply_message.video
 		)
-			return await message.sendMessage('*Reply to a video*')
+			return await message.send('*Reply to a video*')
 		if (match == '' && isNaN(match))
-			return await message.sendMessage(
+			return await message.send(
 				'*Reply with order number*\n*Ex: .merge 1*'
 			)
 		if (/[0-9]+/.test(match)) {
 			await message.reply_message.downloadAndSaveMediaMessage(
 				'./media/merge/' + match
 			)
-			return await message.sendMessage('```video ' + match + ' added```')
+			return await message.send('```video ' + match + ' added```')
 		} else {
 			let length = fs.readdirSync('./media/merge').length
 			if (!(length > 0))
-				return await message.sendMessage(
+				return await message.send(
 					'```Add videos in order.```\n*Example .merge 1*'
 				)
-			await message.sendMessage('```Merging ' + length + ' videos...```')
-			return await message.sendMessage(
+			await message.send('```Merging ' + length + ' videos...```')
+			return await message.send(
 				await mergeVideo(length),
 				{ mimetype: 'video/mp4', quoted: message.data },
 				'video'
@@ -291,8 +291,8 @@ bot(
 	},
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.video)
-			return await message.sendMessage('*Reply to a video*')
-		return await message.sendMessage(
+			return await message.send('*Reply to a video*')
+		return await message.send(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('compress'),
 				'ocompress.mp4',
@@ -316,8 +316,8 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.audio && !message.reply_message.video)
 		)
-			return await message.sendMessage('*Reply to a audio/video.*')
-		return await message.sendMessage(
+			return await message.send('*Reply to a audio/video.*')
+		return await message.send(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('basso'),
 				'bass.mp3',
@@ -341,8 +341,8 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.audio && !message.reply_message.video)
 		)
-			return await message.sendMessage('*Reply to a audio/video.*')
-		return await message.sendMessage(
+			return await message.send('*Reply to a audio/video.*')
+		return await message.send(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('trebleo'),
 				'treble.mp3',
@@ -366,8 +366,8 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.audio && !message.reply_message.video)
 		)
-			return await message.sendMessage('*Reply to a audio/video.*')
-		return await message.sendMessage(
+			return await message.send('*Reply to a audio/video.*')
+		return await message.send(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('histo'),
 				'histo.mp4',
@@ -391,8 +391,8 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.audio && !message.reply_message.video)
 		)
-			return await message.sendMessage('*Reply to a audio/video.*')
-		return await message.sendMessage(
+			return await message.send('*Reply to a audio/video.*')
+		return await message.send(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('vector'),
 				'vector.mp4',
@@ -412,7 +412,7 @@ bot(
 	},
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.video)
-			return await message.sendMessage('*Reply to a video*')
+			return await message.send('*Reply to a video*')
 		const [vw, vh, w, h] = match.split(',')
 		if (
 			!vh ||
@@ -424,7 +424,7 @@ bot(
 			typeof +h !== 'number' ||
 			typeof +vw !== 'number'
 		)
-			return await message.sendMessage(
+			return await message.send(
 				`*Example :*\ncrop out_w,out_h,x,y\nx and y are top left where to start croping`
 			)
 		const location = await message.reply_message.downloadAndSaveMediaMessage(
@@ -432,10 +432,10 @@ bot(
 		)
 		const { height, width } = await videoHeightWidth(location)
 		if (vw > width || vh > height)
-			return await message.sendMessage(
+			return await message.send(
 				`*Video width: ${width}, height: ${height}*\n*Choose output size in between.*`
 			)
-		return await message.sendMessage(
+		return await message.send(
 			await cropVideo(location, vw, vh, w, h),
 			{ mimetype: 'video/mp4', quoted: message.data },
 			'video'
@@ -455,8 +455,8 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.audio && !message.reply_message.video)
 		)
-			return await message.sendMessage('*Reply to a audio/video.*')
-		return await message.sendMessage(
+			return await message.send('*Reply to a audio/video.*')
+		return await message.send(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('lowmp3'),
 				'lowmp3.mp3',
@@ -479,8 +479,8 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.audio && !message.reply_message.video)
 		)
-			return await message.sendMessage('*Reply to a audio/video.*')
-		return await message.sendMessage(
+			return await message.send('*Reply to a audio/video.*')
+		return await message.send(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('pitchmp3'),
 				'lowmp3.mp3',
@@ -503,8 +503,8 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.audio && !message.reply_message.video)
 		)
-			return await message.sendMessage('*Reply to a audio/video.*')
-		return await message.sendMessage(
+			return await message.send('*Reply to a audio/video.*')
+		return await message.send(
 			await getFfmpegBuffer(
 				await message.reply_message.downloadAndSaveMediaMessage('avec'),
 				'avec.mp4',
@@ -534,22 +534,22 @@ bot(
 				!message.reply_message.audio &&
 				!message.reply_message.video)
 		)
-			return await message.sendMessage(
+			return await message.send(
 				'*add audio & video to merge*\n*Reply to a message.*'
 			)
 		if (message.reply_message.audio) {
 			await message.reply_message.downloadAndSaveMediaMessage(
 				'./media/avm/audio'
 			)
-			return await message.sendMessage('```Added audio.```')
+			return await message.send('```Added audio.```')
 		}
 		if (message.reply_message.video) {
 			await message.reply_message.downloadAndSaveMediaMessage(
 				'./media/avm/video'
 			)
-			return await message.sendMessage('```Added video.```')
+			return await message.send('```Added video.```')
 		}
-		return await message.sendMessage(
+		return await message.send(
 			await avm(files),
 			{ quoted: message.data },
 			'video'
@@ -569,8 +569,8 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.audio && !message.reply_message.video)
 		)
-			return await message.sendMessage('*Reply to a audio/video.*')
-		await message.sendMessage(
+			return await message.send('*Reply to a audio/video.*')
+		await message.send(
 			await blackVideo(
 				await message.reply_message.downloadAndSaveMediaMessage('black')
 			),

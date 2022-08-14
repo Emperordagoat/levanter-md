@@ -9,10 +9,10 @@ bot(
 	},
 	async (message, match) => {
 		match = isUrl(match || message.reply_message.text)
-		if (!match) return await message.sendMessage('_Example : tiktok url_')
+		if (!match) return await message.send('_Example : tiktok url_')
 		const result = await tiktok(match)
 		if (!result)
-			return await message.sendMessage('*Not found*', {
+			return await message.send('*Not found*', {
 				quoted: message.quoted,
 			})
 		return await message.sendFromUrl(result.url2)

@@ -10,7 +10,7 @@ bot(
 	async (message, match) => {
 		if (!match) {
 			const { result } = await getJson('https://levanter.up.railway.app/news')
-			return await message.sendMessage(
+			return await message.send(
 				genListMessage(
 					result.map(({ title, url, time }) => ({
 						text: title,
@@ -28,7 +28,7 @@ bot(
 			const { result } = await getJson(
 				`https://levanter.up.railway.app/news?url=${match}`
 			)
-			return await message.sendMessage(result, { quoted: message.data })
+			return await message.send(result, { quoted: message.data })
 		}
 	}
 )

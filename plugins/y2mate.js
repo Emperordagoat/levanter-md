@@ -18,14 +18,14 @@ bot(
 	},
 	async (message, match) => {
 		match = match || message.reply_message.text
-		if (!match) return await message.sendMessage('_Example : ytv url_')
+		if (!match) return await message.send('_Example : ytv url_')
 		if (match.startsWith('y2mate;')) {
 			const [_, q, id] = match.split(';')
 			const result = await y2mate.dl(id, 'video', q)
 			return await message.sendFromUrl(result)
 		}
 		if (!ytIdRegex.test(match))
-			return await message.sendMessage('*Give me a yt link!*', {
+			return await message.send('*Give me a yt link!*', {
 				quoted: message.data,
 			})
 		const vid = ytIdRegex.exec(match)
@@ -37,10 +37,10 @@ bot(
 				id: `ytv y2mate;${q};${vid[1]}`,
 			})
 		if (!buttons.length)
-			return await message.sendMessage('*Not found*', {
+			return await message.send('*Not found*', {
 				quoted: message.quoted,
 			})
-		return await message.sendMessage(
+		return await message.send(
 			await genButtonMessage(buttons, title, '', { image: thumbnail }, message),
 			{},
 			'button'
@@ -58,7 +58,7 @@ bot(
 	async (message, match) => {
 		match = match || message.reply_message.text
 		if (!match)
-			return await message.sendMessage('_Example : yta darari/yt url_')
+			return await message.send('_Example : yta darari/yt url_')
 		const vid = ytIdRegex.exec(match)
 		if (vid) match = vid[1]
 		const audio = await y2mate.get()
@@ -66,11 +66,11 @@ bot(
 		const { title, thumbnail, metadata, id } = video
 		const result = await y2mate.dl(id, 'audio')
 		if (!result)
-			return await message.sendMessage(`_not found._`, { quoted: message.data })
+			return await message.send(`_not found._`, { quoted: message.data })
 		const { buffer } = await getBuffer(result)
 		if (!buffer)
-			return await message.sendMessage(result, { quoted: message.data })
-		return await message.sendMessage(
+			return await message.send(result, { quoted: message.data })
+		return await message.send(
 			await addAudioMetaData(
 				buffer,
 				title,

@@ -10,7 +10,7 @@ bot(
 	},
 	async (message, match) => {
 		if (!match)
-			return await message.sendMessage(
+			return await message.send(
 				await genHydratedButtons(
 					[
 						{
@@ -31,19 +31,19 @@ bot(
 		if (match == 'list') {
 			let list = ''
 			let codes = await antiList(message.jid, 'fake')
-			await message.sendMessage(codes.join(','))
+			await message.send(codes.join(','))
 			codes.forEach((code, i) => {
 				list += `${i + 1}. ${code}\n`
 			})
-			return await message.sendMessage('```' + list + '```')
+			return await message.send('```' + list + '```')
 		}
 		if (match == 'on' || match == 'off') {
 			await enableAntiFake(message.jid, match)
-			return await message.sendMessage(
+			return await message.send(
 				`_Antifake ${match == 'on' ? 'Activated' : 'Deactivated'}_`
 			)
 		}
 		await enableAntiFake(message.jid, match)
-		return await message.sendMessage('_Antifake Updated_')
+		return await message.send('_Antifake Updated_')
 	}
 )

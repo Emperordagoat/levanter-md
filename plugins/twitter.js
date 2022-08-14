@@ -9,13 +9,13 @@ bot(
 	},
 	async (message, match) => {
 		match = isUrl(match || message.reply_message.text)
-		if (!match) return await message.sendMessage('_Example : twitter url_')
+		if (!match) return await message.send('_Example : twitter url_')
 		const result = await twitter(match)
 		if (!result.length)
-			return await message.sendMessage('*Not found*', {
+			return await message.send('*Not found*', {
 				quoted: message.quoted,
 			})
-		return await message.sendMessage(
+		return await message.send(
 			await genButtonMessage(
 				result.map((e) => ({
 					id: `upload ${e.url}`,

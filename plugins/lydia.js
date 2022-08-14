@@ -9,12 +9,12 @@ bot(
 	},
 	async (message, match) => {
 		if (!match)
-			return await message.sendMessage(
+			return await message.send(
 				'*Example : lydia on/off*\n_Reply or mention to activate for a person only._'
 			)
 		const user = message.mention[0] || message.reply_message.jid
 		await setLydia(message.jid, match == 'on', user)
-		await message.sendMessage(
+		await message.send(
 			`_Lydia ${
 				match == 'on' ? 'Activated' : 'Deactivated'
 			}_\n*Only works from reply msg.`

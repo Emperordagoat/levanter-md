@@ -26,7 +26,7 @@ bot(
 				text: enabled ? 'OFF' : 'ON',
 				id: `antiword ${enabled ? 'off' : 'on'}`,
 			})
-			return await message.sendMessage(
+			return await message.send(
 				await genButtonMessage(
 					buttons,
 					'AntiWord\nExample : antiword on/off\nantiword action/null or kick or warn'
@@ -38,12 +38,12 @@ bot(
 		if (match.startsWith('action/')) {
 			const action = match.replace('action/', '')
 			if (!actions.includes(action))
-				return await message.sendMessage(`${action} _is a invalid action_`)
+				return await message.send(`${action} _is a invalid action_`)
 			await setWord(message.jid, action)
-			return await message.sendMessage(`_antiword action updated as ${action}_`)
+			return await message.send(`_antiword action updated as ${action}_`)
 		}
 		await setWord(message.jid, match == 'on')
-		await message.sendMessage(
+		await message.send(
 			`_AntiWord ${match == 'on' ? 'activated' : 'deactivated.'}_`
 		)
 	}

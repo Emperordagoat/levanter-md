@@ -9,7 +9,7 @@ bot(
 	},
 	async (message, match) => {
 		if (!match)
-			return await message.sendMessage('*Example :  img bot*\n*img 10 bot*')
+			return await message.send('*Example :  img bot*\n*img 10 bot*')
 		let lim = 3
 		const count = /\d+/.exec(match)
 		if (count) {
@@ -20,7 +20,7 @@ bot(
 		lim =
 			(result.length && (result.length > lim ? lim : result.length)) ||
 			result.length
-		await message.sendMessage(`_Downloading ${lim} images of ${match.trim()}_`)
+		await message.send(`_Downloading ${lim} images of ${match.trim()}_`)
 		for (let i = 0; i < lim; i++) {
 			await message.sendFromUrl(result[i])
 		}

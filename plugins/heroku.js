@@ -13,9 +13,9 @@ bot(
 		type: 'heroku',
 	},
 	async (message, match) => {
-		await message.sendMessage(`_Restarting_`)
+		await message.send(`_Restarting_`)
 		await heroku.delete(baseURI + '/dynos').catch(async (error) => {
-			await message.sendMessage(`HEROKU : ${error.body.message}`)
+			await message.send(`HEROKU : ${error.body.message}`)
 		})
 	}
 )
@@ -31,7 +31,7 @@ bot(
 		await heroku
 			.get(baseURI + '/formation')
 			.then(async (formation) => {
-				await message.sendMessage(`_Shuttind down._`)
+				await message.send(`_Shuttind down._`)
 				await heroku.patch(baseURI + '/formation/' + formation[0].id, {
 					body: {
 						quantity: 0,
@@ -39,7 +39,7 @@ bot(
 				})
 			})
 			.catch(async (error) => {
-				await message.sendMessage(`HEROKU : ${error.body.message}`)
+				await message.send(`HEROKU : ${error.body.message}`)
 			})
 	}
 )
@@ -70,13 +70,13 @@ bot(
 					const quota = `Total Quota : ${secondsToHms(total_quota)}
 Used  Quota : ${secondsToHms(quota_used)}
 Remaning    : ${secondsToHms(remaining)}`
-					await message.sendMessage('```' + quota + '```')
+					await message.send('```' + quota + '```')
 				})
 				.catch(async (error) => {
-					return await message.sendMessage(`HEROKU : ${error.body.message}`)
+					return await message.send(`HEROKU : ${error.body.message}`)
 				})
 		} catch (error) {
-			await message.sendMessage(error)
+			await message.send(error)
 		}
 	}
 )
@@ -90,10 +90,10 @@ bot(
 	},
 	async (message, match) => {
 		if (!match)
-			return await message.sendMessage(`_Example: .setvar SUDO:919876543210_`)
+			return await message.send(`_Example: .setvar SUDO:919876543210_`)
 		const [key, value] = match.split(':')
 		if (!key || !value)
-			return await message.sendMessage(`_Example: .setvar SUDO:919876543210_`)
+			return await message.send(`_Example: .setvar SUDO:919876543210_`)
 		heroku
 			.patch(baseURI + '/config-vars', {
 				body: {
@@ -101,10 +101,10 @@ bot(
 				},
 			})
 			.then(async () => {
-				await message.sendMessage(`_${key.toUpperCase()}: ${value}_`)
+				await message.send(`_${key.toUpperCase()}: ${value}_`)
 			})
 			.catch(async (error) => {
-				await message.sendMessage(`HEROKU : ${error.body.message}`)
+				await message.send(`HEROKU : ${error.body.message}`)
 			})
 	}
 )
@@ -117,7 +117,7 @@ bot(
 		type: 'heroku',
 	},
 	async (message, match) => {
-		if (!match) return await message.sendMessage(`_Example: delvar sudo_`)
+		if (!match) return await message.send(`_Example: delvar sudo_`)
 		heroku
 			.get(baseURI + '/config-vars')
 			.then(async (vars) => {
@@ -128,12 +128,12 @@ bot(
 							[key]: null,
 						},
 					})
-					return await message.sendMessage(`_Deleted ${key}_`)
+					return await message.send(`_Deleted ${key}_`)
 				}
-				await message.sendMessage(`_${key} not found_`)
+				await message.send(`_${key} not found_`)
 			})
 			.catch(async (error) => {
-				await message.sendMessage(`HEROKU : ${error.body.message}`)
+				await message.send(`HEROKU : ${error.body.message}`)
 			})
 	}
 )
@@ -146,20 +146,20 @@ bot(
 		type: 'heroku',
 	},
 	async (message, match) => {
-		if (!match) return await message.sendMessage(`_Example: getvar sudo_`)
+		if (!match) return await message.send(`_Example: getvar sudo_`)
 		const key = match.trim().toUpperCase()
 		heroku
 			.get(baseURI + '/config-vars')
 			.then(async (vars) => {
 				if (vars[key]) {
-					return await message.sendMessage(
+					return await message.send(
 						'_{} : {}_'.replace('{}', key).replace('{}', vars[key])
 					)
 				}
-				await message.sendMessage(`${key} not found`)
+				await message.send(`${key} not found`)
 			})
 			.catch(async (error) => {
-				await message.sendMessage(`HEROKU : ${error.body.message}`)
+				await message.send(`HEROKU : ${error.body.message}`)
 			})
 	}
 )
@@ -179,10 +179,10 @@ bot(
 				for (const key in keys) {
 					msg += `${key} : ${keys[key]}\n\n`
 				}
-				return await message.sendMessage(msg + '```')
+				return await message.send(msg + '```')
 			})
 			.catch(async (error) => {
-				await message.sendMessage(`HEROKU : ${error.body.message}`)
+				await message.send(`HEROKU : ${error.body.message}`)
 			})
 	}
 )
@@ -196,8 +196,8 @@ bot(
 	},
 	async (message, match) => {
 		const update = await isUpdate()
-		if (!update.length) return await message.sendMessage('*Bot is up-to-date.*')
-		return await message.sendMessage('*New updates*\n\n' + update.join('\n'))
+		if (!update.length) return await message.send('*Bot is up-to-date.*')
+		return await message.send('*New updates*\n\n' + update.join('\n'))
 	}
 )
 
@@ -211,12 +211,12 @@ bot(
 	async (message, match) => {
 		const isupdate = await isUpdate()
 		if (!isupdate.length)
-			return await message.sendMessage(
+			return await message.send(
 				'*Bot is up-to-date.*\n*Nothing to Update.*'
 			)
-		await message.sendMessage('_Updating..._')
+		await message.send('_Updating..._')
 		const e = await updateNow()
-		if (e) return await message.sendMessage(e)
-		return await message.sendMessage('_Updated_')
+		if (e) return await message.send(e)
+		return await message.send('_Updated_')
 	}
 )

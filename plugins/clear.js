@@ -9,6 +9,6 @@ bot(
 	},
 	async (message, match) => {
 		await message.clearChat(message.jid)
-		await message.sendMessage('_Cleared_')
+		await message.send('_Cleared_')
 	}
 )

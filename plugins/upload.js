@@ -8,7 +8,7 @@ bot(
 	},
 	async (message, match) => {
 		match = isUrl(match || message.reply_message.text)
-		if (!match) return await message.sendMessage('_Example : upload url_')
+		if (!match) return await message.send('_Example : upload url_')
 		if (match.startsWith('https://images.app.goo.gl'))
 			match = await getImgUrl(match)
 		await message.sendFromUrl(match)

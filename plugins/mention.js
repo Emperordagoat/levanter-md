@@ -15,7 +15,7 @@ bot(
 	},
 	async (message, match) => {
 		if (!match)
-			return await message.sendMessage(
+			return await message.send(
 				await genHydratedButtons(
 					[
 						{
@@ -36,16 +36,16 @@ bot(
 		if (match == 'get') {
 			const msg = await mentionMessage()
 			if (!msg)
-				return await message.sendMessage('_Reply to Mention not Activated._')
-			return await message.sendMessage(msg)
+				return await message.send('_Reply to Mention not Activated._')
+			return await message.send(msg)
 		} else if (match == 'on' || match == 'off') {
 			await enableMention(match == 'on')
-			return await message.sendMessage(
+			return await message.send(
 				`_Reply to mention ${match == 'on' ? 'Activated' : 'Deactivated'}_`
 			)
 		}
 		await enableMention(match)
 		clearFiles()
-		return await message.sendMessage('_Mention Updated_')
+		return await message.send('_Mention Updated_')
 	}
 )

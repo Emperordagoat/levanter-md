@@ -10,7 +10,7 @@ bot(
 	},
 	async (message, match) => {
 		if (!match)
-			await message.sendMessage(
+			await message.send(
 				await genButtonMessage(
 					[
 						{ id: 'pdm on', text: 'ON' },
@@ -23,7 +23,7 @@ bot(
 			)
 		if (match == 'on' || match == 'off') {
 			await setPdm(message.jid, match)
-			await message.sendMessage(
+			await message.send(
 				`_pdm ${match == 'on' ? 'Activated' : 'Deactivated'}_`
 			)
 		}

@@ -12,8 +12,8 @@ bot(
 			!message.reply_message ||
 			(!message.reply_message.image && !message.reply_message.video)
 		)
-			return await message.sendMessage('*Reply to a image/video*')
-		await message.sendMessage(
+			return await message.send('*Reply to a image/video*')
+		await message.send(
 			await getUrl(
 				await message.reply_message.downloadAndSaveMediaMessage('url'),
 				false

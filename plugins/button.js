@@ -10,9 +10,9 @@ bot(
 	async (message, match) => {
 		match = match.split(',')
 		if (match.length < 3)
-			return await message.sendMessage(
+			return await message.send(
 				'Example head,foot,button1,button2,...\nreply to image,video or document.'
 			)
-		await message.sendMessage(await buttonMessage(match, message), {}, 'button')
+		await message.send(await buttonMessage(match, message), {}, 'button')
 	}
 )

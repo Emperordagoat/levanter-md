@@ -10,7 +10,7 @@ bot(
 				`https://levanter.up.railway.app/gqr?text=${encodeURIComponent(match)}`
 			)
 		if (!message.reply_message || !message.reply_message.image)
-			return await message.sendMessage(
+			return await message.send(
 				'*Example : qr test*\n*Reply to a qr image.*'
 			)
 
@@ -19,7 +19,7 @@ bot(
 		)
 		const qr = new QRReader()
 		qr.callback = (err, value) =>
-			message.sendMessage(err ?? value.result, { quoted: message.data })
+			message.send(err ?? value.result, { quoted: message.data })
 		qr.decode(bitmap)
 	}
 )

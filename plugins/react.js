@@ -8,8 +8,8 @@ bot(
 	},
 	async (message, match) => {
 		if (!match || !message.reply_message)
-			return await message.sendMessage('_Example : react ❣_')
-		return await message.sendMessage(
+			return await message.send('_Example : react ❣_')
+		return await message.send(
 			{
 				text: match,
 				key: message.reply_message.key,

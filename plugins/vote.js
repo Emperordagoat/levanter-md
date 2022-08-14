@@ -9,23 +9,16 @@ bot(
 	},
 	async (message, match) => {
 		const { msg, options, type } = await newVote(message, match)
-		return await message.sendMessage(msg, options, type)
+		return await message.send(msg, options, type)
 	}
 )
 
-bot(
-	{
-		on: 'text',
-		fromMe: false,
-		type: 'vote',
-	},
-	async (message, match) => {
-		const msg = await participateInVote(message)
-		if (msg)
-			return await message.sendMessage(
-				msg.msg,
-				{ quoted: message.data },
-				msg.type
-			)
-	}
-)
+bot({ on: 'text', fromMe: false, type: 'vote' }, async (message, match) => {
+	const msg = await participateInVote(message)
+	if (msg)
+		return await message.send(
+			msg.msg,
+			{ quoted: message.data },
+			msg.type
+		)
+})

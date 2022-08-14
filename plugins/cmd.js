@@ -9,10 +9,10 @@ bot(
 	},
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.sticker)
-			return await message.sendMessage('*Reply to a sticker*')
-		if (!match) return await message.sendMessage('*Example : setcmd ping*')
+			return await message.send('*Reply to a sticker*')
+		if (!match) return await message.send('*Example : setcmd ping*')
 		const res = await setCmd(match, message.reply_message)
-		return await message.sendMessage(res < 1 ? '_Failed_' : '_Success_')
+		return await message.send(res < 1 ? '_Failed_' : '_Success_')
 	}
 )
 
@@ -25,8 +25,8 @@ bot(
 	},
 	async (message, match) => {
 		const res = await getCmd()
-		if (!res.length) return await message.sendMessage('*Not set any cmds*')
-		return await message.sendMessage('```' + res.join('\n') + '```')
+		if (!res.length) return await message.send('*Not set any cmds*')
+		return await message.send('```' + res.join('\n') + '```')
 	}
 )
 
@@ -39,8 +39,8 @@ bot(
 	},
 	async (message, match) => {
 		if (!match && (!message.reply_message || !message.reply_message.sticker))
-			return await message.sendMessage('*Example :*\ndelcmd cmdName\nReply to a sticker')
+			return await message.send('*Example :*\ndelcmd cmdName\nReply to a sticker')
 		const res = await delCmd(match || message.reply_message)
-		return await message.sendMessage(res < 1 ? '_Failed_' : '_Success_')
+		return await message.send(res < 1 ? '_Failed_' : '_Success_')
 	}
 )

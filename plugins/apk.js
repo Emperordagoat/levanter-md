@@ -7,17 +7,17 @@ bot(
 		type: 'download',
 	},
 	async (message, match) => {
-		if (!match) return await message.sendMessage('*Example : apk Mixplorer*')
+		if (!match) return await message.send('*Example : apk Mixplorer*')
 		const { result, status } = await apkMirror(match)
 		if (status > 400) {
 			if (!result.length)
-				return await message.sendMessage(
+				return await message.send(
 					'_No results found matching your query_'
 				)
 			const list = []
 			for (const { title, url } of result)
 				list.push({ id: `apk ${status};;${url}`, text: title })
-			return await message.sendMessage(
+			return await message.send(
 				genListMessage(list, 'Matching apps', 'DOWNLOAD'),
 				{},
 				'list'
@@ -30,7 +30,7 @@ bot(
 					id: `apk ${status};;${result[apk].url}`,
 					text: result[apk].title,
 				})
-			return await message.sendMessage(
+			return await message.send(
 				await genButtonMessage(button, 'Available apks'),
 				{},
 				'button'

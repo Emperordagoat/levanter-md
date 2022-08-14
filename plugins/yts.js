@@ -17,12 +17,12 @@ bot(
 		type: 'search',
 	},
 	async (message, match) => {
-		if (!match) return await message.sendMessage('*Example : yts baymax*')
+		if (!match) return await message.send('*Example : yts baymax*')
 		const vid = ytIdRegex.exec(match)
 		if (vid) {
 			const [result] = await yts(vid[1], true)
 			const { title, description, metadata } = result
-			return await message.sendMessage(
+			return await message.send(
 				`*Title :* ${title}\n*Desc :* ${description}\n*Time :* ${metadata.length_seconds}s\n*Views :* ${metadata.view_count}\n*Publish :* ${metadata.publish_date}`
 			)
 		}
@@ -33,7 +33,7 @@ bot(
 			({ title, description, url, metadata }) =>
 				(msg += `• ${title}\nViews : ${metadata.view_count}\nTime : ${metadata.duration.accessibility_label}\nPublished : ${metadata.published}\nDesc : ${description}\nUrl : ${url}\n\n`)
 		)
-		return await message.sendMessage(msg.trim())
+		return await message.send(msg.trim())
 	}
 )
 
@@ -47,14 +47,14 @@ bot(
 	async (message, match) => {
 		match = match || message.reply_message.text
 		if (!match)
-			return await message.sendMessage(
+			return await message.send(
 				'*Example : song indila love story/ yt link*'
 			)
 		const vid = ytIdRegex.exec(match)
 		if (vid) {
 			const [result] = await yts(vid[1], true)
 			const { id, author, title, thumbnail } = result
-			return await message.sendMessage(
+			return await message.send(
 				await addAudioMetaData(
 					await song(id),
 					title,
@@ -67,7 +67,7 @@ bot(
 			)
 		} else {
 			const result = await yts(match)
-			return await message.sendMessage(
+			return await message.send(
 				genListMessage(
 					result.map(({ title, url, metadata }) => ({
 						text: title,
@@ -94,14 +94,14 @@ bot(
 	async (message, match) => {
 		match = match || message.reply_message.text
 		if (!match)
-			return await message.sendMessage('*Example : video yt_url*')
+			return await message.send('*Example : video yt_url*')
 		const vid = ytIdRegex.exec(match)
 		if (!vid) {
-			return await message.sendMessage('*Example : video yt_url*')
+			return await message.send('*Example : video yt_url*')
 			// const result = await yts(match)
 			// match = result[0].id
 		} else match = vid[1]
-		return await message.sendMessage(
+		return await message.send(
 			await video(match),
 			{ quoted: message.data },
 			'video'

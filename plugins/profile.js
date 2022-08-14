@@ -9,7 +9,7 @@ bot(
 		type: 'user',
 	},
 	async (message, match) => {
-		return await message.sendMessage(
+		return await message.send(
 			message.mention[0] || message.reply_message.jid || message.jid
 		)
 	}
@@ -24,7 +24,7 @@ bot(
 		onlyGroup: true,
 	},
 	async (message, match) => {
-		if (match) await message.sendMessage(match)
+		if (match) await message.send(match)
 		return await message.leftFromGroup(message.jid)
 	}
 )
@@ -41,8 +41,8 @@ bot(
 			message.mention[0] ||
 			message.reply_message.jid ||
 			(!message.isGroup && message.jid)
-		if (!id) return await message.sendMessage('*Give me a person*')
-		await message.sendMessage('_Blocked_')
+		if (!id) return await message.send('*Give me a person*')
+		await message.send('_Blocked_')
 		await message.Block(id)
 	}
 )
@@ -59,8 +59,8 @@ bot(
 			message.mention[0] ||
 			message.reply_message.jid ||
 			(!message.isGroup && message.jid)
-		if (!id) return await message.sendMessage('*Give me a person*')
-		await message.sendMessage('_Unblocked_')
+		if (!id) return await message.send('*Give me a person*')
+		await message.send('_Unblocked_')
 		await message.Unblock(id)
 	}
 )
@@ -74,11 +74,11 @@ bot(
 	},
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.image)
-			return await message.sendMessage('*Reply to a image*')
+			return await message.send('*Reply to a image*')
 		await message.updateProfilePicture(
 			await message.reply_message.downloadMediaMessage()
 		)
-		return await message.sendMessage('_Profile Picture Updated_')
+		return await message.send('_Profile Picture Updated_')
 	}
 )
 
@@ -94,6 +94,6 @@ bot(
 		const url = await message.profilePictureUrl(id)
 		const { status } = await message.fetchStatus(id)
 		const { buffer } = await getBuffer(url)
-		return await message.sendMessage(buffer, { caption: status }, 'image')
+		return await message.send(buffer, { caption: status }, 'image')
 	}
 )

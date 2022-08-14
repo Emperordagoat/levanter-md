@@ -33,7 +33,7 @@ bot(
 				secondsToHms((now - participants[participant].time) / 1000) || 0
 			} ago\n\n`
 		}
-		await message.sendMessage(msg.trim())
+		await message.send(msg.trim())
 	}
 )
 
@@ -48,15 +48,15 @@ bot(
 	async (message, match) => {
 		const user = message.reply_message.jid || message.mention[0]
 		if (!user && match != 'all')
-			return await message.sendMessage(
+			return await message.send(
 				'*Example :*\nreset all\nreset mention/reply a person'
 			)
 		if (match == 'all') {
 			await resetMsgs(message.jid)
-			return await message.sendMessage('_Everyones message count deleted._')
+			return await message.send('_Everyones message count deleted._')
 		}
 		await resetMsgs(message.jid, user)
-		return await message.sendMessage(
+		return await message.send(
 			`_@${jidToNum(user)} message count deleted._`,
 			{ contextInfo: { mentionedJid: [user] } }
 		)
@@ -83,7 +83,7 @@ bot(
 			(kickOrType && kickOrType != 'kick' && kickOrType != 'total') ||
 			(COUNT && isNaN(COUNT))
 		)
-			return await message.sendMessage(
+			return await message.send(
 				`*Example :*\ninactive day 10\ninactive day 10 kick\ninactive total 100\ninactive total 100 kick\ninactive day 7 total 150\ninactive day 7 total 150 kick\n\nif kick not mentioned, Just list`
 			)
 		const { participants } = await getMsg(message.jid)
@@ -115,11 +115,11 @@ bot(
 		)
 		const tokick = [...inactive, ...notText]
 		let msg = `_Total inactives are : ${tokick.length}_`
-		if (tokick.length < 1) return await message.sendMessage(msg)
+		if (tokick.length < 1) return await message.send(msg)
 		if (kickOrType == 'kick' || KICK == 'kick') {
 			const isImAdmin = await isAdmin(members, message.client.user.jid)
-			if (!isImAdmin) return await message.sendMessage(`_I'm not admin._`)
-			await message.sendMessage(
+			if (!isImAdmin) return await message.send(`_I'm not admin._`)
+			await message.send(
 				`_Removing ${tokick.length} inactive members in 7 seconds_`
 			)
 			await sleep(7000)
@@ -129,7 +129,7 @@ bot(
 			msg += `\n*${i + 1}.*${addSpace(i + 1, tokick.length)} @${jidToNum(
 				tokick[i]
 			)}`
-		return await message.sendMessage(msg, {
+		return await message.send(msg, {
 			contextInfo: { mentionedJid: tokick },
 		})
 	}

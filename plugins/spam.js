@@ -4,14 +4,14 @@ bot(
 	{
 		pattern: 'antispam ?(.*)',
 		fromMe: true,
-		desc: 'anti spam group chat',
+		desc: 'TO remove backgroud of image',
 		onlyGroup: true,
 		type: 'group',
 	},
 	async (message, match) => {
 		if (!match || (match != 'on' && match != 'off')) {
 			const { enabled } = await getSpam(message.jid)
-			return await message.sendMessage(
+			return await message.send(
 				await genButtonMessage(
 					[
 						{
@@ -26,7 +26,7 @@ bot(
 			)
 		}
 		await setSpam(message.jid, match == 'on')
-		await message.sendMessage(
+		await message.send(
 			`_AntiSpam ${match == 'on' ? 'activated' : 'deactivated.'}_`
 		)
 	}

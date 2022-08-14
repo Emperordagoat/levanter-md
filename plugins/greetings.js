@@ -20,10 +20,10 @@ bot(
 	async (message, match) => {
 		const welcome = await getMessage(message.jid, 'welcome')
 		if (!match && !welcome)
-			return await message.sendMessage('*Example : welcome Hi &mention*')
+			return await message.send('*Example : welcome Hi &mention*')
 		if (!match) {
-			await message.sendMessage(welcome.message)
-			return await message.sendMessage(
+			await message.send(welcome.message)
+			return await message.send(
 				await genHydratedButtons(
 					[
 						{
@@ -43,21 +43,21 @@ bot(
 		}
 		if (match == 'on' || match == 'off') {
 			if (!welcome)
-				return await message.sendMessage('*Example : welcome Hi #mention*')
+				return await message.send('*Example : welcome Hi #mention*')
 			await enableGreetings(message.jid, 'welcome', match)
-			return await message.sendMessage(
+			return await message.send(
 				`_Welcome  ${match == 'on' ? 'Enabled' : 'Disabled'}_`
 			)
 		}
 		if (match === 'delete') {
-			await message.sendMessage('_Welcome deleted_')
+			await message.send('_Welcome deleted_')
 			clearGreetings(message.jid, 'welcome')
 			return await deleteMessage(message.jid, 'welcome')
 		}
 		await setMessage(message.jid, 'welcome', match)
 		const { msg, options, type } = await greetingsPreview(message, 'welcome')
-		await message.sendMessage(msg, options, type)
-		return await message.sendMessage('_Welcome set_')
+		await message.send(msg, options, type)
+		return await message.send('_Welcome set_')
 	}
 )
 
@@ -72,10 +72,10 @@ bot(
 	async (message, match) => {
 		const welcome = await getMessage(message.jid, 'goodbye')
 		if (!match && !welcome)
-			return await message.sendMessage('*Example : goodbye Bye &mention*')
+			return await message.send('*Example : goodbye Bye &mention*')
 		if (!match) {
-			await message.sendMessage(welcome.message)
-			return await message.sendMessage(
+			await message.send(welcome.message)
+			return await message.send(
 				await genHydratedButtons(
 					[
 						{
@@ -97,20 +97,20 @@ bot(
 		}
 		if (match == 'on' || match == 'off') {
 			if (!welcome)
-				return await message.sendMessage('*Example : goodbye Bye #mention*')
+				return await message.send('*Example : goodbye Bye #mention*')
 			await enableGreetings(message.jid, 'goodbye', match)
-			return await message.sendMessage(
+			return await message.send(
 				`_Goodbye ${match == 'on' ? 'Enabled' : 'Disabled'}_`
 			)
 		}
 		if (match === 'delete') {
-			await message.sendMessage('_Goodbye deleted_')
+			await message.send('_Goodbye deleted_')
 			clearGreetings(message.jid, 'goodbye')
 			return await deleteMessage(message.jid, 'goodbye')
 		}
 		await setMessage(message.jid, 'goodbye', match)
 		const { msg, options, type } = await greetingsPreview(message, 'goodbye')
-		await message.sendMessage(msg, options, type)
-		return await message.sendMessage('_Goodbye set_')
+		await message.send(msg, options, type)
+		return await message.send('_Goodbye set_')
 	}
 )

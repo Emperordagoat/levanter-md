@@ -18,7 +18,7 @@ bot(
 						e.split('@')[0]
 					}\n`)
 			)
-			return await message.sendMessage('```' + mesaj.trim() + '```', {
+			return await message.send('```' + mesaj.trim() + '```', {
 				contextInfo: { mentionedJid },
 			})
 		} else if (match == 'admin' || match == 'admins') {
@@ -27,7 +27,7 @@ bot(
 				.filter((user) => !!user.admin == true)
 				.map(({ id }) => id)
 			mentionedJid.forEach((e) => (mesaj += `@${e.split('@')[0]}\n`))
-			return await message.sendMessage(mesaj.trim(), {
+			return await message.send(mesaj.trim(), {
 				contextInfo: { mentionedJid },
 			})
 		} else if (match == 'notadmin' || match == 'not admins') {
@@ -36,16 +36,18 @@ bot(
 				.filter((user) => !!user.admin != true)
 				.map(({ id }) => id)
 			mentionedJid.forEach((e) => (mesaj += `@${e.split('@')[0]}\n`))
-			return await message.sendMessage(mesaj.trim(), {
+			return await message.send(mesaj.trim(), {
 				contextInfo: { mentionedJid },
 			})
 		}
 		if (match || message.reply_message.txt)
-			return await message.sendMessage(match || message.reply_message.text, {
+			return await message.send(match || message.reply_message.text, {
 				contextInfo: { mentionedJid },
 			})
 		if (!message.reply_message)
-			return await message.sendMessage('*Example :*\ntag all\ntag admin\ntag notadmin\ntag text\nReply to a message')
+			return await message.send(
+				'*Example :*\ntag all\ntag admin\ntag notadmin\ntag text\nReply to a message'
+			)
 		forwardOrBroadCast(message.jid, message, { contextInfo: { mentionedJid } })
 	}
 )

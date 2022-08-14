@@ -19,14 +19,14 @@ bot(
 	async (message, match) => {
 		const participants = await message.groupMetadata(message.jid)
 		const isImAdmin = await isAdmin(participants, message.client.user.jid)
-		if (!isImAdmin) return await message.sendMessage(`_I'm not admin._`)
+		if (!isImAdmin) return await message.send(`_I'm not admin._`)
 		let msg = message.reply_message.text || 'null'
 		const [hour, min] = match.split(' ')
 		if (hour == 'info') {
 			const task = await getMute(message.jid, 'mute')
-			if (!task) return await message.sendMessage('_Not Found AutoMute_')
+			if (!task) return await message.send('_Not Found AutoMute_')
 			const { hour, minute, msg, enabled } = task
-			return await message.sendMessage(
+			return await message.send(
 				`*Hour :* ${hour}\n*Minute :* ${minute}\n*Time :* ${c24to12(
 					`${hour}:${minute}`
 				)}\n*Mute :* ${enabled ? 'on' : 'off'}\nMessage : ${msg}`
@@ -34,10 +34,10 @@ bot(
 		}
 		if (hour == 'on' || hour == 'off') {
 			const isMute = await setMute(message.jid, 'mute', hour == 'on')
-			if (!isMute) return await message.sendMessage('_Not Found AutoMute')
+			if (!isMute) return await message.send('_Not Found AutoMute')
 			const task = await getMute(message.jid, 'mute')
 			if (!task || !task.hour)
-				return await message.sendMessage('_Not Found AutoMute_')
+				return await message.send('_Not Found AutoMute_')
 			const isTask = addTask(
 				message.jid,
 				'mute',
@@ -47,13 +47,13 @@ bot(
 				task.msg
 			)
 			if (!isTask)
-				return await message.sendMessage('_AutoMute Already Disabled_')
-			return await message.sendMessage(
+				return await message.send('_AutoMute Already Disabled_')
+			return await message.send(
 				`_AutoMute ${hour == 'on' ? 'Enabled' : 'Disabled'}._`
 			)
 		}
 		if (!hour || !min || isNaN(hour) || isNaN(min))
-			return await message.sendMessage(
+			return await message.send(
 				await genButtonMessage(
 					[
 						{ id: 'amute on', text: 'ON' },
@@ -68,7 +68,7 @@ bot(
 		await setMute(message.jid, 'mute', true, hour, min, msg)
 		addTask(message.jid, 'mute', hour, min, message.client, msg)
 
-		return await message.sendMessage(
+		return await message.send(
 			`_Group will Mute at ${c24to12(`${hour}:${min}`)}_${
 				msg != 'null' ? `\n_Message: ${msg}_` : ''
 			}`
@@ -87,15 +87,15 @@ bot(
 	async (message, match) => {
 		const participants = await message.groupMetadata(message.jid)
 		const isImAdmin = await isAdmin(participants, message.client.user.jid)
-		if (!isImAdmin) return await message.sendMessage(`_I'm not admin._`)
+		if (!isImAdmin) return await message.send(`_I'm not admin._`)
 		let msg = message.reply_message.text || 'null'
 		const [hour, min] = match.split(' ')
 		if (hour == 'info') {
 			const task = await getMute(message.jid, 'unmute')
 			if (!task || !task.hour)
-				return await message.sendMessage('_Not Found AutoUnMute_')
+				return await message.send('_Not Found AutoUnMute_')
 			const { hour, minute, msg, enabled } = task
-			return await message.sendMessage(
+			return await message.send(
 				`*Hour :* ${hour}\n*Minute :* ${minute}\n*Time :* ${c24to12(
 					`${hour}:${minute}`
 				)}\n*unMute :* ${enabled ? 'on' : 'off'}\nMessage : ${msg}`
@@ -103,9 +103,9 @@ bot(
 		}
 		if (hour == 'on' || hour == 'off') {
 			const isMute = await setMute(message.jid, 'unmute', hour == 'on')
-			if (!isMute) return await message.sendMessage('_Not Found AutoUnMute_')
+			if (!isMute) return await message.send('_Not Found AutoUnMute_')
 			const task = await getMute(message.jid, 'unmute')
-			if (!task) return await message.sendMessage('_Not Found AutoUnMute_')
+			if (!task) return await message.send('_Not Found AutoUnMute_')
 			const isTask = addTask(
 				message.jid,
 				'unmute',
@@ -115,13 +115,13 @@ bot(
 				task.msg
 			)
 			if (!isTask)
-				return await message.sendMessage('_AutoUnMute Already Disabled_')
-			return await message.sendMessage(
+				return await message.send('_AutoUnMute Already Disabled_')
+			return await message.send(
 				`_AutoUnMute ${hour == 'on' ? 'Enabled' : 'Disabled'}._`
 			)
 		}
 		if (!hour || !min || isNaN(hour) || isNaN(min))
-			return await message.sendMessage(
+			return await message.send(
 				await genButtonMessage(
 					[
 						{ id: 'aunmute on', text: 'ON' },
@@ -135,7 +135,7 @@ bot(
 			)
 		await setMute(message.jid, 'unmute', true, hour, min, msg)
 		addTask(message.jid, 'unmute', hour, min, message.client, msg)
-		return await message.sendMessage(
+		return await message.send(
 			`_Group will unMute at ${c24to12(`${hour}:${min}`)}_${
 				msg != 'null' ? `\n_Message: ${msg}_` : ''
 			}`

@@ -50,7 +50,7 @@ bot.addCommand(
 			)}${textToStylist(command.toUpperCase(), 'mono')}\n`
 		})
 		CMD_HELP += `╰────────────────`
-		return await message.sendMessage('```' + CMD_HELP + '```')
+		return await message.send('```' + CMD_HELP + '```')
 	}
 )
 
@@ -70,7 +70,7 @@ bot.addCommand(
 				msg += `${index} ${ctt(command.pattern)}\n${command.desc}\n\n`
 			}
 		})
-		await message.sendMessage('```' + msg.trim() + '```')
+		await message.send('```' + msg.trim() + '```')
 	}
 )
 bot.addCommand(
@@ -120,6 +120,6 @@ bot.addCommand(
 			msg += ` ╰─────────────────
 `
 		}
-		await message.sendMessage(msg.trim())
+		await message.send(msg.trim())
 	}
 )

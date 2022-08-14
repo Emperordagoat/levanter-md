@@ -10,11 +10,11 @@ bot(
 		onlyGroup: true,
 	},
 	async (message, match) => {
-		if (!match) return await message.sendMessage(`*Example : .stop hi*`)
+		if (!match) return await message.send(`*Example : .stop hi*`)
 		const isDel = await deleteFilter(message.jid, match)
 		if (!isDel)
-			return await message.sendMessage(`_${match} not found in filters_`)
-		return await message.sendMessage(`_${match} deleted._`)
+			return await message.send(`_${match} not found in filters_`)
+		return await message.send(`_${match} deleted._`)
 	}
 )
 
@@ -31,17 +31,17 @@ bot(
 		if (!match) {
 			const filters = await getFilter(message.jid)
 			if (!filters)
-				return await message.sendMessage(
+				return await message.send(
 					`_Not set any filter_\n*Example filter 'hi' 'hello'*`
 				)
 			let msg = ''
 			filters.map(({ pattern }) => {
 				msg += `=> ${pattern} \n`
 			})
-			return await message.sendMessage(msg.trim())
+			return await message.send(msg.trim())
 		} else {
 			if (match.length < 2) {
-				return await message.sendMessage(`Example filter 'hi' 'hello'`)
+				return await message.send(`Example filter 'hi' 'hello'`)
 			}
 			await setFilter(
 				message.jid,
@@ -49,7 +49,7 @@ bot(
 				match[1].replace(/['"]+/g, ''),
 				match[0][0] === "'" ? true : false
 			)
-			await message.sendMessage(
+			await message.send(
 				`_${match[0].replace(/['"]+/g, '')}_ added to filters.`
 			)
 		}
@@ -57,18 +57,14 @@ bot(
 )
 
 bot(
-	{
-		on: 'text',
-		fromMe: false,
-		type: 'filterOrLydia',
-	},
+	{ on: 'text', fromMe: false, type: 'filterOrLydia' },
 	async (message, match) => {
 		const filters = await getFilter(message.jid)
 		if (filters)
 			filters.map(async ({ pattern, regex, text }) => {
 				pattern = new RegExp(regex ? pattern : `\\b(${pattern})\\b`, 'gm')
 				if (pattern.test(message.text)) {
-					await message.sendMessage(text, {
+					await message.send(text, {
 						quoted: message.data,
 					})
 				}
@@ -76,19 +72,12 @@ bot(
 
 		const isLydia = await lydia(message)
 		if (isLydia)
-			return await message.sendMessage(isLydia, { quoted: message.data })
+			return await message.send(isLydia, { quoted: message.data })
 	}
 )
 
-bot(
-	{
-		on: 'text',
-		fromMe: true,
-		type: 'lydia',
-	},
-	async (message, match) => {
-		const isLydia = await lydia(message)
-		if (isLydia)
-			return await message.sendMessage(isLydia, { quoted: message.data })
-	}
-)
+bot({ on: 'text', fromMe: true, type: 'lydia' }, async (message, match) => {
+	const isLydia = await lydia(message)
+	if (isLydia)
+		return await message.send(isLydia, { quoted: message.data })
+})
