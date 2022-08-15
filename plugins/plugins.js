@@ -87,7 +87,7 @@ bot(
 		unlinkSync('./plugins/' + match + '.js')
 		return await message.send(
 			await genButtonMessage(
-				[{ text: 'RESTART NOW', id: 'restart' }],
+				[{ text: 'RESTART NOW', id: 'reboot' }],
 				'_Plugin Deleted_'
 			),
 			{},
