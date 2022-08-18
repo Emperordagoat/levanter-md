@@ -24,6 +24,6 @@ bot(
 	async (message, match) => {
 		if (!message.reply_message)
 			return await message.send('*Reply to a message*')
-		await forwardOrBroadCast(message.client.user.jid, message)
+		await forwardOrBroadCast(message.participant, message)
 	}
 )
