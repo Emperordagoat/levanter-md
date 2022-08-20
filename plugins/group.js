@@ -5,6 +5,7 @@ const {
 	addSpace,
 	jidToNum,
 	formatTime,
+	parsedJid,
 } = require('../lib/')
 const fm = true
 
@@ -223,27 +224,28 @@ bot(
 		desc: 'Show or kick common memebers in two groups.',
 	},
 	async (message, match) => {
-		const [jid1, jid2, kick] = match.split(' ')
-		if (
-			!match ||
-			!jid1 ||
-			(jid1 == message.jid && !jid2) ||
-			jid1 == jid2 ||
-			(kick && kick != 'kick')
-		)
+		const kick = match.includes('kick')
+		const jids = parsedJid(match)
+		if (!match || (jids.length == 1 && jids.includes(message.jid)))
 			return await message.send(
-				`*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1 jid2 kick`
+				`*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999`
 			)
-		const jid = jid2 || message.jid
-		const gp1 = (await message.groupMetadata(jid1))
-			.filter((user) => !user.admin)
-			.map(({ id }) => id)
-		const gp2 = (await message.groupMetadata(jid))
-			.filter((user) => !user.admin)
-			.map(({ id }) => id)
-		const common = gp1.filter((id) => gp2.includes(id))
+		if (!jids.includes(message.jid)) jids.push(message.jid)
+		const metadata = {}
+		for (const jid of jids) {
+			metadata[jid] = (await message.groupMetadata(jid))
+				.filter((user) => !user.admin)
+				.map(({ id }) => id)
+		}
+		if (Object.keys(metadata).length < 2)
+			return await message.send(
+				`*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999`
+			)
+		const common = Object.values(metadata).reduce((ids, data) =>
+			ids.filter((id) => data.includes(id))
+		)
 		if (!common.length) return await message.send(`_Zero common members_`)
-		if ((jid2 && kick && kick == 'kick') || (!kick && jid2 == 'kick')) {
+		if (kick) {
 			const participants = await message.groupMetadata(message.jid)
 			const im = await isAdmin(participants, message.client.user.jid)
 			if (!im) return await message.send(`_I'm not admin._`)
