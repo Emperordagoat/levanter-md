@@ -1,4 +1,4 @@
-const { bot, getBuffer } = require('../lib/')
+const { bot, getName, formatTime, jidToNum, getGids } = require('../lib/')
 const fm = true
 
 bot(
@@ -90,10 +90,31 @@ bot(
 		type: 'misc',
 	},
 	async (message, match) => {
-		const id = message.mention[0] || message.reply_message.jid || message.jid
-		const url = await message.profilePictureUrl(id)
-		const { status } = await message.fetchStatus(id)
-		const { buffer } = await getBuffer(url)
-		return await message.send(buffer, { caption: status }, 'image')
+		const gid = message.jid
+		const id = message.mention[0] || message.reply_message.jid
+		let pp = ''
+		try {
+			pp = await message.profilePictureUrl(id || gid)
+		} catch (error) {
+			pp = 'https://cdn.wallpapersafari.com/0/83/zKyWb6.jpeg'
+		}
+		let caption = ''
+		if (id) {
+			try {
+				const { status, setAt } = await message.fetchStatus(id)
+				caption += `*Name :* ${await getName(gid, id)}\n*Num :* +${jidToNum(
+					id
+				)}\n*About :* ${status}\n*setAt :* ${formatTime(setAt, id)}`
+			} catch (error) {}
+		} else {
+			const { subject, size, creation, desc, owner } =
+				await message.groupMetadata(message.jid, !!gid)
+			caption += `*Name :* ${subject}\n*Owner :* ${owner ? '+' : ''}${jidToNum(
+				owner
+			)}\n*Members :* ${size}\n*Created :* ${formatTime(
+				creation
+			)}\n*Desc :* ${desc}`
+		}
+		return await message.sendFromUrl(pp, { caption })
 	}
 )
