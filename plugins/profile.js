@@ -118,3 +118,18 @@ bot(
 		return await message.sendFromUrl(pp, { caption })
 	}
 )
+
+bot(
+	{
+		pattern: 'gjid',
+		fromMe: fm,
+		desc: 'List group jids',
+		type: 'user',
+	},
+	async (message, match) => {
+		const gids = await getGids()
+		let msg = ''
+		for (const { name, id } of gids) msg += `*${name} :* ${id}\n\n`
+		await message.send(msg.trim())
+	}
+)
