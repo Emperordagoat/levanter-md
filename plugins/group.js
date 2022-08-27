@@ -225,12 +225,13 @@ bot(
 	},
 	async (message, match) => {
 		const kick = match.includes('kick')
+		const kickFromAll = match.includes('kickall')
 		const jids = parsedJid(match)
 		if (!match || (jids.length == 1 && jids.includes(message.jid)))
 			return await message.send(
-				`*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999`
+				`*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999 kickall\n\nkick to remove only group u command\nkickall to remove from all jids`
 			)
-		if (!jids.includes(message.jid)) jids.push(message.jid)
+		if (!jids.includes(message.jid) && jids.length < 2) jids.push(message.jid)
 		const metadata = {}
 		for (const jid of jids) {
 			metadata[jid] = (await message.groupMetadata(jid))
@@ -239,12 +240,21 @@ bot(
 		}
 		if (Object.keys(metadata).length < 2)
 			return await message.send(
-				`*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999`
+				`*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999\n\nkick to remove only group u command\nkickall to remove from all jids`
 			)
 		const common = Object.values(metadata).reduce((ids, data) =>
 			ids.filter((id) => data.includes(id))
 		)
 		if (!common.length) return await message.send(`_Zero common members_`)
+		if (kickFromAll) {
+			for (const jid of jids) {
+				const participants = await message.groupMetadata(jid)
+				const im = await isAdmin(participants, message.client.user.jid)
+				if (im) await message.Kick(common, jid)
+				await sleep(5 * 1000)
+			}
+			return
+		}
 		if (kick) {
 			const participants = await message.groupMetadata(message.jid)
 			const im = await isAdmin(participants, message.client.user.jid)
