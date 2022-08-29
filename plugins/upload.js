@@ -11,6 +11,6 @@ bot(
 		if (!match) return await message.send('_Example : upload url_')
 		if (match.startsWith('https://images.app.goo.gl'))
 			match = await getImgUrl(match)
-		await message.sendFromUrl(match)
+		await message.sendFromUrl(match, { buffer: false })
 	}
 )
