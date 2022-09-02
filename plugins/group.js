@@ -224,14 +224,13 @@ bot(
 		desc: 'Show or kick common memebers in two groups.',
 	},
 	async (message, match) => {
+		const example = `*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999\n\ncommon jid1 jid2 jid3 any\nkick - to remove only group u command\nkickall - to remove from all jids\nany - to include two or more common group members`
 		const kick = match.includes('kick')
 		const kickFromAll = match.includes('kickall')
 		const isAny = match.includes('any')
 		const jids = parsedJid(match)
 		if (!match || (jids.length == 1 && jids.includes(message.jid)))
-			return await message.send(
-				`*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999 kickall\n\nkick to remove only group u command\nkickall to remove from all jids`
-			)
+			return await message.send(example)
 		if (!jids.includes(message.jid) && jids.length < 2) jids.push(message.jid)
 		const metadata = {}
 		for (const jid of jids) {
@@ -239,10 +238,7 @@ bot(
 				.filter((user) => !user.admin)
 				.map(({ id }) => id)
 		}
-		if (Object.keys(metadata).length < 2)
-			return await message.send(
-				`*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999\n\ncommon jid1 jid2 jid3 any\nkick to remove only group u command\nkickall to remove from all jids\nany to include two or more common group members`
-			)
+		if (Object.keys(metadata).length < 2) return await message.send(example)
 		let common = []
 		if (isAny) {
 			const gids = Object.values(metadata)
