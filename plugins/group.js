@@ -226,6 +226,7 @@ bot(
 	async (message, match) => {
 		const kick = match.includes('kick')
 		const kickFromAll = match.includes('kickall')
+		const isAny = match.includes('any')
 		const jids = parsedJid(match)
 		if (!match || (jids.length == 1 && jids.includes(message.jid)))
 			return await message.send(
@@ -240,18 +241,28 @@ bot(
 		}
 		if (Object.keys(metadata).length < 2)
 			return await message.send(
-				`*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999\n\nkick to remove only group u command\nkickall to remove from all jids`
+				`*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999\n\ncommon jid1 jid2 jid3 any\nkick to remove only group u command\nkickall to remove from all jids\nany to include two or more common group members`
 			)
-		const common = Object.values(metadata).reduce((ids, data) =>
-			ids.filter((id) => data.includes(id))
-		)
+		let common = []
+		if (isAny) {
+			const gids = Object.values(metadata)
+			for (let i = 1; i < gids.length; i++) {
+				common = [...common, ...gids[i - 1].filter((x) => gids[i].includes(x))]
+			}
+		} else {
+			common = Object.values(metadata).reduce((ids, data) =>
+				ids.filter((id) => data.includes(id))
+			)
+		}
+		const data = {}
+		common.map((e) => (data[e] = e))
+		common = Object.keys(data)
 		if (!common.length) return await message.send(`_Zero common members_`)
 		if (kickFromAll) {
 			for (const jid of jids) {
 				const participants = await message.groupMetadata(jid)
 				const im = await isAdmin(participants, message.client.user.jid)
 				if (im) await message.Kick(common, jid)
-				await sleep(5 * 1000)
 			}
 			return
 		}
