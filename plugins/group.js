@@ -6,6 +6,7 @@ const {
 	jidToNum,
 	formatTime,
 	parsedJid,
+	getCommon,
 } = require('../lib/')
 const fm = true
 
@@ -239,20 +240,7 @@ bot(
 				.map(({ id }) => id)
 		}
 		if (Object.keys(metadata).length < 2) return await message.send(example)
-		let common = []
-		if (isAny) {
-			const gids = Object.values(metadata)
-			for (let i = 1; i < gids.length; i++) {
-				common = [...common, ...gids[i - 1].filter((x) => gids[i].includes(x))]
-			}
-		} else {
-			common = Object.values(metadata).reduce((ids, data) =>
-				ids.filter((id) => data.includes(id))
-			)
-		}
-		const data = {}
-		common.map((e) => (data[e] = e))
-		common = Object.keys(data)
+		const common = getCommon(Object.values(metadata), isAny)
 		if (!common.length) return await message.send(`_Zero common members_`)
 		if (kickFromAll) {
 			for (const jid of jids) {
