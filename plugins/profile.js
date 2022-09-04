@@ -1,4 +1,13 @@
-const { bot, getName, formatTime, jidToNum, getGids } = require('../lib/')
+const {
+	bot,
+	getName,
+	formatTime,
+	jidToNum,
+	getGids,
+	parsedJid,
+	isUser,
+	isGroup,
+} = require('../lib/')
 const fm = true
 
 bot(
@@ -84,14 +93,18 @@ bot(
 
 bot(
 	{
-		pattern: 'whois',
+		pattern: 'whois ?(.*)',
 		fromMe: fm,
 		desc: 'To get PP and about',
 		type: 'misc',
 	},
 	async (message, match) => {
-		const gid = message.jid
-		const id = message.mention[0] || message.reply_message.jid
+		match = parsedJid(match)[0]
+		const gid = (isGroup(match) && match) || message.jid
+		const id =
+			(isUser(match) && match) ||
+			message.mention[0] ||
+			message.reply_message.jid
 		let pp = ''
 		try {
 			pp = await message.profilePictureUrl(id || gid)
@@ -108,7 +121,7 @@ bot(
 			} catch (error) {}
 		} else {
 			const { subject, size, creation, desc, owner } =
-				await message.groupMetadata(message.jid, !!gid)
+				await message.groupMetadata(gid, !!gid)
 			caption += `*Name :* ${subject}\n*Owner :* ${owner ? '+' : ''}${jidToNum(
 				owner
 			)}\n*Members :* ${size}\n*Created :* ${formatTime(
