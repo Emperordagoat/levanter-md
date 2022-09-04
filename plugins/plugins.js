@@ -35,8 +35,7 @@ bot(
 			const { url } = await getPlugin(match)
 			if (url) return await message.send(url, { quoted: message.data })
 		}
-		if (!isValidUrl)
-			return await message.send('*Give me valid plugin urls*')
+		if (!isValidUrl) return await message.send('*Give me valid plugin urls*')
 		for (const url of isValidUrl) {
 			try {
 				const res = await got(url)
@@ -71,23 +70,28 @@ bot(
 	},
 	async (message, match) => {
 		if (!match)
-			return await message.send(
-				'*Example :*\nremove mforward\nremove all'
-			)
+			return await message.send('*Example :*\nremove mforward\nremove all')
 		if (match == 'all') {
 			await delPlugin()
 			return await message.send(
-				'_All plugins deleted Successfully_\n*Restart BOT*'
+				await genButtonMessage(
+					[{ text: 'RESTART BOT', id: 'restart' }],
+					'_All plugins deleted Successfully_'
+				),
+				{},
+				'button'
 			)
 		}
 		const isDeleted = await delPlugin(match)
-		if (!isDeleted)
-			return await message.send(`*Plugin ${match} not found*`)
+		if (!isDeleted) return await message.send(`*Plugin ${match} not found*`)
 		delete require.cache[require.resolve('../plugins/' + match + '.js')]
 		unlinkSync('./plugins/' + match + '.js')
 		return await message.send(
 			await genButtonMessage(
-				[{ text: 'RESTART NOW', id: 'reboot' }],
+				[
+					{ text: 'RESTART', id: 'restart' },
+					{ text: 'REBOOT', id: 'reboot' },
+				],
 				'_Plugin Deleted_'
 			),
 			{},
