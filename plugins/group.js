@@ -204,15 +204,14 @@ bot(
 		const [_, code] = match.match(linkRegex) || []
 		if (!code) return await message.send('_Invalid invite link_')
 		const res = await message.infoInvite(code)
-		return await message.send(
-			'```' +
-				`Name    : ${res.subject}
-Jid     : ${res.id}@g.us
-Owner   : ${jidToNum(res.creator)}
-Members : ${res.size}
-Created : ${formatTime(res.creation)}` +
-				'```'
-		)
+		const caption = `*Name :* ${res.subject}
+*Jid :* ${res.id}@g.us
+*Owner :* ${jidToNum(res.creator)}
+*Members :* ${res.size}
+*Created :* ${formatTime(res.creation)}
+*Desc :* ${res.desc}`
+		if (res.url) return await message.sendFromUrl(res.url, { caption })
+		return await message.send(caption)
 	}
 )
 
