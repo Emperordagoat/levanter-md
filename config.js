@@ -49,4 +49,5 @@ module.exports = {
 		process.env.ANTIWORDS_MSG || '_AntiWord Detected &mention kicked_',
 	ANTIWORDS: process.env.ANTIWORDS || 'word',
 	MENTION: process.env.MENTION || '',
+	SS_TOKEN: process.env.SS_TOKEN || '',
 }

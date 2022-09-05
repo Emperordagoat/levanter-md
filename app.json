@@ -90,6 +90,11 @@
 			"description": "words that not allowed in chats.",
 			"required": false,
 			"value": "word1,word2,word3"
+		},
+		"SS_TOKEN": {
+			"description": "token from https://app.screenshotapi.net/dashboard",
+			"required": false,
+			"value": ""
 		}
 	},
 	"addons": [
