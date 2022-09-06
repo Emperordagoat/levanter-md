@@ -206,7 +206,7 @@ bot(
 		return await message.send(
 			await genButtonMessage(
 				[{ id: 'update now', text: 'UPDATE NOW' }],
-				`*Updates*\n${update.join('\n'.trim())}`,
+				`*Updates*\n${update.join('\n').trim()}`,
 				`${update.length} updates`
 			),
 			{},
