@@ -1,9 +1,10 @@
 const {
 	bot,
-	genHydratedButtons,
+	genButtonMessage,
 	mentionMessage,
 	enableMention,
 	clearFiles,
+	getMention,
 } = require('../lib/')
 
 bot(
@@ -14,29 +15,40 @@ bot(
 		type: 'misc',
 	},
 	async (message, match) => {
-		if (!match)
-			return await message.send(
-				await genHydratedButtons(
-					[
-						{
-							urlButton: {
-								text: 'example',
-								url: 'https://github.com/lyfe00011//whatsapp-bot-md/wiki/mention_example',
-							},
-						},
-						{ button: { id: 'mention on', text: 'ON' } },
-						{ button: { id: 'mention off', text: 'OFF' } },
-						{ button: { id: 'mention get', text: 'GET' } },
-					],
-					'Mention Msg Manager'
-				),
-				{},
-				'template'
+		if (!match) {
+			const mention = await getMention()
+			const onOrOff = mention && mention.enabled ? 'off' : 'on'
+			const button = await genButtonMessage(
+				[
+					{ id: 'mention get', text: 'GET' },
+					{ id: `mention ${onOrOff}`, text: onOrOff.toUpperCase() },
+				],
+				'Example\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/mention_example',
+				'Mention'
 			)
+			return await message.send(button, {}, 'button')
+			// return await message.send(
+			// 	await genHydratedButtons(
+			// 		[
+			// 			{
+			// 				urlButton: {
+			// 					text: 'example',
+			// 					url: 'https://github.com/lyfe00011//whatsapp-bot-md/wiki/mention_example',
+			// 				},
+			// 			},
+			// 			{ button: { id: 'mention on', text: 'ON' } },
+			// 			{ button: { id: 'mention off', text: 'OFF' } },
+			// 			{ button: { id: 'mention get', text: 'GET' } },
+			// 		],
+			// 		'Mention Msg Manager'
+			// 	),
+			// 	{},
+			// 	'template'
+			// )
+		}
 		if (match == 'get') {
 			const msg = await mentionMessage()
-			if (!msg)
-				return await message.send('_Reply to Mention not Activated._')
+			if (!msg) return await message.send('_Reply to Mention not Activated._')
 			return await message.send(msg)
 		} else if (match == 'on' || match == 'off') {
 			await enableMention(match == 'on')

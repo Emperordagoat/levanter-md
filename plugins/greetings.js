@@ -4,7 +4,7 @@ const {
 	deleteMessage,
 	bot,
 	getMessage,
-	genHydratedButtons,
+	genButtonMessage,
 	greetingsPreview,
 	clearGreetings,
 } = require('../lib/')
@@ -23,27 +23,33 @@ bot(
 			return await message.send('*Example : welcome Hi &mention*')
 		if (!match) {
 			await message.send(welcome.message)
-			return await message.send(
-				await genHydratedButtons(
-					[
-						{
-							urlButton: {
-								text: 'Example',
-								url: 'https://github.com/lyfe00011//whatsapp-bot-md/wiki/Greetings',
-							},
-						},
-						{ button: { id: 'welcome on', text: 'ON' } },
-						{ button: { id: 'welcome off', text: 'OFF' } },
-					],
-					'Welcome'
-				),
-				{},
-				'template'
+			const onOrOff = welcome && welcome.enabled ? 'off' : 'on'
+			const button = await genButtonMessage(
+				[{ id: `welcome ${onOrOff}`, text: onOrOff.toUpperCase() }],
+				'Example\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/Greetings',
+				'Welcome'
 			)
+			return await message.send(button, {}, 'button')
+			// return await message.send(
+			// 	await genHydratedButtons(
+			// 		[
+			// 			{
+			// 				urlButton: {
+			// 					text: 'Example',
+			// 					url: 'https://github.com/lyfe00011//whatsapp-bot-md/wiki/Greetings',
+			// 				},
+			// 			},
+			// 			{ button: { id: 'welcome on', text: 'ON' } },
+			// 			{ button: { id: 'welcome off', text: 'OFF' } },
+			// 		],
+			// 		'Welcome'
+			// 	),
+			// 	{},
+			// 	'template'
+			// )
 		}
 		if (match == 'on' || match == 'off') {
-			if (!welcome)
-				return await message.send('*Example : welcome Hi #mention*')
+			if (!welcome) return await message.send('*Example : welcome Hi #mention*')
 			await enableGreetings(message.jid, 'welcome', match)
 			return await message.send(
 				`_Welcome  ${match == 'on' ? 'Enabled' : 'Disabled'}_`
@@ -75,25 +81,32 @@ bot(
 			return await message.send('*Example : goodbye Bye &mention*')
 		if (!match) {
 			await message.send(welcome.message)
-			return await message.send(
-				await genHydratedButtons(
-					[
-						{
-							urlButton: {
-								url: 'https://github.com/lyfe00011/whatsapp-bot-md/wiki/Greetings',
-								text: 'Example',
-							},
-						},
-						{
-							button: { id: 'goodbye on', text: 'ON' },
-						},
-						{ button: { id: 'goodbye off', text: 'OFF' } },
-					],
-					'Goodbye'
-				),
-				{},
-				'template'
+			const onOrOff = welcome && welcome.enabled ? 'off' : 'on'
+			const button = await genButtonMessage(
+				[{ id: `welcome ${onOrOff}`, text: onOrOff.toUpperCase() }],
+				'Example\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/Greetings',
+				'Goodbye'
 			)
+			return await message.send(button, {}, 'button')
+			// return await message.send(
+			// 	await genHydratedButtons(
+			// 		[
+			// 			{
+			// 				urlButton: {
+			// 					url: 'https://github.com/lyfe00011/whatsapp-bot-md/wiki/Greetings',
+			// 					text: 'Example',
+			// 				},
+			// 			},
+			// 			{
+			// 				button: { id: 'goodbye on', text: 'ON' },
+			// 			},
+			// 			{ button: { id: 'goodbye off', text: 'OFF' } },
+			// 		],
+			// 		'Goodbye'
+			// 	),
+			// 	{},
+			// 	'template'
+			// )
 		}
 		if (match == 'on' || match == 'off') {
 			if (!welcome)

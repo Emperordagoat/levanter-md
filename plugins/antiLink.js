@@ -1,4 +1,4 @@
-const { getAntiLink, bot, genHydratedButtons, setAntiLink } = require('../lib/')
+const { getAntiLink, bot, genButtonMessage, setAntiLink } = require('../lib/')
 
 bot(
 	{
@@ -10,29 +10,40 @@ bot(
 	},
 	async (message, match) => {
 		const antilink = await getAntiLink(message.jid)
-		if (!match)
-			return await message.send(
-				await genHydratedButtons(
-					[
-						{
-							urlButton: {
-								text: 'Example',
-								url: 'https://github.com/lyfe00011/whatsapp-bot-md/wiki/antilink',
-							},
-						},
-						{
-							button: {
-								id: `antilink ${antilink.enabled ? 'off' : 'on'}`,
-								text: antilink.enabled ? 'OFF' : 'ON',
-							},
-						},
-						{ button: { id: 'antilink info', text: 'INFO' } },
-					],
-					'AntiLink'
-				),
-				{},
-				'template'
+		if (!match) {
+			const onOrOff = antilink.enabled ? 'off' : 'on'
+			const button = await genButtonMessage(
+				[
+					{ id: 'antilink info', text: 'INFO' },
+					{ id: `antilink ${onOrOff}`, text: onOrOff.toUpperCase() },
+				],
+				'Example\nhttps://github.com/lyfe00011/whatsapp-bot-md/wiki/antilink',
+				'Antilink'
 			)
+			return await message.send(button, {}, 'button')
+			// return await message.send(
+			// 	await genHydratedButtons(
+			// 		[
+			// 			{
+			// 				urlButton: {
+			// 					text: 'Example',
+			// 					url: 'https://github.com/lyfe00011/whatsapp-bot-md/wiki/antilink',
+			// 				},
+			// 			},
+			// 			{
+			// 				button: {
+			// 					id: `antilink ${antilink.enabled ? 'off' : 'on'}`,
+			// 					text: antilink.enabled ? 'OFF' : 'ON',
+			// 				},
+			// 			},
+			// 			{ button: { id: 'antilink info', text: 'INFO' } },
+			// 		],
+			// 		'AntiLink'
+			// 	),
+			// 	{},
+			// 	'template'
+			// )
+		}
 		if (match == 'on' || match == 'off') {
 			if (match == 'off' && !antilink)
 				return await message.send('_AntiLink is not enabled._')
