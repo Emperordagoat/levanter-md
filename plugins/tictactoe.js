@@ -5,6 +5,7 @@ const {
 	delTicTacToe,
 	genButtonMessage,
 	isUser,
+	parsedJid,
 } = require('../lib/')
 
 bot(
@@ -32,17 +33,23 @@ bot(
 				'button'
 			)
 		let opponent = message.mention[0] || message.reply_message.jid
+		let me = message.participant
+		const [_me, _opponent] = parsedJid(match)
+		if (isUser(_me) && isUser(_opponent)) {
+			me = _me
+			opponent = _opponent
+		}
 		if (restart == 'restart' && isUser(id)) {
 			opponent = id
 			await delTicTacToe()
 		}
 		if (!opponent || opponent == message.participant)
 			return await message.send(
-				'*Choose an Opponent, Reply to a message or mention*'
+				'*Choose an Opponent*\n*Reply to a message or mention or tictactoe jid1 jid2*'
 			)
-		const { text } = await ticTacToe(message.jid, message.participant, opponent)
+		const { text } = await ticTacToe(message.jid, me, opponent)
 		return await message.send(text, {
-			contextInfo: { mentionedJid: [message.participant, opponent] },
+			contextInfo: { mentionedJid: [me, opponent] },
 		})
 	}
 )
