@@ -22,7 +22,7 @@ bot(
 		}
 		let [restart, id] = match.split(' ')
 		const game = isTactacToe()
-		if (game.state && !match)
+		if (game.state)
 			return await message.send(
 				await genButtonMessage(
 					[{ id: 'tictactoe end', text: 'END' }],
@@ -43,7 +43,7 @@ bot(
 			opponent = id
 			await delTicTacToe()
 		}
-		if (!opponent || opponent == message.participant)
+		if (!opponent || opponent == me)
 			return await message.send(
 				'*Choose an Opponent*\n*Reply to a message or mention or tictactoe jid1 jid2*'
 			)
