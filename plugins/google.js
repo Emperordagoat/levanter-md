@@ -11,7 +11,7 @@ bot(
 		if (!message.reply_message || !message.reply_message.image)
 			return await message.send('*Reply to a image*')
 		const { result } = await getJson(`
-        https://levanter.up.railway.app/google?q=${await getUrl(
+        https://levanter-qr.vercel.app/google?q=${await getUrl(
 					await message.reply_message.downloadAndSaveMediaMessage('google')
 				)}`)
 		if (!result.length) return await message.send('_Not found_')
