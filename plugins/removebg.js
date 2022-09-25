@@ -1,5 +1,5 @@
 const { bot, removeBg } = require('../lib')
-
+const config = require('../config')
 bot(
 	{
 		pattern: 'rmbg',
