@@ -96,7 +96,7 @@ bot(
 				if (kickOrType && kickOrType == 'total')
 					return (
 						participant[1].total < COUNT &&
-						getFloor((now - participant[1].time) / 1000 / 8400) > count &&
+						getFloor((now - participant[1].time) / 86400000) > count &&
 						membersJids.includes(participant[0])
 					)
 				if (type == 'total')
@@ -105,7 +105,7 @@ bot(
 					)
 				else
 					return (
-						getFloor((now - participant[1].time) / 1000 / 8400) > count &&
+						getFloor((now - participant[1].time) / 86400000) > count &&
 						membersJids.includes(participant[0])
 					)
 			})
