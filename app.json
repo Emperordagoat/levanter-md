@@ -1,11 +1,7 @@
 {
-	"name": "Bottus",
-	"description": " Whatsapp bot.",
-	"keywords": [
-		"whatsapp",
-		"bot"
-	],
-	"repository": "https://github.com/lyfe0010/whatsapp-bot-md",
+	"name": "levanter",
+	"description": "",
+	"keywords": [],
 	"stack": "container",
 	"env": {
 		"ALWAYS_ONLINE": {
@@ -20,12 +16,12 @@
 		},
 		"SUDO": {
 			"description": "admin",
-			"required": true,
+			"required": false,
 			"value": "null"
 		},
 		"PREFIX": {
 			"description": "prefix, check for more",
-			"required": true,
+			"required": false,
 			"value": "."
 		},
 		"SESSION_ID": {
@@ -35,11 +31,11 @@
 		},
 		"STICKER_PACKNAME": {
 			"description": "sticker pack info",
-			"required": true,
+			"required": false,
 			"value": "❤️,LyFE"
 		},
 		"HEROKU_APP_NAME": {
-			"description": "Heroku app name, same as above entered",
+			"description": "Heroku app name, same as above entered.",
 			"required": true
 		},
 		"HEROKU_API_KEY": {
@@ -48,7 +44,7 @@
 		},
 		"RMBG_KEY": {
 			"description": "API key from remove.bg, required for plugin rmbg",
-			"required": true,
+			"required": false,
 			"value": "null"
 		},
 		"LANGUAG": {
