@@ -224,12 +224,13 @@ bot(
 		desc: 'Show or kick common memebers in two groups.',
 	},
 	async (message, match) => {
-		const example = `*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999\n\ncommon jid1 jid2 jid3 any\nkick - to remove only group u command\nkickall - to remove from all jids\nany - to include two or more common group members\nskip jid1,jid2 - to aviod removing`
+		const example = `*Example*\ncommon jid\ncommon jid kick\ncommon jid1 jid2\ncommon jid1,jid2 kick\ncommon jid1 jid2 jid3...jid999\n\ncommon jid1 jid2 jid3 any\nkick - to remove only group u command\nkickall - to remove from all jids\nany - to include two or more common group members\nskip - to avoid removing from all, example skip to avoid from one group or skip jid1,jid2,jid3 to skip from.`
 		const kick = match.includes('kick')
 		const kickFromAll = match.includes('kickall')
 		const isAny = match.includes('any')
 		const jids = parsedJid(match)
 		const toSkip = parsedJid(match.split('skip')[1] || '')
+		const anySkip = match.includes('skip') && !toSkip.length
 		if (!match || (jids.length == 1 && jids.includes(message.jid)))
 			return await message.send(example)
 		if (!jids.includes(message.jid) && jids.length < 2) jids.push(message.jid)
@@ -243,11 +244,23 @@ bot(
 		const common = getCommon(Object.values(metadata), isAny)
 		if (!common.length) return await message.send(`_Zero common members_`)
 		if (kickFromAll) {
-			const gids = jids.filter((id) => !toSkip.includes(id))
+			let gids = jids
+			if (!anySkip) gids = jids.filter((id) => !toSkip.includes(id))
+			const skip = {}
 			for (const jid of gids) {
 				const participants = await message.groupMetadata(jid)
+				const kick = participants
+					.map(({ id }) => id)
+					.filter((id) => common.includes(id))
 				const im = await isAdmin(participants, message.client.user.jid)
-				if (im) await message.Kick(common, jid)
+				if (im) {
+					if (anySkip) {
+						for (const id of kick) {
+							if (skip[id]) await message.Kick(id, jid)
+							skip[id] = id
+						}
+					} else await message.Kick(kick, jid)
+				}
 			}
 			return
 		}
