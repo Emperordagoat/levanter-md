@@ -258,9 +258,7 @@ bot(
 		)
 			return await message.send('*Reply to a video*')
 		if (match == '' && isNaN(match))
-			return await message.send(
-				'*Reply with order number*\n*Ex: .merge 1*'
-			)
+			return await message.send('*Reply with order number*\n*Ex: .merge 1*')
 		if (/[0-9]+/.test(match)) {
 			await message.reply_message.downloadAndSaveMediaMessage(
 				'./media/merge/' + match
@@ -292,15 +290,17 @@ bot(
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.video)
 			return await message.send('*Reply to a video*')
-		return await message.send(
-			await getFfmpegBuffer(
-				await message.reply_message.downloadAndSaveMediaMessage('compress'),
-				'ocompress.mp4',
-				'compress'
-			),
-			{ quoted: message.data },
-			'video'
+		const compress = await getFfmpegBuffer(
+			await message.reply_message.downloadAndSaveMediaMessage('compress'),
+			'ocompress.mp4',
+			'compress'
 		)
+		compress.on('progress', async (percent) => {
+			await message.send(`_Compress in progress (${percent}%)_`)
+		})
+		compress.on('done', async (buffer) => {
+			return await message.send(buffer, { quoted: message.data }, 'video')
+		})
 	}
 )
 
