@@ -18,7 +18,7 @@ bot(
 			{
 				name,
 				options,
-				selectableOptionsCount: poll.length - 1,
+				selectableOptionsCount: options.length,
 			},
 			{},
 			'poll'
