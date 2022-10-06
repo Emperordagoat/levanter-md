@@ -29,7 +29,7 @@ bot(
 			return await message.send(
 				await genButtonMessage(
 					buttons,
-					'AntiWord\nExample : antiword on/off\nantiword action/null or kick or warn'
+					'AntiWord\nExample : antiword on/off\nantiword action/null or kick or warn\nsetvar ANTIWORDS:word1,word2,...'
 				),
 				{},
 				'button'
