@@ -91,6 +91,11 @@
 			"description": "token from https://app.screenshotapi.net/dashboard",
 			"required": false,
 			"value": ""
+		},
+		"REJECT_CALL": {
+			"description": "auto reject call, if set as true",
+			"required": false,
+			"value": "false"
 		}
 	},
 	"addons": [

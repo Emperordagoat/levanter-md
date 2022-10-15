@@ -51,4 +51,5 @@ module.exports = {
 	MENTION: process.env.MENTION || '',
 	SS_TOKEN: process.env.SS_TOKEN || '',
 	MAX_UPLOAD: process.env.MAX_UPLOAD || 230,
+	REJECT_CALL: toBool(process.env.REJECT_CALL),
 }
