@@ -14,22 +14,21 @@
 
 1. Install git ffmpeg curl 
  ```
- sudo apt -y update
- sudo apt install git ffmpeg curl
+ sudo apt -y update &&  sudo apt -y upgrade 
+ sudo apt -y install git ffmpeg curl
  ```
 
 2. Install nodejs 
 ```
-curl -fsSl https://deb.nodesource.com/setup_lts.x | bash -
-sudo apt -y install nodejs
+sudo apt -y remove nodejs
+curl -fsSl https://deb.nodesource.com/setup_lts.x | sudo bash - && sudo apt -y install nodejs
 ```
 
 3. Install yarn
 ```
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - 
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt -y update
-sudo apt -y install yarn
+sudo apt -y update && sudo apt -y install yarn
 ```
 
 4. Install pm2
@@ -48,9 +47,11 @@ yarn install --network-concurrency 1
 ```
 touch config.env
 nano config.env
+```
+copy paste lines below (remove SESSION_ID if not needs)
 
----------inside file add, not include this line----------
-SESSION_ID = session you got after scan or dont add this so you can scan qr instead
+```
+SESSION_ID = Session_Id_you_Got_After_Scan_Dont_Add_This_Line_If_You_Can_Scan_From_Terminal_Itself
 PREFIX = .
 STICKER_PACKNAME = LyFE
 ALWAYS_ONLINE = false
@@ -65,10 +66,19 @@ SUDO = 989876543210
 TZ=Asia/Kolkata
 ```
 
+ctrl + o and ctrl + x
+
 7. start and stop bot
+
+To start bot
 ```
 npm start  
-ctrl + c and npm stop
+```
+
+To stop bot 
+```
+ctrl + c
+npm stop
 ```
 ### Thanks To
 
