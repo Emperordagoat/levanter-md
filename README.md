@@ -63,7 +63,8 @@ BRAINSHOP = 159501,6pq8dPiYt7PdqHz3
 MAX_UPLOAD = 200
 REJECT_CALL = false
 SUDO = 989876543210
-TZ=Asia/Kolkata
+TZ = Asia/Kolkata
+VPS = true
 ```
 
 ctrl + o and ctrl + x
