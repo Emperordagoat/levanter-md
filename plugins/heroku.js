@@ -104,7 +104,7 @@ Remaning    : ${secondsToHms(remaining)}`
 			heroku
 				.patch(baseURI + '/config-vars', {
 					body: {
-						[key.toUpperCase()]: value,
+						[key.toUpperCase().trim()]: value.trim(),
 					},
 				})
 				.then(async () => {
