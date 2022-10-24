@@ -96,6 +96,11 @@
 			"description": "auto reject call, if set as true",
 			"required": false,
 			"value": "false"
+		},
+		"AUTO_STATUS_VIEW": {
+			"description": "view others status",
+			"required": false,
+			"value": "false"
 		}
 	},
 	"addons": [

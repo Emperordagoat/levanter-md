@@ -53,4 +53,5 @@ module.exports = {
 	MAX_UPLOAD: process.env.MAX_UPLOAD || 230,
 	REJECT_CALL: toBool(process.env.REJECT_CALL),
 	VPS: toBool(process.env.VPS),
+	AUTO_STATUS_VIEW: toBool(process.env.AUTO_STATUS_VIEW),
 }
