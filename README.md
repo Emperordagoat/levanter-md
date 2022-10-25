@@ -65,6 +65,7 @@ REJECT_CALL = false
 SUDO = 989876543210
 TZ = Asia/Kolkata
 VPS = true
+AUTO_STATUS_VIEW = true
 ```
 
 ctrl + o and ctrl + x
