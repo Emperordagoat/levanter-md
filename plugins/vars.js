@@ -1,5 +1,6 @@
 const config = require('../config')
 const { bot, setVars, getVars, delVar } = require('../lib/index')
+const { restartInstance } = require('../lib/pm2')
 
 if (config.VPS) {
 	bot(
@@ -32,7 +33,8 @@ if (config.VPS) {
 			if (!vars[match])
 				return await message.send(`_${match} not found in vars_`)
 			delVar(match)
-			return await message.send(`_${match} deleted_`)
+			await message.send(`_${match} deleted_`)
+			restartInstance()
 		}
 	)
 
@@ -48,7 +50,8 @@ if (config.VPS) {
 			if (!match || keyValue.length < 2)
 				return await message.send(`*Example : setvar sudo = 91987653210*`)
 			setVars({ [keyValue[0].trim().toUpperCase()]: keyValue[1].trim() })
-			return await message.send(`_new var ${keyValue[0].toUpperCase()} added_`)
+			await message.send(`_new var ${keyValue[0].toUpperCase()} added_`)
+			restartInstance()
 		}
 	)
 
