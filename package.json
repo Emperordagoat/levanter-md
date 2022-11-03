@@ -11,7 +11,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@adiwajshing/baileys": "git+https://github.com/adiwajshing/Baileys.git#1e24a08f0f30f510e97c91a861516d892e7814bb",
+		"@adiwajshing/baileys": "git+https://github.com/adiwajshing/Baileys.git#e710ed96f9e8b7b1c27b4c665fd6fd6c8d06e037",
 		"axios": "^0.27.2",
 		"browser-id3-writer": "^4.4.0",
 		"cheerio": "^1.0.0-rc.10",
@@ -43,6 +43,6 @@
 		"sqlite3": "^5.0.11",
 		"supervisor": "^0.12.0",
 		"translate-google-api": "^1.0.4",
-		"youtubei.js": "^1.4.2-d.5"
+		"youtubei.js": "^2.3.2"
 	}
 }
