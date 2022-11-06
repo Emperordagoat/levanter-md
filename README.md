@@ -64,6 +64,7 @@ A simple Whatsapp User bot
       TZ = Asia/Kolkata
       VPS = true
       AUTO_STATUS_VIEW = true
+      SEND_READ = false
       ```
       ctrl + o and ctrl + x, To save and exit
 

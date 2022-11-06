@@ -54,4 +54,5 @@ module.exports = {
 	REJECT_CALL: toBool(process.env.REJECT_CALL),
 	VPS: toBool(process.env.VPS),
 	AUTO_STATUS_VIEW: toBool(process.env.AUTO_STATUS_VIEW),
+	SEND_READ: toBool(process.env.SEND_READ),
 }
