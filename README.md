@@ -1,16 +1,22 @@
 ### WhatsApp MD user bot
 A simple Whatsapp User bot
 
-### Setup 
-1. ## Deploy on Heroku ##
+## Setup 
+1. ### Deploy on Heroku ###
    1. Click [SCAN](https://levanter.onrender.com/md) and scan QR through Whatsapp Linked Devices Option in Your whatsapp App.
    2. You will get a session id in whatsapp, copy id only.
    3. If You don't have a account in [Heroku](https://signup.heroku.com/), [Create a account Now](https://signup.heroku.com/).
    4. If You Don't have a github account [SignUp](https://github.com/join) Now.
    4. [FORK](https://github.com/lyfe00011/whatsapp-bot-md/fork) this repo
    5. Now [DEPLOY](https://levanter.onrender.com/dmd)
-
-2. ## Deploy on VPS or PC (Example here as in Ubuntu ##
+2. ### Deploy on koyeb ###
+   1. Create an account in [koyeb](https://app.koyeb.com/auth/signup). [SignUp Now](https://app.koyeb.com/auth/signup)
+   2. Get [DATABASE_URL](https://github.com/lyfe00011/whatsapp-bot-md/wiki/DATABASE_URL), You needs while depolying
+   3. Get [SESSION_ID](https://levanter.onrender.com/md), Open Linked Devices in WhatsaApp and [SCAN](https://levanter.onrender.com/md) Now.
+   4. [DEPLOY](https://app.koyeb.com/apps/depoly?type=docker&image=quay.io/lyfe00011/koyeb:beta) Now.
+   5. Enter [Environment Variables](https://github.com/lyfe00011/whatsapp-bot-md/wiki/Environment_Variables), [Read More](https://github.com/lyfe00011/whatsapp-bot-md/wiki/Environment_Variables)
+   6. Enter Name and Click Create service
+3. ### Deploy on VPS or PC (Example here as in Ubuntu ###
    1. Install git ffmpeg curl 
       ```
        sudo apt -y update &&  sudo apt -y upgrade 
