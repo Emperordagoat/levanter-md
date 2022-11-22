@@ -1,0 +1,2 @@
+run = "yarn install --network-concurrency 1 && yarn start"
+start = "yarn start"
