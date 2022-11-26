@@ -168,7 +168,7 @@ bot(
 		const [_, code] = match.match(wa) || []
 		if (!code) return await message.send(`_Give me a Group invite link._`)
 		const res = await message.infoInvite(code)
-		if (res.size > 512) return await message.send('*Group full!*')
+		if (res.size > 1024) return await message.send('*Group full!*')
 		await message.acceptInvite(code)
 		return await message.send(`_Joined_`)
 	}
