@@ -55,4 +55,7 @@ module.exports = {
 	VPS: toBool(process.env.VPS),
 	AUTO_STATUS_VIEW: toBool(process.env.AUTO_STATUS_VIEW),
 	SEND_READ: toBool(process.env.SEND_READ),
+	KOYEB: toBool(process.env.KOYEB),
+	KOYEB_NAME: (process.env.KOYEB_NAME || '').trim(),
+	KOYEB_API: (process.env.KOYEB_API || '').trim(),
 }
