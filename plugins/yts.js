@@ -20,18 +20,18 @@ bot(
 		if (!match) return await message.send('*Example : yts baymax*')
 		const vid = ytIdRegex.exec(match)
 		if (vid) {
-			const [result] = await yts(vid[1], true)
-			const { title, description, metadata } = result
+			const result = await yts(vid[1], true)
+			const { title, description, duration, view, published } = result
 			return await message.send(
-				`*Title :* ${title}\n*Desc :* ${description}\n*Time :* ${metadata.length_seconds}s\n*Views :* ${metadata.view_count}\n*Publish :* ${metadata.publish_date}`
+				`*Title :* ${title}\n*Time :* ${duration}\n*Views :* ${view}\n*Publish :* ${published}\n*Desc :* ${description}`
 			)
 		}
 
 		const result = await yts(match)
 		let msg = ''
 		result.forEach(
-			({ title, description, url, metadata }) =>
-				(msg += `• ${title}\nViews : ${metadata.view_count}\nTime : ${metadata.duration.accessibility_label}\nPublished : ${metadata.published}\nDesc : ${description}\nUrl : ${url}\n\n`)
+			({ title, id, view, duration, published, author }) =>
+				(msg += `• *${title.trim()}*\n*Views :* ${view}\n*Time :* ${duration}\n*Author :* ${author}\n*Published :* ${published}\n*Url :* https://www.youtube.com/watch?v=${id}\n\n`)
 		)
 		return await message.send(msg.trim())
 	}
@@ -47,9 +47,7 @@ bot(
 	async (message, match) => {
 		match = match || message.reply_message.text
 		if (!match)
-			return await message.send(
-				'*Example : song indila love story/ yt link*'
-			)
+			return await message.send('*Example : song indila love story/ yt link*')
 		const vid = ytIdRegex.exec(match)
 		if (vid) {
 			const [result] = await yts(vid[1], true)
@@ -93,8 +91,7 @@ bot(
 	},
 	async (message, match) => {
 		match = match || message.reply_message.text
-		if (!match)
-			return await message.send('*Example : video yt_url*')
+		if (!match) return await message.send('*Example : video yt_url*')
 		const vid = ytIdRegex.exec(match)
 		if (!vid) {
 			return await message.send('*Example : video yt_url*')
