@@ -1,11 +1,11 @@
 {
 	"name": "levanter",
-	"version": "4.0.3",
+	"version": "4.0.4",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "pm2 start . --attach --name levanter",
+		"start": "pm2 start . --attach --namespace levanter --name levanter",
 		"stop": "pm2 stop levanter"
 	},
 	"author": "",

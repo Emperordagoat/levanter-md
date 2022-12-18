@@ -70,7 +70,7 @@ bot(
 					result.map(({ title, id, duration }) => ({
 						text: title,
 						id: `song https://www.youtube.com/watch?v=${id}`,
-						desc: duration.text,
+						desc: duration,
 					})),
 					`Searched ${match}\nFound ${result.length} results`,
 					'DOWNLOAD'
