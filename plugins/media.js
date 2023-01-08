@@ -211,7 +211,7 @@ bot(
 	},
 	async (message, match) => {
 		if (!message.reply_message || !message.reply_message.image)
-			return await message.send('*Reply to a image.*')
+			return await message.send('*Reply to a image.*\n```Reply images with caption as page number to this message(.page)```')
 		if (isNaN(match))
 			return await message.send('*Reply in order*\n*Ex: .page 1*')
 		await message.reply_message.downloadAndSaveMediaMessage(`./pdf/${match}`)
