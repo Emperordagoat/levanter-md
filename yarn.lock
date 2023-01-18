@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@adiwajshing/baileys@git+https://github.com/lyfe00011/Baileys.git#mutex":
+"@adiwajshing/baileys@git+https://github.com/adiwajshing/Baileys.git":
   version "5.0.0"
-  resolved "git+https://github.com/lyfe00011/Baileys.git#b300bbf93a821cb8d0b3137d8e7a689e8d27af2b"
+  resolved "git+https://github.com/adiwajshing/Baileys.git#41851d9e34e43029134a89ceabce528422d1faff"
   dependencies:
     "@hapi/boom" "^9.1.3"
     axios "^0.24.0"

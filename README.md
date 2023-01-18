@@ -21,76 +21,75 @@ A simple Whatsapp User bot
    7. Enter Name and Click Create service
 3. ### Deploy on VPS or PC (Example here as in Ubuntu
 
-   1. Install git ffmpeg curl
+    ### Install with script
       ```
-       sudo apt -y update &&  sudo apt -y upgrade
-       sudo apt -y install git ffmpeg curl
+      wget -N "https://gist.githubusercontent.com/lyfe00011/0208883ee3a3f602d0f7c7ff138c05ea/raw/install.sh" && chmod +x install.sh && ./install.sh
       ```
-   2. Install nodejs
+    ### Install without script
+         1. Install git ffmpeg curl
+            ```
+             sudo apt -y update &&  sudo apt -y upgrade
+             sudo apt -y install git ffmpeg curl
+            ```
+         2. Install nodejs
 
-      ```
-      sudo apt -y remove nodejs
-      curl -fsSl https://deb.nodesource.com/setup_lts.x | sudo bash - && sudo apt -y install nodejs
-      ```
+            ```
+            sudo apt -y remove nodejs
+            curl -fsSl https://deb.nodesource.com/setup_lts.x | sudo bash - && sudo apt -y install nodejs
+            ```
 
-   3. Install yarn
+         3. Install yarn
 
-      ```
-      curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-      echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-      sudo apt -y update && sudo apt -y install yarn
-      ```
+            ```
+            curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+            echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+            sudo apt -y update && sudo apt -y install yarn
+            ```
 
-   4. Install pm2
+         4. Install pm2
 
-      ```
-      sudo yarn global add pm2
-      ```
+            ```
+            sudo yarn global add pm2
+            ```
 
-   5. Clone Repo and install packages
+         5. Clone Repo and install packages
 
-      ```
-      git clone https://github.com/lyfe00011/whatsapp-bot-md
-      cd whatsapp-bot-md
-      yarn install --network-concurrency 1
-      ```
+            ```
+            git clone https://github.com/lyfe00011/whatsapp-bot-md
+            cd whatsapp-bot-md
+            yarn install --network-concurrency 1
+            ```
 
-   6. Enter Environment Variables
+         6. Enter Environment Variables
+            copy paste lines below (remove SESSION_ID if not needs)
 
-      ```
-      touch config.env
-      nano config.env
-      ```
+            ```
+            echo > "SESSION_ID = Session_Id_you_Got_After_Scan_Dont_Add_This_Line_If_You_Can_Scan_From_Terminal_Itself
+            PREFIX = .
+            STICKER_PACKNAME = LyFE
+            ALWAYS_ONLINE = false
+            RMBG_KEY = null
+            LANGUAG = en
+            WARN_LIMIT = 3
+            FORCE_LOGOUT = false
+            BRAINSHOP = 159501,6pq8dPiYt7PdqHz3
+            MAX_UPLOAD = 200
+            REJECT_CALL = false
+            SUDO = 989876543210
+            TZ = Asia/Kolkata
+            VPS = true
+            AUTO_STATUS_VIEW = true
+            SEND_READ = false" > config.env
+            ```
 
-      copy paste lines below (remove SESSION_ID if not needs)
+            [Read More](https://github.com/lyfe00011/whatsapp-bot-md/wiki/Environment_Variables)
+           
+           nano config.env, if you want edit TO Save ctrl + o press enter then ctrl + x
 
-      ```
-      SESSION_ID = Session_Id_you_Got_After_Scan_Dont_Add_This_Line_If_You_Can_Scan_From_Terminal_Itself
-      PREFIX = .
-      STICKER_PACKNAME = LyFE
-      ALWAYS_ONLINE = false
-      RMBG_KEY = null
-      LANGUAG = en
-      WARN_LIMIT = 3
-      FORCE_LOGOUT = false
-      BRAINSHOP = 159501,6pq8dPiYt7PdqHz3
-      MAX_UPLOAD = 200
-      REJECT_CALL = false
-      SUDO = 989876543210
-      TZ = Asia/Kolkata
-      VPS = true
-      AUTO_STATUS_VIEW = true
-      SEND_READ = false
-      ```
+         7. start and stop bot
 
-      [Read More](https://github.com/lyfe00011/whatsapp-bot-md/wiki/Environment_Variables)
-
-      ctrl + o and ctrl + x, To save and exit
-
-   7. start and stop bot
-
-      To start bot `npm start`,
-      To stop bot `npm stop`
+            To start bot `npm start`,
+            To stop bot `npm stop`
 
 ### Thanks To
 
