@@ -7,6 +7,8 @@ const {
 	formatTime,
 	parsedJid,
 	getCommon,
+	numToJid,
+	genButtonMessage,
 } = require('../lib/')
 const fm = true
 
@@ -53,6 +55,22 @@ bot(
 		if (!isImAdmin) return await message.send(`_I'm not admin._`)
 		match = match || message.reply_message.jid
 		if (!match) return await message.send('Example : add 91987654321')
+		if (!match.startsWith('@@')) {
+			match = jidToNum(match)
+			const button = await genButtonMessage(
+				[
+					{ id: `@@`, text: 'NO' },
+					{ id: `add @@${match}`, text: 'YES' },
+				],
+				`Your Number maybe banned, Do you want add @${match}`,
+				''
+			)
+			return await message.send(
+				button,
+				{ contextInfo: { mentionedJid: [numToJid(match)] } },
+				'button'
+			)
+		}
 		match = jidToNum(match)
 		const res = await message.Add(match)
 		if (res == '403') return await message.send('_Failed, Invite sent_')

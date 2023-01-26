@@ -1,4 +1,4 @@
-const { story, bot } = require('../lib/')
+const { story, bot, genListMessage } = require('../lib/')
 
 bot(
 	{
@@ -15,6 +15,17 @@ bot(
 			return await message.send('*Not found*', {
 				quoted: message.quoted,
 			})
+		if (result.length > 1) {
+			const msg = genListMessage(
+				result.map((url, index) => ({
+					id: `upload ${url}`,
+					text: `${index + 1}/${result.length}`,
+				})),
+				`Total ${result.length} stories`,
+				'Download'
+			)
+			return await message.send(msg, { quoted: message.data }, 'list')
+		}
 		for (const url of result) {
 			await message.sendFromUrl(url)
 		}
