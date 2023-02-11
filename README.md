@@ -41,7 +41,7 @@ A simple Whatsapp User bot
          sudo yarn global add pm2
       ###### 5. Clone Repo and install packages
          git clone https://github.com/lyfe00011/whatsapp-bot-md botName
-         cd whatsapp-bot-md
+         cd botName
          yarn install --network-concurrency 1
       ###### 6. Enter Environment Variables
       ###### copy paste lines below (remove SESSION_ID if not needs)
