@@ -140,9 +140,14 @@ bot(
 		type: 'user',
 	},
 	async (message, match) => {
-		const gids = await getGids()
+		const gids = await message.getGids()
 		let msg = ''
-		for (const { name, id } of gids) msg += `*${name} :* ${id}\n\n`
+		let i = 1
+		for (const gid in gids) {
+			const name = gids[gid].subject
+			msg += `*${i}.* *${name} :* ${gid}\n\n`
+			i++
+		}
 		await message.send(msg.trim())
 	}
 )
