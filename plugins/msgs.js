@@ -23,15 +23,26 @@ bot(
 		const participants = await getMsg(message.jid, user)
 		let msg = ''
 		const now = new Date().getTime()
-		for (const participant in participants) {
-			msg += `*Number :* ${jidToNum(participant)}\n*Name :* ${
-				participants[participant].name || ''
-			}\n*Total Msgs :* ${participants[participant].total}\n`
-			const { items } = participants[participant]
+		if (user) {
+			msg += `*Number :* ${jidToNum(user)}\n*Name :* ${
+				participants.name || ''
+			}\n*Total Msgs :* ${participants.total}\n`
+			const { items } = participants
 			for (const item in items) msg += `*${item} :* ${items[item]}\n`
 			msg += `*lastSeen :* ${
-				secondsToHms((now - participants[participant].time) / 1000) || 0
+				secondsToHms((now - participants.time) / 1000) || 0
 			} ago\n\n`
+		} else {
+			for (const participant in participants) {
+				msg += `*Number :* ${jidToNum(participant)}\n*Name :* ${
+					participants[participant].name || ''
+				}\n*Total Msgs :* ${participants[participant].total}\n`
+				const { items } = participants[participant]
+				for (const item in items) msg += `*${item} :* ${items[item]}\n`
+				msg += `*lastSeen :* ${
+					secondsToHms((now - participants[participant].time) / 1000) || 0
+				} ago\n\n`
+			}
 		}
 		await message.send(msg.trim())
 	}
