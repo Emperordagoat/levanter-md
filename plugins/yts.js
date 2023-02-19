@@ -65,6 +65,8 @@ bot(
 			)
 		} else {
 			const result = await yts(match)
+			if (!result.length)
+				return await message.send(`_Not result for_ *${match}*`)
 			return await message.send(
 				genListMessage(
 					result.map(({ title, id, duration }) => ({
