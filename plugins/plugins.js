@@ -6,6 +6,7 @@ const {
 	pluginsList,
 	delPlugin,
 	genButtonMessage,
+	PLATFORM,
 } = require('../lib/')
 const { writeFileSync, unlinkSync } = require('fs')
 const got = require('got')
@@ -31,11 +32,12 @@ bot(
 			return await message.send('```' + msg + '```')
 		}
 		const isValidUrl = parseGistUrls(match)
-		if (!isValidUrl) {
+		if (!isValidUrl || isValidUrl.length < 1) {
 			const { url } = await getPlugin(match)
 			if (url) return await message.send(url, { quoted: message.data })
 		}
-		if (!isValidUrl) return await message.send('*Give me valid plugin urls*')
+		if (!isValidUrl)
+			return await message.send('*Give me valid plugin urls/plugin_name*')
 		for (const url of isValidUrl) {
 			try {
 				const res = await got(url)
@@ -71,13 +73,20 @@ bot(
 	async (message, match) => {
 		if (!match)
 			return await message.send('*Example :*\nremove mforward\nremove all')
+		const buttons = [{ text: 'REBOOT', id: 'reboot' }]
+		if (PLATFORM == 'heroku') buttons.push({ text: 'RESTART', id: 'restart' })
 		if (match == 'all') {
-			await delPlugin()
+			const plugins = await getPlugin()
+			for (const plugin of plugins) {
+				try {
+					delete require.cache[
+						require.resolve('../plugins/' + plugin.name + '.js')
+					]
+					unlinkSync('./plugins/' + plugin.name + '.js')
+				} catch (error) {}
+			}
 			return await message.send(
-				await genButtonMessage(
-					[{ text: 'RESTART BOT', id: 'restart' }],
-					'_All plugins deleted Successfully_'
-				),
+				await genButtonMessage(buttons, '_All plugins deleted Successfully_'),
 				{},
 				'button'
 			)
@@ -87,13 +96,7 @@ bot(
 		delete require.cache[require.resolve('../plugins/' + match + '.js')]
 		unlinkSync('./plugins/' + match + '.js')
 		return await message.send(
-			await genButtonMessage(
-				[
-					{ text: 'RESTART', id: 'restart' },
-					{ text: 'REBOOT', id: 'reboot' },
-				],
-				'_Plugin Deleted_'
-			),
+			await genButtonMessage(buttons, '_Plugin Deleted_'),
 			{},
 			'button'
 		)
