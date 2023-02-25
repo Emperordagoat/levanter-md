@@ -35,9 +35,10 @@ bot(
 		if (!isValidUrl || isValidUrl.length < 1) {
 			const { url } = await getPlugin(match)
 			if (url) return await message.send(url, { quoted: message.data })
-		}
-		if (!isValidUrl)
 			return await message.send('*Give me valid plugin urls/plugin_name*')
+		}
+		const isMany = isValidUrl.length > 1
+		let msg = ''
 		for (const url of isValidUrl) {
 			try {
 				const res = await got(url)
@@ -52,14 +53,19 @@ bot(
 						return unlinkSync('./plugins/' + plugin_name + '.js')
 					}
 					await setPlugin(plugin_name, url)
-					await message.send(
-						`_Newly installed plugins are : ${pluginsList(res.body).join(',')}_`
-					)
+					if (!isMany)
+						await message.send(
+							`_Newly installed plugins are : ${pluginsList(res.body).join(
+								','
+							)}_`
+						)
+					else msg += `${pluginsList(res.body).join(',')}\n`
 				}
 			} catch (error) {
 				await message.send(`${error}\n${url}`)
 			}
 		}
+		if (isMany) await message.send(`_Newly installed plugins are : ${msg}_`)
 	}
 )
 
