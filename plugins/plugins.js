@@ -1,3 +1,5 @@
+const got = require('got')
+const path = require('path')
 const {
 	bot,
 	parseGistUrls,
@@ -9,7 +11,6 @@ const {
 	PLATFORM,
 } = require('../lib/')
 const { writeFileSync, unlinkSync } = require('fs')
-const got = require('got')
 
 bot(
 	{
@@ -37,7 +38,6 @@ bot(
 			if (url) return await message.send(url, { quoted: message.data })
 			return await message.send('*Give me valid plugin urls/plugin_name*')
 		}
-		const isMany = isValidUrl.length > 1
 		let msg = ''
 		for (const url of isValidUrl) {
 			try {
@@ -53,19 +53,13 @@ bot(
 						return unlinkSync('./plugins/' + plugin_name + '.js')
 					}
 					await setPlugin(plugin_name, url)
-					if (!isMany)
-						await message.send(
-							`_Newly installed plugins are : ${pluginsList(res.body).join(
-								','
-							)}_`
-						)
-					else msg += `${pluginsList(res.body).join(',')}\n`
+					msg += `${pluginsList(res.body).join(',')}\n`
 				}
 			} catch (error) {
 				await message.send(`${error}\n${url}`)
 			}
 		}
-		if (isMany) await message.send(`_Newly installed plugins are : ${msg}_`)
+		await message.send(`_Newly installed plugins are : ${msg.trim()}_`)
 	}
 )
 
@@ -84,11 +78,11 @@ bot(
 		if (match == 'all') {
 			const plugins = await getPlugin()
 			for (const plugin of plugins) {
+				const paths = path.join(__dirname, '../plugins/' + plugin.name + '.js')
 				try {
-					delete require.cache[
-						require.resolve('../plugins/' + plugin.name + '.js')
-					]
-					unlinkSync('./plugins/' + plugin.name + '.js')
+					await delPlugin(plugin.name)
+					delete require.cache[require.resolve(paths)]
+					unlinkSync(paths)
 				} catch (error) {}
 			}
 			return await message.send(
@@ -99,8 +93,9 @@ bot(
 		}
 		const isDeleted = await delPlugin(match)
 		if (!isDeleted) return await message.send(`*Plugin ${match} not found*`)
-		delete require.cache[require.resolve('../plugins/' + match + '.js')]
-		unlinkSync('./plugins/' + match + '.js')
+		const paths = path.join(__dirname, '../plugins/' + match + '.js')
+		delete require.cache[require.resolve(paths)]
+		unlinkSync(paths)
 		return await message.send(
 			await genButtonMessage(buttons, '_Plugin Deleted_'),
 			{},
