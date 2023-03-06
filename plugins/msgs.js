@@ -104,7 +104,7 @@ bot(
 			else if (kickOrType && kickOrType == 'total') {
 				if (
 					participants[participant].total <= COUNT &&
-					getFloor((now - participants[participant].time) / 1000 / 8400) >=
+					getFloor((now - participants[participant].time) / 1000) / 86400 >=
 						count
 				)
 					inactive.push(participant)
@@ -112,7 +112,7 @@ bot(
 				if (participants[participant].total <= count) inactive.push(participant)
 			} else {
 				if (
-					getFloor((now - participants[participant].time) / 1000 / 8400) >=
+					getFloor((now - participants[participant].time) / 1000) / 86400 >=
 					count
 				)
 					inactive.push(participant)
