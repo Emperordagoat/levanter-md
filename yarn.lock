@@ -4,7 +4,7 @@
 
 "@adiwajshing/baileys@git+https://github.com/lyfe00011/Baileys.git#fix":
   version "5.0.0"
-  resolved "git+https://github.com/lyfe00011/Baileys.git#d2508f94c2d89fff05db36152afd5662d043fcc6"
+  resolved "git+https://github.com/lyfe00011/Baileys.git#0e89787134c172c85d39bf86f169457bc33488c2"
   dependencies:
     "@hapi/boom" "^9.1.3"
     axios "^1.3.3"
