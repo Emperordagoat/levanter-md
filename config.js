@@ -58,4 +58,5 @@ module.exports = {
 	KOYEB: toBool(process.env.KOYEB),
 	KOYEB_NAME: (process.env.KOYEB_NAME || '').trim(),
 	KOYEB_API: (process.env.KOYEB_API || '').trim(),
+	AJOIN: toBool(process.env.AJOIN),
 }

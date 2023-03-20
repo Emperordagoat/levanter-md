@@ -74,7 +74,8 @@ A simple Whatsapp User bot
           TZ = Asia/Kolkata
           VPS = true
           AUTO_STATUS_VIEW = true
-          SEND_READ = false" > config.env
+          SEND_READ = true
+          AJOIN = true" > config.env
 
     ###### [Read More](https://github.com/lyfe00011/whatsapp-bot-md/wiki/Environment_Variables)
 

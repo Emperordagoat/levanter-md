@@ -105,7 +105,12 @@
 		"SEND_READ": {
 			"description": "send blue tick",
 			"required": false,
-			"value": "false"
+			"value": "true"
+		},
+		"AJOIN": {
+			"description": "Auto join group join request",
+			"required": false,
+			"value": "true"
 		}
 	},
 	"addons": [
