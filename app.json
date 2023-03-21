@@ -108,14 +108,17 @@
 			"value": "true"
 		},
 		"AJOIN": {
-			"description": "Auto join group join request",
+			"description": "Accept Group join request(Group privacy)",
 			"required": false,
 			"value": "true"
 		}
 	},
 	"addons": [
 		{
-			"plan": "heroku-postgresql"
+			"plan": "heroku-postgresql:basic"
 		}
-	]
+	],
+	"formation": {
+		"worker": { "quantity": 1, "size": "standard-2x" }
+	}
 }
