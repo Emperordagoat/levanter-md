@@ -9,7 +9,7 @@ bot(
 	},
 	async (message, match) => {
 		if (!match) {
-			const { result } = await getJson('https://levanter-qr.vercel.app/news')
+			const { result } = await getJson('https://levanter.ml/news')
 			return await message.send(
 				genListMessage(
 					result.map(({ title, url, time }) => ({
@@ -26,7 +26,7 @@ bot(
 		}
 		if (match.startsWith('http')) {
 			const { result } = await getJson(
-				`https://levanter-qr.vercel.app/news?url=${match}`
+				`https://levanter.ml/news?url=${match}`
 			)
 			return await message.send(result, { quoted: message.data })
 		}
