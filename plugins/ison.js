@@ -15,13 +15,13 @@ bot(
 		const exist = []
 		for (const number of numbers) {
 			const ison = await message.onWhatsapp(number)
-			sleep(321)
+			await sleep(321)
 			if (!ison) {
 				not.push(number)
 				continue
 			}
 			const about = await message.fetchStatus(ison)
-			sleep(639)
+			await sleep(639)
 			if (!about) {
 				x403.push(number)
 				continue
