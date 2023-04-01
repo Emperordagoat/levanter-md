@@ -4,3 +4,4 @@ node_modules/
 *-lock.json
 *.env
 plugins/test.js
+word.txt

@@ -114,10 +114,10 @@ bot(
 		let caption = ''
 		if (id) {
 			try {
-				const { status, setAt } = await message.fetchStatus(id)
+				const { status, date } = await message.fetchStatus(id)
 				caption += `*Name :* ${await getName(gid, id)}\n*Num :* +${jidToNum(
 					id
-				)}\n*About :* ${status}\n*setAt :* ${formatTime(setAt, id)}`
+				)}\n*About :* ${status}\n*setAt :* ${date}`
 			} catch (error) {}
 		} else {
 			const { subject, size, creation, desc, owner } =
