@@ -11,7 +11,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@adiwajshing/baileys": "git+https://github.com/lyfe00011/Baileys.git#8b05db2789b7126ad7e11b119c78257714437c0b",
+		"@adiwajshing/baileys": "git+https://github.com/lyfe00011/Baileys.git#209dfb122d0cbdba934d45fca47a350169dfe640",
 		"axios": "^1.3.3",
 		"browser-id3-writer": "^4.4.0",
 		"cheerio": "^1.0.0-rc.10",
