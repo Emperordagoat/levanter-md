@@ -75,7 +75,7 @@ bot(
 	{
 		pattern: 'pfilter ?(.*)',
 		fromMe: fm,
-		desc: 'pfilter in all groups',
+		desc: 'pfilter in groups',
 		type: 'autoReply',
 	},
 	async (message, match) => {
@@ -119,7 +119,7 @@ bot(
 		const filters = await getFilter('gfilter')
 		if (filters)
 			filters.map(async ({ pattern, regex, text }) => {
-				pattern = new RegExp(regex ? pattern : `\\b(${pattern})\\b`, 'gm')
+				pattern = new RegExp(`(?:^|\\W)${pattern}(?:$|\\W)`)
 				if (pattern.test(message.text)) {
 					await message.send(text, {
 						quoted: message.data,
@@ -140,7 +140,7 @@ bot(
 			const filters = await getFilter('pfilter')
 			if (filters)
 				filters.map(async ({ pattern, regex, text }) => {
-					pattern = new RegExp(regex ? pattern : `\\b(${pattern})\\b`, 'gm')
+					pattern = new RegExp(`(?:^|\\W)${pattern}(?:$|\\W)`)
 					if (pattern.test(message.text)) {
 						await message.send(text, {
 							quoted: message.data,
