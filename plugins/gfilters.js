@@ -5,7 +5,7 @@ bot(
 	{
 		pattern: 'gstop ?(.*)',
 		fromMe: fm,
-		desc: 'Delete gfilters in all chat',
+		desc: 'Delete gfilters in all group',
 		type: 'autoReply',
 		onlyGroup: true,
 	},
@@ -75,7 +75,7 @@ bot(
 	{
 		pattern: 'pfilter ?(.*)',
 		fromMe: fm,
-		desc: 'pfilter in groups',
+		desc: 'pfilter in all chat',
 		type: 'autoReply',
 	},
 	async (message, match) => {
