@@ -109,7 +109,7 @@ bot(
 					SEND_READ: match == 'on' ? 'true' : 'false',
 				})
 				await message.send(
-					`_Auto Call Reject ${match == 'on' ? 'Enabled' : 'Disabled'}_`
+					`_Auto Read ${match == 'on' ? 'Enabled' : 'Disabled'}_`
 				)
 			} catch (error) {
 				await message.send(`${error}`, {
@@ -148,7 +148,7 @@ bot(
 					ALWAYS_ONLINE: match == 'on' ? 'true' : 'false',
 				})
 				await message.send(
-					`_Auto Call Reject ${match == 'on' ? 'Enabled' : 'Disabled'}_`
+					`_Always Online ${match == 'on' ? 'Enabled' : 'Disabled'}_`
 				)
 			} catch (error) {
 				await message.send(`${error}`, {
