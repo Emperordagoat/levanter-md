@@ -90,7 +90,7 @@ bot(
 			!count ||
 			(type.toLowerCase() != 'total' && type.toLowerCase() != 'day') ||
 			isNaN(count) ||
-			(kickOrType && kickOrType != 'total') ||
+			(kickOrType && kickOrType != 'total' && kickOrType != 'kick') ||
 			(COUNT && isNaN(COUNT))
 		)
 			return await message.send(

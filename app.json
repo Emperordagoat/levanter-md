@@ -17,7 +17,7 @@
 		"SUDO": {
 			"description": "admin",
 			"required": false,
-			"value": "null"
+			"value": ""
 		},
 		"PREFIX": {
 			"description": "prefix, check for more",
@@ -100,12 +100,12 @@
 		"AUTO_STATUS_VIEW": {
 			"description": "view others status",
 			"required": false,
-			"value": "true"
+			"value": "false"
 		},
 		"SEND_READ": {
 			"description": "send blue tick",
 			"required": false,
-			"value": "true"
+			"value": "false"
 		},
 		"AJOIN": {
 			"description": "Accept Group join request(Group privacy)",
