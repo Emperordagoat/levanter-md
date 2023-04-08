@@ -4,7 +4,8 @@ const {
 	song,
 	video,
 	addAudioMetaData,
-	genListMessage,
+	// genListMessage,
+	generateList,
 } = require('../lib/')
 const ytIdRegex =
 	/(?:http(?:s|):\/\/|)(?:(?:www\.|)youtube(?:\-nocookie|)\.com\/(?:watch\?.*(?:|\&)v=|embed|shorts\/|v\/)|youtu\.be\/)([-_0-9A-Za-z]{11})/
@@ -63,24 +64,31 @@ bot(
 				{ quoted: message.data, mimetype: 'audio/mpeg' },
 				'audio'
 			)
-		} else {
-			const result = await yts(match)
-			if (!result.length)
-				return await message.send(`_Not result for_ *${match}*`)
-			return await message.send(
-				genListMessage(
-					result.map(({ title, id, duration }) => ({
-						text: title,
-						id: `song https://www.youtube.com/watch?v=${id}`,
-						desc: duration,
-					})),
-					`Searched ${match}\nFound ${result.length} results`,
-					'DOWNLOAD'
-				),
-				{},
-				'list'
-			)
 		}
+		const result = await yts(match)
+		if (!result.length) return await message.send(`_Not result for_ *${match}*`)
+		const msg = generateList(
+			result.map(({ title, id, duration }) => ({
+				text: title + ` (${duration})`,
+				id: `song https://www.youtube.com/watch?v=${id}`,
+			})),
+			`Searched ${match}\nFound ${result.length} results`,
+			message.jid
+		)
+		return await message.send('```' + msg + '```')
+		// return await message.send(
+		// 	genListMessage(
+		// 		result.map(({ title, id, duration }) => ({
+		// 			text: title,
+		// 			id: `song https://www.youtube.com/watch?v=${id}`,
+		// 			desc: duration,
+		// 		})),
+		// 		`Searched ${match}\nFound ${result.length} results`,
+		// 		'DOWNLOAD'
+		// 	),
+		// 	{},
+		// 	'list'
+		// )
 	}
 )
 

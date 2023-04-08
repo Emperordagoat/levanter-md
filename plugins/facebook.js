@@ -1,4 +1,4 @@
-const { facebook, bot, genButtonMessage, isUrl } = require('../lib/')
+const { facebook, bot, generateList, isUrl } = require('../lib/')
 
 bot(
 	{
@@ -15,16 +15,27 @@ bot(
 			return await message.send('*Not found*', {
 				quoted: message.quoted,
 			})
+		if (result.length == 1) return await message.sendFromUrl(result[0].url)
 		return await message.send(
-			await genButtonMessage(
+			generateList(
 				result.map((e) => ({
 					id: `upload ${e.url}`,
 					text: e.quality,
 				})),
-				'Choose Video Quality'
-			),
-			{},
-			'button'
+				`*Choose Video Quality*`,
+				message.jid
+			)
 		)
+		// return await message.send(
+		// 	await genButtonMessage(
+		// 		result.map((e) => ({
+		// 			id: `upload ${e.url}`,
+		// 			text: e.quality,
+		// 		})),
+		// 		'Choose Video Quality'
+		// 	),
+		// 	{},
+		// 	'button'
+		// )
 	}
 )

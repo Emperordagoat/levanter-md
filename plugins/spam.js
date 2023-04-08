@@ -1,4 +1,9 @@
-const { bot, setSpam, getSpam, genButtonMessage } = require('../lib')
+const {
+	bot,
+	setSpam,
+	getSpam,
+	// genButtonMessage
+} = require('../lib')
 
 bot(
 	{
@@ -11,19 +16,20 @@ bot(
 	async (message, match) => {
 		if (!match || (match != 'on' && match != 'off')) {
 			const { enabled } = await getSpam(message.jid)
-			return await message.send(
-				await genButtonMessage(
-					[
-						{
-							text: enabled ? 'OFF' : 'ON',
-							id: `antispam ${enabled ? 'off' : 'on'}`,
-						},
-					],
-					'AntiSpam\nExample : antispam on/off'
-				),
-				{},
-				'button'
-			)
+			return await message.send(`antispam ${enabled ? 'off' : 'on'}`)
+			// return await message.send(
+			// 	await genButtonMessage(
+			// 		[
+			// 			{
+			// 				text: enabled ? 'OFF' : 'ON',
+			// 				id: `antispam ${enabled ? 'off' : 'on'}`,
+			// 			},
+			// 		],
+			// 		'AntiSpam\nExample : antispam on/off'
+			// 	),
+			// 	{},
+			// 	'button'
+			// )
 		}
 		await setSpam(message.jid, match == 'on')
 		await message.send(

@@ -1,4 +1,8 @@
-const { bot, setPdm, genButtonMessage } = require('../lib/')
+const {
+	bot,
+	setPdm,
+	// genButtonMessage
+} = require('../lib/')
 
 bot(
 	{
@@ -9,23 +13,21 @@ bot(
 		onlyGroup: true,
 	},
 	async (message, match) => {
-		if (!match)
-			await message.send(
-				await genButtonMessage(
-					[
-						{ id: 'pdm on', text: 'ON' },
-						{ id: 'pdm off', text: 'OFF' },
-					],
-					'Promote Demote Message'
-				),
-				{},
-				'button'
-			)
+		if (!match) return await message.send('pdm on | off')
+		// await message.send(
+		// 	await genButtonMessage(
+		// 		[
+		// 			{ id: 'pdm on', text: 'ON' },
+		// 			{ id: 'pdm off', text: 'OFF' },
+		// 		],
+		// 		'Promote Demote Message'
+		// 	),
+		// 	{},
+		// 	'button'
+		// )
 		if (match == 'on' || match == 'off') {
 			await setPdm(message.jid, match)
-			await message.send(
-				`_pdm ${match == 'on' ? 'Activated' : 'Deactivated'}_`
-			)
+			await message.send(`_pdm ${match == 'on' ? 'Activated' : 'Deactivated'}_`)
 		}
 	}
 )

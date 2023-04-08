@@ -1,4 +1,4 @@
-const { twitter, bot, genButtonMessage, isUrl } = require('../lib/')
+const { twitter, bot, generateList, isUrl } = require('../lib/')
 
 bot(
 	{
@@ -15,16 +15,28 @@ bot(
 			return await message.send('*Not found*', {
 				quoted: message.quoted,
 			})
-		return await message.send(
-			await genButtonMessage(
-				result.map((e) => ({
-					id: `upload ${e.url}`,
-					text: e.quality.split('x')[0],
-				})),
-				'Choose Video Quality'
-			),
-			{},
-			'button'
-		)
+		if (result.length > 1) {
+			return await message.send(
+				generateList(
+					result.map((e) => ({
+						id: `upload ${e.url}`,
+						text: e.quality.split('x')[0],
+					})),
+					'*Choose Video Quality*\n',
+					message.jid
+				)
+			)
+			// return await message.send(
+			// 	await genButtonMessage(
+			// 		result.map((e) => ({
+			// 			id: `upload ${e.url}`,
+			// 			text: e.quality.split('x')[0],
+			// 		})),
+			// 		'Choose Video Quality'
+			// 	),
+			// 	{},
+			// 	'button'
+			// )
+		}
 	}
 )

@@ -3,7 +3,7 @@ const {
 	bot,
 	setWarn,
 	jidToNum,
-	genButtonMessage,
+	// genButtonMessage,
 	isAdmin,
 	deleteWarn,
 } = require('../lib/')
@@ -44,24 +44,27 @@ bot(
 			const isImAdmin = await isAdmin(participants, message.client.user.jid)
 			if (!isImAdmin) return await message.send(`_I'm not admin._`)
 			const isUserAdmin = await isAdmin(participants, user)
-			if (isUserAdmin)
-				return await message.send(`_I can't Remove admin._`)
-			await message.send(
-				`_@${jidToNum(user)} Kicked, Reached Max warning._`,
-				{ contextInfo: { mentionedJid: [user] } }
-			)
+			if (isUserAdmin) return await message.send(`_I can't Remove admin._`)
+			await message.send(`_@${jidToNum(user)} Kicked, Reached Max warning._`, {
+				contextInfo: { mentionedJid: [user] },
+			})
 			await deleteWarn(user, message.jid)
 			return await message.Kick(user)
 		}
-		return await message.send(
-			await genButtonMessage(
-				[{ id: `warn reset ${user}`, text: 'RESET' }],
-				`⚠️WARNING⚠️\n*User :* @${jidToNum(
-					user
-				)}\n*Warn :* ${count}\n*Remaining :* ${config.WARN_LIMIT - count}`
-			),
-			{ contextInfo: { mentionedJid: [user] } },
-			'button'
+		await message.send(
+			`⚠️WARNING⚠️\n*User :* @${jidToNum(
+				user
+			)}\n*Warn :* ${count}\n*Remaining :* ${config.WARN_LIMIT - count}`
 		)
+		// return await message.send(
+		// 	await genButtonMessage(
+		// 		[{ id: `warn reset ${user}`, text: 'RESET' }],
+		// 		`⚠️WARNING⚠️\n*User :* @${jidToNum(
+		// 			user
+		// 		)}\n*Warn :* ${count}\n*Remaining :* ${config.WARN_LIMIT - count}`
+		// 	),
+		// 	{ contextInfo: { mentionedJid: [user] } },
+		// 	'button'
+		// )
 	}
 )

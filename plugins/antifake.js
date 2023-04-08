@@ -3,7 +3,7 @@ const {
 	getFake,
 	antiList,
 	enableAntiFake,
-	genButtonMessage,
+	// genButtonMessage,
 } = require('../lib/')
 
 bot(
@@ -17,16 +17,19 @@ bot(
 	async (message, match) => {
 		if (!match) {
 			const fake = await getFake(message.jid)
-			const onOrOff = fake && fake.enabled ? 'off' : 'on'
-			const button = await genButtonMessage(
-				[
-					{ id: 'antifake list', text: 'LIST' },
-					{ id: `antifake ${onOrOff}`, text: onOrOff.toUpperCase() },
-				],
-				'Example\nhttps://github.com/lyfe00011/whatsapp-bot-md/wiki/antifake',
-				'Antifake'
+			const onOrOff = fake && fake.enabled ? 'on' : 'off'
+			return await message.send(
+				`_Antifake is ${onOrOff}_\n*Example :*\nantifake list\nantifake !91,1\nantifake on | off`
 			)
-			return await message.send(button, {}, 'button')
+			// const button = await genButtonMessage(
+			// 	[
+			// 		{ id: 'antifake list', text: 'LIST' },
+			// 		{ id: `antifake ${onOrOff}`, text: onOrOff.toUpperCase() },
+			// 	],
+			// 	'Example\nhttps://github.com/lyfe00011/whatsapp-bot-md/wiki/antifake',
+			// 	'Antifake'
+			// )
+			// return await message.send(button, {}, 'button')
 			// return await message.send(
 			// 	await genHydratedButtons(
 			// 		[
@@ -61,7 +64,11 @@ bot(
 				`_Antifake ${match == 'on' ? 'Activated' : 'Deactivated'}_`
 			)
 		}
-		await enableAntiFake(message.jid, match)
-		return await message.send('_Antifake Updated_')
+		const res = await enableAntiFake(message.jid, match)
+		return await message.send(
+			`_Antifake Updated_\nAllow - ${res.allow.join(
+				', '
+			)}\nNotAllow - ${res.notallow.join(', ')}`
+		)
 	}
 )

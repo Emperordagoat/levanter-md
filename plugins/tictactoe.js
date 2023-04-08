@@ -3,7 +3,7 @@ const {
 	isTactacToe,
 	ticTacToe,
 	delTicTacToe,
-	genButtonMessage,
+	// genButtonMessage,
 	isUser,
 	parsedJid,
 } = require('../lib/')
@@ -17,21 +17,22 @@ bot(
 	},
 	async (message, match) => {
 		if (match == 'end') {
-			await delTicTacToe()
-			return await message.send('*Game ended*')
+			const end = await delTicTacToe()
+			if (end) return await message.send('*Game ended*')
 		}
 		let [restart, id] = match.split(' ')
-		const game = isTactacToe()
-		if (game.state)
-			return await message.send(
-				await genButtonMessage(
-					[{ id: 'tictactoe end', text: 'END' }],
-					game.text,
-					'Choose Number from 1-9 to Play'
-				),
-				{ contextInfo: { mentionedJid: game.mentionedJid } },
-				'button'
-			)
+		// const game = isTactacToe()
+		// if (game.state)
+			// return await message.send(game.text + '\n\nChoose a number in 1-9')
+		// return await message.send(
+		// 	await genButtonMessage(
+		// 		[{ id: 'tictactoe end', text: 'END' }],
+		// 		game.text,
+		// 		'Choose Number from 1-9 to Play'
+		// 	),
+		// 	{ contextInfo: { mentionedJid: game.mentionedJid } },
+		// 	'button'
+		// )
 		let opponent = message.mention[0] || message.reply_message.jid
 		let me = message.participant
 		const [_me, _opponent] = parsedJid(match)

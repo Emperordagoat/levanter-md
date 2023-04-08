@@ -1,6 +1,6 @@
 const {
 	bot,
-	genButtonMessage,
+	// genButtonMessage,
 	mentionMessage,
 	enableMention,
 	clearFiles,
@@ -17,16 +17,20 @@ bot(
 	async (message, match) => {
 		if (!match) {
 			const mention = await getMention()
-			const onOrOff = mention && mention.enabled ? 'off' : 'on'
-			const button = await genButtonMessage(
-				[
-					{ id: 'mention get', text: 'GET' },
-					{ id: `mention ${onOrOff}`, text: onOrOff.toUpperCase() },
-				],
-				'Example\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/mention_example',
-				'Mention'
+			const onOrOff = mention && mention.enabled ? 'on' : 'off'
+			return await message.send(
+				`Mention is ${onOrOff}\n\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/mention_example`
 			)
-			return await message.send(button, {}, 'button')
+
+			// const button = await genButtonMessage(
+			// 	[
+			// 		{ id: 'mention get', text: 'GET' },
+			// 		{ id: `mention ${onOrOff}`, text: onOrOff.toUpperCase() },
+			// 	],
+			// 	'Example\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/mention_example',
+			// 	'Mention'
+			// )
+			// return await message.send(button, {}, 'button')
 			// return await message.send(
 			// 	await genHydratedButtons(
 			// 		[

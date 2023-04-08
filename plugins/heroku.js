@@ -5,7 +5,7 @@ const {
 	isUpdate,
 	updateNow,
 	bot,
-	genButtonMessage,
+	// genButtonMessage,
 } = require('../lib/')
 const Config = require('../config')
 const heroku = new Heroku({ token: Config.HEROKU_API_KEY })
@@ -99,15 +99,18 @@ bot(
 	async (message, match) => {
 		const update = await isUpdate()
 		if (!update.length) return await message.send('*Bot is up-to-date.*')
-		return await message.send(
-			await genButtonMessage(
-				[{ id: 'update now', text: 'UPDATE NOW' }],
-				`*Updates*\n${update.join('\n').trim()}`,
-				`${update.length} updates`
-			),
-			{},
-			'button'
+		await message.send(
+			`${update.length} updates\n\n${update.join('\n').trim()}`
 		)
+		// return await message.send(
+		// 	await genButtonMessage(
+		// 		[{ id: 'update now', text: 'UPDATE NOW' }],
+		// 		`*Updates*\n${update.join('\n').trim()}`,
+		// 		`${update.length} updates`
+		// 	),
+		// 	{},
+		// 	'button'
+		// )
 	}
 )
 

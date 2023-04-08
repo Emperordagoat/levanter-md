@@ -1,4 +1,9 @@
-const { getAntiLink, bot, genButtonMessage, setAntiLink } = require('../lib/')
+const {
+	getAntiLink,
+	bot,
+	// genButtonMessage,
+	setAntiLink,
+} = require('../lib/')
 
 bot(
 	{
@@ -12,15 +17,18 @@ bot(
 		const antilink = await getAntiLink(message.jid)
 		if (!match) {
 			const onOrOff = antilink.enabled ? 'off' : 'on'
-			const button = await genButtonMessage(
-				[
-					{ id: 'antilink info', text: 'INFO' },
-					{ id: `antilink ${onOrOff}`, text: onOrOff.toUpperCase() },
-				],
-				'Example\nhttps://github.com/lyfe00011/whatsapp-bot-md/wiki/antilink',
-				'Antilink'
+			return await message.send(
+				`_Antilink is ${onOrOff}_\n*Example :*\nantilink list\nantilink whatsapp.com\nantlink on | off`
 			)
-			return await message.send(button, {}, 'button')
+			// const button = await genButtonMessage(
+			// 	[
+			// 		{ id: 'antilink info', text: 'INFO' },
+			// 		{ id: `antilink ${onOrOff}`, text: onOrOff.toUpperCase() },
+			// 	],
+			// 	'Example\nhttps://github.com/lyfe00011/whatsapp-bot-md/wiki/antilink',
+			// 	'Antilink'
+			// )
+			// return await message.send(button, {}, 'button')
 			// return await message.send(
 			// 	await genHydratedButtons(
 			// 		[
@@ -65,7 +73,11 @@ bot(
 				return await message.send('*Invalid action*')
 			return await message.send(`_AntiLink action updated as ${action}_`)
 		}
-		await setAntiLink(message.jid, match)
-		return await message.send(`_AntiLink allowed urls are ${match}_`)
+		const res = await setAntiLink(message.jid, match)
+		return await message.send(
+			`_AntiLink allowed urls are_\nAllow - ${res.allow.join(
+				', '
+			)}\nNotAllow - ${res.notallow.join(', ')}`
+		)
 	}
 )

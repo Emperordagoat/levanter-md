@@ -2,9 +2,10 @@ const {
 	y2mate,
 	bot,
 	getBuffer,
-	genButtonMessage,
+	// genButtonMessage,
 	addAudioMetaData,
 	yts,
+	generateList,
 } = require('../lib/')
 const ytIdRegex =
 	/(?:http(?:s|):\/\/|)(?:(?:www\.|)youtube(?:\-nocookie|)\.com\/(?:watch\?.*(?:|\&)v=|embed|shorts\/|v\/)|youtu\.be\/)([-_0-9A-Za-z]{11})/
@@ -40,17 +41,23 @@ bot(
 			return await message.send('*Not found*', {
 				quoted: message.quoted,
 			})
-		return await message.send(
-			await genButtonMessage(
-				buttons,
-				title,
-				time,
-				{ image: thumbnail },
-				message
-			),
-			{},
-			'button'
-		)
+		return await message.sendFromUrl(thumbnail, {
+			caption:
+				'```' +
+				generateList(buttons, title + `(${time})\n`, message.jid) +
+				'```',
+		})
+		// return await message.send(
+		// 	await genButtonMessage(
+		// 		buttons,
+		// 		title,
+		// 		time,
+		// 		{ image: thumbnail },
+		// 		message
+		// 	),
+		// 	{},
+		// 	'button'
+		// )
 	}
 )
 

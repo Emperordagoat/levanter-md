@@ -7,8 +7,8 @@ const {
 	setPlugin,
 	pluginsList,
 	delPlugin,
-	genButtonMessage,
-	PLATFORM,
+	// genButtonMessage,
+	// PLATFORM,
 } = require('../lib/')
 const { writeFileSync, unlinkSync } = require('fs')
 
@@ -73,8 +73,8 @@ bot(
 	async (message, match) => {
 		if (!match)
 			return await message.send('*Example :*\nremove mforward\nremove all')
-		const buttons = [{ text: 'REBOOT', id: 'reboot' }]
-		if (PLATFORM == 'heroku') buttons.push({ text: 'RESTART', id: 'restart' })
+		// const buttons = [{ text: 'REBOOT', id: 'reboot' }]
+		// if (PLATFORM == 'heroku') buttons.push({ text: 'RESTART', id: 'restart' })
 		if (match == 'all') {
 			const plugins = await getPlugin()
 			for (const plugin of plugins) {
@@ -85,21 +85,18 @@ bot(
 					unlinkSync(paths)
 				} catch (error) {}
 			}
-			return await message.send(
-				await genButtonMessage(buttons, '_All plugins deleted Successfully_'),
-				{},
-				'button'
-			)
+		} else {
+			const isDeleted = await delPlugin(match)
+			if (!isDeleted) return await message.send(`*Plugin ${match} not found*`)
+			const paths = path.join(__dirname, '../plugins/' + match + '.js')
+			delete require.cache[require.resolve(paths)]
+			unlinkSync(paths)
 		}
-		const isDeleted = await delPlugin(match)
-		if (!isDeleted) return await message.send(`*Plugin ${match} not found*`)
-		const paths = path.join(__dirname, '../plugins/' + match + '.js')
-		delete require.cache[require.resolve(paths)]
-		unlinkSync(paths)
-		return await message.send(
-			await genButtonMessage(buttons, '_Plugin Deleted_'),
-			{},
-			'button'
-		)
+		return await message.send(`_Plugins deleted, Restart BOT_`)
+		// return await message.send(
+		// 	await genButtonMessage(buttons, '_Plugin Deleted_'),
+		// 	{},
+		// 	'button'
+		// )
 	}
 )

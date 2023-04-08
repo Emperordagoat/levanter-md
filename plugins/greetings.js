@@ -4,7 +4,7 @@ const {
 	deleteMessage,
 	bot,
 	getMessage,
-	genButtonMessage,
+	// genButtonMessage,
 	greetingsPreview,
 	clearGreetings,
 } = require('../lib/')
@@ -23,13 +23,16 @@ bot(
 			return await message.send('*Example : welcome Hi &mention*')
 		if (!match) {
 			await message.send(welcome.message)
-			const onOrOff = welcome && welcome.enabled ? 'off' : 'on'
-			const button = await genButtonMessage(
-				[{ id: `welcome ${onOrOff}`, text: onOrOff.toUpperCase() }],
-				'Example\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/Greetings',
-				'Welcome'
+			const onOrOff = welcome && welcome.enabled ? 'on' : 'off'
+			await message.send(
+				`Welcome is ${onOrOff}\n\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/Greetings`
 			)
-			return await message.send(button, {}, 'button')
+			// const button = await genButtonMessage(
+			// 	[{ id: `welcome ${onOrOff}`, text: onOrOff.toUpperCase() }],
+			// 	'Example\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/Greetings',
+			// 	'Welcome'
+			// )
+			// return await message.send(button, {}, 'button')
 			// return await message.send(
 			// 	await genHydratedButtons(
 			// 		[
@@ -56,9 +59,9 @@ bot(
 			)
 		}
 		if (match === 'delete') {
-			await message.send('_Welcome deleted_')
+			await deleteMessage(message.jid, 'welcome')
 			clearGreetings(message.jid, 'welcome')
-			return await deleteMessage(message.jid, 'welcome')
+			return await message.send('_Welcome deleted_')
 		}
 		await setMessage(message.jid, 'welcome', match)
 		const { msg, options, type } = await greetingsPreview(message, 'welcome')
@@ -81,13 +84,17 @@ bot(
 			return await message.send('*Example : goodbye Bye &mention*')
 		if (!match) {
 			await message.send(welcome.message)
-			const onOrOff = welcome && welcome.enabled ? 'off' : 'on'
-			const button = await genButtonMessage(
-				[{ id: `welcome ${onOrOff}`, text: onOrOff.toUpperCase() }],
-				'Example\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/Greetings',
-				'Goodbye'
+			const onOrOff = welcome && welcome.enabled ? 'on' : 'off'
+			return await message.send(
+				`Goodbye is ${onOrOff}\n\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/Greetings`
 			)
-			return await message.send(button, {}, 'button')
+
+			// const button = await genButtonMessage(
+			// 	[{ id: `welcome ${onOrOff}`, text: onOrOff.toUpperCase() }],
+			// 	'Example\nhttps://github.com/lyfe00011//whatsapp-bot-md/wiki/Greetings',
+			// 	'Goodbye'
+			// )
+			// return await message.send(button, {}, 'button')
 			// return await message.send(
 			// 	await genHydratedButtons(
 			// 		[
@@ -117,9 +124,9 @@ bot(
 			)
 		}
 		if (match === 'delete') {
-			await message.send('_Goodbye deleted_')
+			await deleteMessage(message.jid, 'goodbye')
 			clearGreetings(message.jid, 'goodbye')
-			return await deleteMessage(message.jid, 'goodbye')
+			return await message.send('_Goodbye deleted_')
 		}
 		await setMessage(message.jid, 'goodbye', match)
 		const { msg, options, type } = await greetingsPreview(message, 'goodbye')
