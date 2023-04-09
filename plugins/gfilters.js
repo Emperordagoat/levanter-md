@@ -7,7 +7,6 @@ bot(
 		fromMe: fm,
 		desc: 'Delete gfilters in all group',
 		type: 'autoReply',
-		onlyGroup: true,
 	},
 	async (message, match) => {
 		if (!match) return await message.send(`*Example : gstop hi*`)
@@ -23,7 +22,6 @@ bot(
 		fromMe: fm,
 		desc: 'Delete pfilters in all chat',
 		type: 'autoReply',
-		onlyGroup: true,
 	},
 	async (message, match) => {
 		if (!match) return await message.send(`*Example : pstop hi*`)
@@ -39,7 +37,6 @@ bot(
 		fromMe: fm,
 		desc: 'gfilter in all groups',
 		type: 'autoReply',
-		onlyGroup: true,
 	},
 	async (message, match) => {
 		match = match.match(/[\'\"](.*?)[\'\"]/gms)
@@ -119,7 +116,7 @@ bot(
 		const filters = await getFilter('gfilter')
 		if (filters)
 			filters.map(async ({ pattern, regex, text }) => {
-				pattern = new RegExp(`(?:^|\\W)${pattern}(?:$|\\W)`)
+				pattern = new RegExp(`(?:^|\\W)${pattern}(?:$|\\W)`, 'i')
 				if (pattern.test(message.text)) {
 					await message.send(text, {
 						quoted: message.data,
@@ -140,7 +137,7 @@ bot(
 			const filters = await getFilter('pfilter')
 			if (filters)
 				filters.map(async ({ pattern, regex, text }) => {
-					pattern = new RegExp(`(?:^|\\W)${pattern}(?:$|\\W)`)
+					pattern = new RegExp(`(?:^|\\W)${pattern}(?:$|\\W)`, 'i')
 					if (pattern.test(message.text)) {
 						await message.send(text, {
 							quoted: message.data,

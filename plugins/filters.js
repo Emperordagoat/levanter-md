@@ -62,7 +62,7 @@ bot(
 		const filters = await getFilter(message.jid)
 		if (filters)
 			filters.map(async ({ pattern, regex, text }) => {
-				pattern = new RegExp(`(?:^|\\W)${pattern}(?:$|\\W)`)
+				pattern = new RegExp(`(?:^|\\W)${pattern}(?:$|\\W)`,'i')
 				if (pattern.test(message.text)) {
 					await message.send(text, {
 						quoted: message.data,
