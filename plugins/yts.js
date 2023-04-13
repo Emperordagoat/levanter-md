@@ -22,7 +22,7 @@ bot(
 		const vid = ytIdRegex.exec(match)
 		if (vid) {
 			const result = await yts(vid[1], true)
-			const { title, description, duration, view, published } = result
+			const { title, description, duration, view, published } = result[0]
 			return await message.send(
 				`*Title :* ${title}\n*Time :* ${duration}\n*Views :* ${view}\n*Publish :* ${published}\n*Desc :* ${description}`
 			)
@@ -69,7 +69,7 @@ bot(
 		if (!result.length) return await message.send(`_Not result for_ *${match}*`)
 		const msg = generateList(
 			result.map(({ title, id, duration }) => ({
-				text: title + ` (${duration})`,
+				text: title + ` (${duration})\n`,
 				id: `song https://www.youtube.com/watch?v=${id}`,
 			})),
 			`Searched ${match}\nFound ${result.length} results`,

@@ -12,7 +12,7 @@ bot(
 	},
 	async (message, match) => {
 		if (!match) {
-			return await message.send('status on | off')
+			return await message.send('*Auto View WhatsApp Status*\nstatus on | off')
 			// const msg = await genButtonMessage(
 			// 	[
 			// 		{
@@ -51,7 +51,7 @@ bot(
 	},
 	async (message, match) => {
 		if (!match) {
-			return await message.send('call on | off')
+			return await message.send('*Auto Reject Calls*\ncall on | off')
 			// const msg = await genButtonMessage(
 			// 	[
 			// 		{
@@ -90,7 +90,7 @@ bot(
 	},
 	async (message, match) => {
 		if (!match) {
-			return await message.send('read on | off')
+			return await message.send('*Auto Read Messages*\nread on | off')
 			// const msg = await genButtonMessage(
 			// 	[
 			// 		{
@@ -129,7 +129,7 @@ bot(
 	},
 	async (message, match) => {
 		if (!match) {
-			return await message.send('online on | off')
+			return await message.send('*Show always online*\nonline on | off')
 			// const msg = await genButtonMessage(
 			// 	[
 			// 		{
