@@ -54,7 +54,8 @@ bot(
 		await message.send(
 			`⚠️WARNING⚠️\n*User :* @${jidToNum(
 				user
-			)}\n*Warn :* ${count}\n*Remaining :* ${config.WARN_LIMIT - count}`
+			)}\n*Warn :* ${count}\n*Remaining :* ${config.WARN_LIMIT - count}`,
+			{ contextInfo: { mentionedJid: [user] } }
 		)
 		// return await message.send(
 		// 	await genButtonMessage(

@@ -61,4 +61,5 @@ module.exports = {
 	AJOIN: toBool(process.env.AJOIN),
 	GPT: (process.env.GPT || '').trim(),
 	MODEL: (process.env.MODEL || 'gpt-3.5-turbo').trim(),
+	APPROVE: (process.env.APPROVE || '').trim(),
 }

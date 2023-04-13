@@ -13,7 +13,7 @@ bot(
 		onlyGroup: true,
 	},
 	async (message, match) => {
-		if (!match) return await message.send('pdm on | off')
+		if (!match) return await message.send('*Promote demote message*\npdm on | off')
 		// await message.send(
 		// 	await genButtonMessage(
 		// 		[
