@@ -62,4 +62,5 @@ module.exports = {
 	GPT: (process.env.GPT || '').trim(),
 	MODEL: (process.env.MODEL || 'gpt-3.5-turbo').trim(),
 	APPROVE: (process.env.APPROVE || '').trim(),
+	ANTI_DELETE: (process.env.ANTI_DELETE || 'null').trim(),
 }
