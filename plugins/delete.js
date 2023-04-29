@@ -1,4 +1,4 @@
-const { bot, setVar } = require('../lib/index')
+const { bot, setVar, parsedJid, isGroup } = require('../lib/index')
 
 bot(
 	{
@@ -8,17 +8,29 @@ bot(
 		type: 'whatsapp',
 	},
 	async (message, match) => {
-		if (!match || (match != 'p' && match != 'g' && match != 'null'))
+		const jid = parsedJid(match)[0]
+		if (!match || (match != 'p' && match != 'g' && match != 'null' && !jid))
 			return await message.send(
-				"*Anti delete Message*\n*Example :* delete p | g | null\n p - Send deleted messages to your chat or sudo\n g - Send deleted Message on chat where it delete\n null - Don't do anything with delete (off)"
+				"*Anti delete Message*\n*Example :* delete p | g | null\n p - Send deleted messages to your chat or sudo\n g - Send deleted Message on chat where it delete\njid - Send deleted Message to jid\n null - Don't do anything with delete (off)"
 			)
+		if (isGroup(jid)) {
+			try {
+				await message.groupMetadata(jid)
+			} catch (error) {
+				return await message.send(`_${jid} is invalid_`)
+			}
+		} else if (jid) {
+			const exist = await message.onWhatsapp(jid)
+			if (!exist) return await message.send(`_${jid} is invalid_`)
+		}
 		await setVar({ ANTI_DELETE: match })
-		const msg =
-			match == 'null'
-				? '_Anti delete Disabled_'
-				: match == 'p'
-				? '_Deleted Messages send to your chat or sudo_'
-				: '_Deleted Messages send to the chat itself_'
+		const msg = jid
+			? `_Deleted Messages send to ${jid}_`
+			: match == 'null'
+			? '_Anti delete Disabled_'
+			: match == 'p'
+			? '_Deleted Messages send to your chat or sudo_'
+			: '_Deleted Messages send to the chat itself_'
 		await message.send(msg)
 	}
 )
