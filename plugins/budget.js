@@ -56,14 +56,13 @@ bot(
 		type: 'budget',
 	},
 	async (message, match) => {
-		const [type, item, amount] = match.split(',')
-		if (!type || (type != 'income' && type != 'expense') || !item || !amount)
+		if (!match)
 			return await message.send(
-				'*Missing type*\n*Example : delbudget type,item,amount*\n*delbudget income, salary, 1000*'
+				'*Example : delbudget id*\n\n*Id from summary*\n*To update amount re-enter again instead of deletion*'
 			)
-		const res = await delBudget(message.participant, type, item, amount)
-		if (!res) return await message.send(`_${type} and ${item} not in list._`)
-		await message.send(`_${item} removed from the list._`)
+		const res = await delBudget(message.participant, match)
+		if (!res) return await message.send(`_${match} not in list._`)
+		await message.send(`_${match} removed from the list._`)
 	}
 )
 
