@@ -9,7 +9,7 @@ bot(
 	},
 	async (message, match) => {
 		const [type, amount, remark] = match.split(',')
-		if (!type && !amount)
+		if (!type || !amount || isNaN(amount))
 			return await message.send(
 				'*Missing type*\n*Example : income type,amount,remark*\n*income salary, 500*\n\n*remark is optional*'
 			)
@@ -33,7 +33,7 @@ bot(
 	},
 	async (message, match) => {
 		const [type, amount, remark] = match.split(',')
-		if (!type || !amount)
+		if (!type || !amount || isNaN(amount))
 			return await message.send(
 				'*Missing type*\n*Example : expense type,amount,remark*\n*expense movie, 200, movie_name*\n\n*remark is optional*'
 			)
