@@ -75,7 +75,7 @@ bot(
 		type: 'budget',
 	},
 	async (message, match) => {
-		const budget = await summary()
+		const budget = await summary(message.participant)
 		await message.send(
 			budget,
 			{
