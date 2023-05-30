@@ -16,7 +16,7 @@ bot(
 	async (message, match) => {
 		const antilink = await getAntiLink(message.jid)
 		if (!match) {
-			const onOrOff = antilink.enabled ? 'off' : 'on'
+			const onOrOff = antilink.enabled ? 'on' : 'off'
 			return await message.send(
 				`_Antilink is ${onOrOff}_\n*Example :*\nantilink list\nantilink whatsapp.com\nantlink on | off`
 			)

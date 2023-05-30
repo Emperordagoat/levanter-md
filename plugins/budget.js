@@ -1,4 +1,10 @@
-const { bot, summary, setBudget, delBudget } = require('../lib/index')
+const {
+	bot,
+	summary,
+	setBudget,
+	delBudget,
+	isValidDate,
+} = require('../lib/index')
 
 bot(
 	{
@@ -74,7 +80,10 @@ bot(
 		type: 'budget',
 	},
 	async (message, match) => {
-		const budget = await summary(message.participant)
+		const [from, to] = match.split(',')
+		if (!isValidDate(from) || !isValidDate(to))
+			return await message.send(`*Example : summary 1 May 2023, 3 May 2023*`)
+		const budget = await summary(message.participant, from, to)
 		await message.send(
 			budget,
 			{

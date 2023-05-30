@@ -24,7 +24,7 @@ bot(
 			return await message.send(
 				`_Antiword is ${
 					enabled ? 'on' : 'off'
-				}_\n*Example :*\nantiword action/(kick|warn|null)\nantiword on | off\nsetvar ANTIWORDS:word1,word2`
+				} (${action})_\n*Example :*\nantiword action/(kick|warn|null)\nantiword on | off\nsetvar ANTIWORDS:word1,word2`
 			)
 			// const buttons = actions
 			// 	.filter((e) => e != action)
