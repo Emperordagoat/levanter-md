@@ -81,7 +81,7 @@ bot(
 	},
 	async (message, match) => {
 		const [from, to] = match.split(',')
-		if (!isValidDate(from) || !isValidDate(to))
+		if (match && (!isValidDate(from) || !isValidDate(to)))
 			return await message.send(`*Example : summary 1 May 2023, 3 May 2023*`)
 		const budget = await summary(message.participant, from, to)
 		await message.send(
