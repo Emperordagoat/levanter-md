@@ -51,16 +51,14 @@ bot(
 			return await message.send('*Example : song indila love story/ yt link*')
 		const vid = ytIdRegex.exec(match)
 		if (vid) {
+			const song = await song(vid[1])
 			const [result] = await yts(vid[1], true)
-			const { id, author, title, thumbnail } = result
+			const { author, title, thumbnail } = result
+			const meta = title
+				? await addAudioMetaData(song, title, author, '', thumbnail.url)
+				: song
 			return await message.send(
-				await addAudioMetaData(
-					await song(id),
-					title,
-					author,
-					'',
-					thumbnail.url
-				),
+				meta,
 				{ quoted: message.data, mimetype: 'audio/mpeg' },
 				'audio'
 			)
