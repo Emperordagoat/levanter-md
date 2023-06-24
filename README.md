@@ -5,18 +5,18 @@ A simple Whatsapp User bot
 ## Setup
 
 1.  ### Deploy on Heroku
-    1. Click [SCAN](https://levanter.onrender.com/md) and scan QR through Whatsapp Linked Devices Option in Your whatsapp App.
+    1. Click [SCAN](https://www.levanter.ml/md) and scan QR through Whatsapp Linked Devices Option in Your whatsapp App.
     2. You will get a session id in whatsapp, copy id only.
     3. If You don't have a account in [Heroku](https://signup.heroku.com/), [Create a account Now](https://signup.heroku.com/).
     4. If You Don't have a github account [SignUp](https://github.com/join) Now.
     5. [FORK](https://github.com/lyfe00011/whatsapp-bot-md/fork) this repo
-    6. Now [DEPLOY](https://levanter.onrender.com/dmd)
+    6. Now [DEPLOY](https://www.levanter.ml/dmd)
 2.  ### Deploy on koyeb
     1. Create an account in [koyeb](https://app.koyeb.com/auth/signup). [SignUp Now](https://app.koyeb.com/auth/signup)
     2. Get [DATABASE_URL](https://github.com/lyfe00011/whatsapp-bot-md/wiki/DATABASE_URL), You needs while depolying
-    3. Get [SESSION_ID](https://levanter.onrender.com/md), Open Linked Devices in WhatsaApp and [SCAN](https://levanter.onrender.com/md) Now.
+    3. Get [SESSION_ID](https://www.levanter.ml/md), Open Linked Devices in WhatsaApp and [SCAN](https://www.levanter.ml/md) Now.
     4. Get Koyeb API key. [Let Go](https://app.koyeb.com/account/api)
-    5. [DEPLOY](https://levanter.onrender.com/koyeb) Now.
+    5. [DEPLOY](https://www.levanter.ml/koyeb) Now.
     6. Enter [Environment Variables](https://github.com/lyfe00011/whatsapp-bot-md/wiki/Environment_Variables), [Read More](https://github.com/lyfe00011/whatsapp-bot-md/wiki/Environment_Variables)
     7. Enter Name and Click Create service
 3.  ### Deploy on VPS or PC (Example here as in Ubuntu
