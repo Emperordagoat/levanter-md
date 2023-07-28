@@ -1,7 +1,10 @@
 const toBool = (x) => x == 'true'
 const { Sequelize } = require('sequelize')
 const { existsSync } = require('fs')
-if (existsSync('config.env')) require('dotenv').config({ path: './config.env' })
+const path = require('path')
+const configPath = path.join(__dirname, './config.env')
+const databasePath = path.join(__dirname, './database.db')
+if (existsSync(configPath)) require('dotenv').config({ path: configPath })
 const DATABASE_URL =
 	process.env.DATABASE_URL === undefined
 		? './database.db'
@@ -10,7 +13,7 @@ module.exports = {
 	VERSION: require('./package.json').version,
 	SESSION_ID: (process.env.SESSION_ID || '').trim(),
 	DATABASE:
-		DATABASE_URL === './database.db'
+		DATABASE_URL === databasePath
 			? new Sequelize({
 					dialect: 'sqlite',
 					storage: DATABASE_URL,
@@ -63,4 +66,5 @@ module.exports = {
 	MODEL: (process.env.MODEL || 'gpt-3.5-turbo').trim(),
 	APPROVE: (process.env.APPROVE || '').trim(),
 	ANTI_DELETE: (process.env.ANTI_DELETE || 'null').trim(),
+	PERSONAL_MESSAGE: process.env.PERSONAL_MESSAGE || 'null',
 }
