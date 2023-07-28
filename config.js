@@ -7,7 +7,7 @@ const databasePath = path.join(__dirname, './database.db')
 if (existsSync(configPath)) require('dotenv').config({ path: configPath })
 const DATABASE_URL =
 	process.env.DATABASE_URL === undefined
-		? './database.db'
+		? databasePath
 		: process.env.DATABASE_URL
 module.exports = {
 	VERSION: require('./package.json').version,
