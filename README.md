@@ -25,7 +25,7 @@ A simple WhatsApp User bot.
 
    - Install with script
      
-         wget -N http://bit.ly/43JqREw && chmod +x install && ./install
+        wget -N -O levanter.sh http://bit.ly/43JqREw && chmod +x levanter.sh && ./levanter.sh
     
    - Install without a script
        - Install git, ffmpeg, and curl:
