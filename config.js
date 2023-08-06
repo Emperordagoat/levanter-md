@@ -67,4 +67,7 @@ module.exports = {
 	APPROVE: (process.env.APPROVE || '').trim(),
 	ANTI_DELETE: (process.env.ANTI_DELETE || 'null').trim(),
 	PERSONAL_MESSAGE: process.env.PERSONAL_MESSAGE || 'null',
+	DISABLE_START_MESSAGE: process.env.DISABLE_START_MESSAGE
+		? toBool(process.env.DISABLE_START_MESSAGE)
+		: false,
 }

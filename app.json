@@ -114,6 +114,16 @@
 			"description": "Accept Group join request(Group privacy)",
 			"required": false,
 			"value": "true"
+		},
+		"PERSONAL_MESSAGE": {
+			"description": "Send a Welcome message on personal chat",
+			"required": false,
+			"value": "null"
+		},
+		"DISABLE_START_MESSAGE": {
+			"description": "Disable start Message",
+			"required": false,
+			"value": "false"
 		}
 	},
 	"addons": [

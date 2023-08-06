@@ -50,7 +50,7 @@ A simple WhatsApp User bot.
 
              git clone https://github.com/lyfe00011/whatsapp-bot-md botName
               cd botName
-                yarn install --network-concurrency 1
+               yarn install --network-concurrency 1
 
        - Enter Environment Variables: Copy-paste the lines below (remove SESSION_ID if not needed):
 
@@ -70,7 +70,9 @@ A simple WhatsApp User bot.
              VPS = true
              AUTO_STATUS_VIEW = true
              SEND_READ = true
-             AJOIN = true" > config.env
+             AJOIN = true
+             DISABLE_START_MESSAGE = false
+             PERSONAL_MESSAGE = null" > config.env
 
     - [Read More](https://github.com/lyfe00011/whatsapp-bot-md/wiki/Environment_Variables)
 
