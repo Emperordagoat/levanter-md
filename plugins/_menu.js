@@ -87,7 +87,9 @@ bot.addCommand(
 				command.pattern !== undefined
 			) {
 				if (!commands[command.type]) commands[command.type] = []
-				commands[command.type].push(ctt(command.pattern).trim())
+				const isDiabled = command.active === false
+				const cmd = ctt(command.pattern).trim()
+				commands[command.type].push(isDiabled ? cmd + ' [disabled]' : cmd)
 			}
 		})
 		const date = new Date()

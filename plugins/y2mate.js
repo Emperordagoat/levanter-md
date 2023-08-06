@@ -46,6 +46,7 @@ bot(
 				'```' +
 				generateList(buttons, title + `(${time})\n`, message.jid) +
 				'```',
+			buffer: false,
 		})
 		// return await message.send(
 		// 	await genButtonMessage(
