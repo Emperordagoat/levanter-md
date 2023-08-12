@@ -17,7 +17,7 @@ bot(
 		pattern: 'plugin ?(.*)',
 		fromMe: true,
 		desc: 'Install External plugins',
-		type: 'misc',
+		type: 'plugin',
 	},
 	async (message, match) => {
 		match = match || message.reply_message.text
@@ -68,7 +68,7 @@ bot(
 		pattern: 'remove ?(.*)',
 		fromMe: true,
 		desc: 'Delete External Plugins',
-		type: 'misc',
+		type: 'plugin',
 	},
 	async (message, match) => {
 		if (!match)

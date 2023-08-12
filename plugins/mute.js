@@ -42,7 +42,6 @@ bot(
 				'mute',
 				hour == 'off' ? 'off' : task.hour,
 				task.minute,
-				message.client,
 				task.msg
 			)
 			if (!isTask) return await message.send('_AutoMute Already Disabled_')
@@ -67,7 +66,7 @@ bot(
 		// 	'button'
 		// )
 		await setMute(message.jid, 'mute', true, hour, min, msg)
-		addTask(message.jid, 'mute', hour, min, message.client, msg)
+		addTask(message.jid, 'mute', hour, min, msg)
 
 		return await message.send(
 			`_Group will Mute at ${c24to12(`${hour}:${min}`)}_${
@@ -112,7 +111,6 @@ bot(
 				'unmute',
 				hour == 'off' ? 'off' : task.hour,
 				task.minute,
-				message.client,
 				task.msg
 			)
 			if (!isTask) return await message.send('_AutoUnMute Already Disabled_')
@@ -137,7 +135,7 @@ bot(
 		// 	'button'
 		// )
 		await setMute(message.jid, 'unmute', true, hour, min, msg)
-		addTask(message.jid, 'unmute', hour, min, message.client, msg)
+		addTask(message.jid, 'unmute', hour, min, msg)
 		return await message.send(
 			`_Group will unMute at ${c24to12(`${hour}:${min}`)}_${
 				msg != 'null' ? `\n_Message: ${msg}_` : ''
