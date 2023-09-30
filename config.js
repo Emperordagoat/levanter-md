@@ -67,4 +67,10 @@ module.exports = {
     : false,
   ANTI_BOT: toBool(process.env.ANTI_BOT),
   ANTI_BOT_MESSAGE: process.env.ANTI_BOT_MESSAGE || '&mention removed',
+  WARN_MESSAGE:
+    process.env.WARN_MESSAGE ||
+    '⚠️WARNING⚠️\n*User :* &mention\n*Warn :* warn\n*Remaining :* &remaining',
+  WARN_RESET_MESSAGE:
+    process.env.WARN_MESSAGE || `WARN RESET\nUser : &mention\nRemaining : &remaining`,
+  WARN_KICK_MESSAGE: process.env.WARN_MESSAGE || '&mention kicked',
 }
