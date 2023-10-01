@@ -27,13 +27,14 @@ bot(
         `*Title :* ${title}\n*Time :* ${duration}\n*Views :* ${view}\n*Publish :* ${published}\n*Desc :* ${description}`
       )
     }
-
     const result = await yts(match)
-    let msg = ''
-    result.forEach(
-      ({ title, id, view, duration, published, author }) =>
-        (msg += `• *${title.trim()}*\n*Views :* ${view}\n*Time :* ${duration}\n*Author :* ${author}\n*Published :* ${published}\n*Url :* https://www.youtube.com/watch?v=${id}\n\n`)
-    )
+    const msg = result
+      .map(
+        ({ title, id, view, duration, published, author }) =>
+          `• *${title.trim()}*\n*Views :* ${view}\n*Time :* ${duration}\n*Author :* ${author}\n*Published :* ${published}\n*Url :* https://www.youtube.com/watch?v=${id}\n\n`
+      )
+      .join('')
+
     return await message.send(msg.trim())
   }
 )
@@ -56,14 +57,14 @@ bot(
       const meta = title ? await addAudioMetaData(_song, title, author, '', thumbnail.url) : _song
       return await message.send(meta, { quoted: message.data, mimetype: 'audio/mpeg' }, 'audio')
     }
-    const result = await yts(match)
+    const result = await yts(match, 0, 1)
     if (!result.length) return await message.send(`_Not result for_ *${match}*`)
     const msg = generateList(
-      result.map(({ title, id, duration, view }) => ({
-        text: `${title}\nduration : ${duration}\nviews : ${view}\n`,
+      result.map(({ title, id, duration, author, album }) => ({
+        text: `🆔&id\n🎵${title}\n🕒${duration}\n👤${author}\n📀${album}\n\n`,
         id: `song https://www.youtube.com/watch?v=${id}`,
       })),
-      `Searched ${match}\nFound ${result.length} results`,
+      `Searched ${match} and Found ${result.length} results\nsend 🆔 to download song.\n`,
       message.jid
     )
     return await message.send('```' + msg + '```')
