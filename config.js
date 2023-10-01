@@ -71,6 +71,6 @@ module.exports = {
     process.env.WARN_MESSAGE ||
     '⚠️WARNING⚠️\n*User :* &mention\n*Warn :* warn\n*Remaining :* &remaining',
   WARN_RESET_MESSAGE:
-    process.env.WARN_MESSAGE || `WARN RESET\nUser : &mention\nRemaining : &remaining`,
-  WARN_KICK_MESSAGE: process.env.WARN_MESSAGE || '&mention kicked',
+    process.env.WARN_RESET_MESSAGE || `WARN RESET\nUser : &mention\nRemaining : &remaining`,
+  WARN_KICK_MESSAGE: process.env.WARN_KICK_MESSAGE || '&mention kicked',
 }
