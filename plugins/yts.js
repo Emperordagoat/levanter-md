@@ -65,7 +65,8 @@ bot(
         id: `song https://www.youtube.com/watch?v=${id}`,
       })),
       `Searched ${match} and Found ${result.length} results\nsend 🆔 to download song.\n`,
-      message.jid
+      message.jid,
+      message.participant
     )
     return await message.send('```' + msg + '```')
     // return await message.send(
@@ -104,7 +105,8 @@ bot(
           id: `video https://www.youtube.com/watch?v=${id}`,
         })),
         `Searched ${match}\nFound ${result.length} results`,
-        message.jid
+        message.jid,
+        message.participant
       )
       return await message.send('```' + msg + '```')
     }

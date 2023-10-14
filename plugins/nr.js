@@ -10,9 +10,9 @@ bot(
   async (message, match) => {
     if (!match) return await message.send(`Example : zushi ping, sticker`)
     const z = await zushi(match, message.jid)
-    if (!z.length) return await message.send(`not set any`)
+    if (!z) return await message.send(`*${match}* already set`)
 
-    await message.send(`${z.join('\n')}`)
+    await message.send(`*allowed commands*\n${z.join('\n')}`)
   }
 )
 
@@ -25,8 +25,8 @@ bot(
   },
   async (message, match) => {
     const z = await yami(message.jid)
-    if (!z) return await message.send(`not set any`)
-    await message.send(`${z.join('\n')}`)
+    if (!z || !z.length) return await message.send(`not set any`)
+    await message.send(`*allowed commands*\n${z.join('\n')}`)
   }
 )
 
@@ -40,7 +40,8 @@ bot(
   async (message, match) => {
     if (!match) return await message.send('Example : ope ping, sticker')
     const z = await ope(message.jid, match)
-    if (!z) return await message.send(`not set ${z}`)
-    await message.send(`${z.join('\n')}`)
+    if (z === false || !z.length) return await message.send(`not set any`)
+    if (z === null) return await message.send(`not set *${match}*`)
+    await message.send(`*allowed commands*\n${z.join('\n')}`)
   }
 )

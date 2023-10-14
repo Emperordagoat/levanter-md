@@ -17,7 +17,8 @@ bot(
             id: `news ${url}`,
           })),
           'Malayalam News',
-          message.jid
+          message.jid,
+          message.participant
         )
       )
     }
