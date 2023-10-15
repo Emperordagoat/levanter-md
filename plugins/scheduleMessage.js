@@ -45,7 +45,7 @@ bot(
 			return await message.send('_There is no any schedules_')
 		let msg = ''
 		for (const schedule of schedules) {
-			msg += `Jid : *${schedule.jid}*\nTime : *${schedule.time}*\n\n`
+			msg += `Jid : *${schedule.jid}*\nTime : ${schedule.time}\n\n`
 		}
 		return await message.send(msg.trim())
 	}
