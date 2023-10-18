@@ -5,7 +5,7 @@ bot(
     fromMe: true,
     desc: 'word chain game\nwcg start to force start game',
     type: 'game',
-    onlyGroup: true,
+    // onlyGroup: true,
   },
   async (message, match) => {
     if (match == 'start') {
