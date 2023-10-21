@@ -4362,10 +4362,10 @@ yamljs@0.3.0:
     argparse "^1.0.7"
     glob "^7.0.5"
 
-youtubei.js@6.4.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/youtubei.js/-/youtubei.js-6.4.0.tgz#8e18f8a87f5315391cf1722e15510d0a3a6b4b0b"
-  integrity sha512-c3Hj+9JmMchVWusVOubHDNrvKybzai1vWzZsVIZ9oxt74W0zaP78S0pPW21i/RnVBx29rAA2+ojs56b/REP/1A==
+youtubei.js@6.4.1:
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/youtubei.js/-/youtubei.js-6.4.1.tgz#d7a7c83cd7ddf8fedbaf3d2ab8a36840e233adf4"
+  integrity sha512-GVrDkJmF5t378SeDiZPEAoegZ1pxjbEzNyXTuiQnL5LzPSZKA3IoJwL8lBNlRMKyksI5RbieoHzULsEt4AIbFw==
   dependencies:
     jintr "^1.1.0"
     tslib "^2.5.0"
