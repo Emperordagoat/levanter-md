@@ -1,4 +1,4 @@
-const { bot, truecaller } = require('../lib/index')
+const { bot, truecaller, jidToNum } = require('../lib/index')
 
 bot(
   {
@@ -8,6 +8,10 @@ bot(
     type: 'search',
   },
   async (message, match) => {
+    match =
+      (message.mention[0] && jidToNum(message.mention[0])) ||
+      match ||
+      (message.reply_message && jidToNum(message.reply_message.jid))
     if (!match) return await message.send(`*Example :* truecaller 919876543210`)
 
     const res = await truecaller.search(match)
