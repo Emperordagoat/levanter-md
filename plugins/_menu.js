@@ -8,6 +8,7 @@ bot.addCommand(
     dontAddCommandList: true,
   },
   async (message, match) => {
+    const sorted = bot.commands.sort((a, b) => (a, b) => a.name.localeCompare(b.name))
     const date = new Date()
     let CMD_HELP = `╭────────────────╮
 						ʟᴇᴠᴀɴᴛᴇʀ
@@ -27,7 +28,7 @@ bot.addCommand(
 ╭────────────────
 `
     const commands = []
-    bot.commands.map(async (command, index) => {
+    sorted.map(async (command, index) => {
       if (command.dontAddCommandList === false && command.pattern !== undefined) {
         commands.push(command.name)
       }
@@ -51,7 +52,8 @@ bot.addCommand(
   },
   async (message, match) => {
     let msg = ''
-    bot.commands.map(async (command, index) => {
+    const sorted = bot.commands.sort((a, b) => a.name.localeCompare(b.name))
+    sorted.map(async (command, index) => {
       if (command.dontAddCommandList === false && command.pattern !== undefined) {
         msg += `${index} ${command.name}\n${command.desc}\n\n`
       }
@@ -91,7 +93,7 @@ bot.addCommand(
 ╰═════════════════⊷\`\`\`\n`
 
     if (match && commands[match]) {
-		msg += ` ╭─❏ ${textToStylist(match.toLowerCase(), 'smallcaps')} ❏\n`
+      msg += ` ╭─❏ ${textToStylist(match.toLowerCase(), 'smallcaps')} ❏\n`
       for (const plugin of commands[match])
         msg += ` │ ${textToStylist(plugin.toUpperCase(), 'mono')}\n`
       msg += ` ╰─────────────────`
