@@ -1,6 +1,6 @@
 {
 	"name": "levanter",
-	"version": "4.8.5",
+	"version": "5.0.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
