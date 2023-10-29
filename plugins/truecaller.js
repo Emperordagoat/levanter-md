@@ -1,4 +1,4 @@
-const { bot, truecaller, jidToNum } = require('../lib/index')
+const { bot, truecaller, jidToNum, delTruecaller } = require('../lib/index')
 
 bot(
   {
@@ -13,7 +13,10 @@ bot(
       match ||
       (message.reply_message && jidToNum(message.reply_message.jid))
     if (!match) return await message.send(`*Example :* truecaller 919876543210`)
-
+    if (match === 'logout') {
+      await delTruecaller()
+      return await message.send(`Logged out from Truecaller.`)
+    }
     const res = await truecaller.search(match)
 
     if (res.message) {
