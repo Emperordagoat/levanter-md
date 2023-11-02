@@ -52,10 +52,15 @@ bot.addCommand(
   },
   async (message, match) => {
     let msg = ''
-    const sorted = bot.commands.sort((a, b) => a.name.localeCompare(b.name))
+    const sorted = bot.commands.sort((a, b) => {
+      if (a.name && b.name) {
+        return a.name.localeCompare(b.name)
+      }
+      return 0
+    })
     sorted.map(async (command, index) => {
       if (command.dontAddCommandList === false && command.pattern !== undefined) {
-        msg += `${index} ${command.name}\n${command.desc}\n\n`
+        msg += `${index + 1} ${command.name}\n${command.desc}\n\n`
       }
     })
     await message.send('```' + msg.trim() + '```')
