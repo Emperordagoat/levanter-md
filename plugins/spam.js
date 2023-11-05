@@ -16,7 +16,7 @@ bot(
 	async (message, match) => {
 		if (!match || (match != 'on' && match != 'off')) {
 			const { enabled } = await getSpam(message.jid)
-			return await message.send(`antispam ${enabled ? 'off' : 'on'}`)
+			return await message.send(`Example : antispam ${enabled ? 'off' : 'on'}`)
 			// return await message.send(
 			// 	await genButtonMessage(
 			// 		[
