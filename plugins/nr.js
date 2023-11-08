@@ -40,8 +40,8 @@ bot(
   async (message, match) => {
     if (!match) return await message.send('Example : ope ping, sticker')
     const z = await ope(message.jid, match)
-    if (z === false || !z.length) return await message.send(`not set any`)
-    if (z === null) return await message.send(`not set *${match}*`)
+  if (z === null) return await message.send(`not set *${match}*`)
+  if (z === false || !z.length) return await message.send(`not set any`)
     await message.send(`*allowed commands*\n${z.join('\n')}`)
   }
 )
