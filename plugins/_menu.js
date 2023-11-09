@@ -32,10 +32,10 @@ bot.addCommand(
 ╰────────────────
 ╭────────────────
 `
-    sorted.map(async (command, index) => {
+    sorted.map(async (command, i) => {
       if (command.dontAddCommandList === false && command.pattern !== undefined) {
         CMD_HELP += `│ ${i + 1} ${addSpace(i + 1, sorted.length)}${textToStylist(
-          command.toUpperCase(),
+          command.name.toUpperCase(),
           'mono'
         )}\n`
       }
