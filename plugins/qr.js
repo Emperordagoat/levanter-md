@@ -7,7 +7,7 @@ bot(
 	async (message, match) => {
 		if (match)
 			return await message.sendFromUrl(
-				`https://levanter.ml/gqr?text=${encodeURIComponent(match)}`
+				`https://levanter.onrender.com/gqr?text=${encodeURIComponent(match)}`
 			)
 		if (!message.reply_message || !message.reply_message.image)
 			return await message.send(

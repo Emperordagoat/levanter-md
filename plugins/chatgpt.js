@@ -1,4 +1,3 @@
-const config = require('../config')
 const { bot, getGPTResponse, getDallEResponse } = require('../lib')
 
 bot(
@@ -9,10 +8,6 @@ bot(
     type: 'AI',
   },
   async (message, match) => {
-    if (!config.GPT && config.GPT !== 'free')
-      return await message.send(
-        'Get a key from https://platform.openai.com/account/api-keys\n\nsetvar GPT = your_key'
-      )
     match = match || message.reply_message.text
     if (!match) return await message.send('*Example : gpt What is the capital of France?*')
     const res = await getGPTResponse(match)
@@ -28,10 +23,6 @@ bot(
     type: 'AI',
   },
   async (message, match) => {
-    if (!config.GPT && config.GPT !== 'free')
-      return await message.send(
-        'Get a key from https://platform.openai.com/account/api-keys\n\nsetvar GPT = your_key'
-      )
     if (!match)
       return await message.send(
         '*Example : dall a close up, studio photographic portrait of a white siamese cat that looks curious, backlit ears*'
