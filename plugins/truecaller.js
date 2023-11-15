@@ -30,8 +30,10 @@ bot(
     let msg = ''
     if (res.name) msg += `*Name :* ${res.name}\n`
     if (res.gender) msg += `*Gender :* ${res.gender}\n`
+    if (res.email) msg += `*Email :* ${res.email}\n`
     msg += `*Type :* ${res.numberType}(${res.type})\n`
     msg += `*Carrier :* ${res.carrier}\n`
+    msg += `*Number :* ${res.number}\n`
     if (res.city) msg += `*City :* ${res.city}\n`
     msg += `*DailingCode :* ${res.dialingCode}(${res.countryCode})`
     await message.send(msg)
