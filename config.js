@@ -74,4 +74,5 @@ module.exports = {
     process.env.WARN_RESET_MESSAGE || `WARN RESET\nUser : &mention\nRemaining : &remaining`,
   WARN_KICK_MESSAGE: process.env.WARN_KICK_MESSAGE || '&mention kicked',
   TRUECALLER: process.env.TRUECALLER,
+  DETELE_TYPE: (process.env.DETELE_TYPE || '').trim(),
 }
