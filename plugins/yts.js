@@ -61,14 +61,15 @@ bot(
     if (!result.length) return await message.send(`_Not result for_ *${match}*`)
     const msg = generateList(
       result.map(({ title, id, duration, author, album }) => ({
-        text: `🆔&id\n🎵${title}\n🕒${duration}\n👤${author}\n📀${album}\n\n`,
+        _id: `🆔&id\n`,
+        text: `🎵${title}\n🕒${duration}\n👤${author}\n📀${album}\n\n`,
         id: `song https://www.youtube.com/watch?v=${id}`,
       })),
       `Searched ${match} and Found ${result.length} results\nsend 🆔 to download song.\n`,
       message.jid,
       message.participant
     )
-    return await message.send('```' + msg + '```')
+    return await message.send(msg.message, { quoted: message.data }, msg.type)
     // return await message.send(
     // 	genListMessage(
     // 		result.map(({ title, id, duration }) => ({
@@ -108,7 +109,7 @@ bot(
         message.jid,
         message.participant
       )
-      return await message.send('```' + msg + '```')
+      return await message.send(msg.message, { quoted: message.data }, msg.type)
     }
     return await message.send(await video(vid[1]), { quoted: message.data }, 'video')
   }

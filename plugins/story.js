@@ -16,17 +16,16 @@ bot(
         quoted: message.quoted,
       })
     if (result.length > 1) {
-      return await message.send(
-        generateList(
-          result.map((url, index) => ({
-            id: `upload ${url}`,
-            text: `${index + 1}/${result.length}`,
-          })),
-          `*Total ${result.length} stories*\n`,
-          message.jid,
-          message.participant
-        )
+      const list = generateList(
+        result.map((url, index) => ({
+          id: `upload ${url}`,
+          text: `${index + 1}/${result.length}`,
+        })),
+        `*Total ${result.length} stories*\n`,
+        message.jid,
+        message.participant
       )
+      return await message.send(list.message, {}, list.type)
       // const msg = genListMessage(
       // 	result.map((url, index) => ({
       // 		id: `upload ${url}`,

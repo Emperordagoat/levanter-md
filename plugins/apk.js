@@ -19,9 +19,14 @@ bot(
       if (!result.length) return await message.send('_No results found matching your query_')
       const list = []
       for (const { title, url } of result) list.push({ id: `apk ${status};;${url}`, text: title })
-      return await message.send(
-        generateList(list, `Matching Apps(${list.length})\n`, message.jid, message.participant)
+      const lists = generateList(
+        list,
+        `Matching Apps(${list.length})\n`,
+        message.jid,
+        message.participant
       )
+      return await message.send(lists.message, {}, lists.type)
+
       // return await message.send(
       // 	generateList(list, 'Matching apps', 'DOWNLOAD'),
       // 	{},
@@ -39,7 +44,13 @@ bot(
         const res = await apkMirror(button[0].id.replace('apk ', ''))
         return await message.sendFromUrl(res.result)
       }
-      return await message.send(generateList(button, `Available architectures\n`, message.jid))
+      const list = generateList(
+        button,
+        `Available architectures\n`,
+        message.jid,
+        message.participant
+      )
+      return await message.send(list.message, { quoted: message.data }, list.type)
       // return await message.send(
       // 	await genButtonMessage(button, 'Available apks'),
       // 	{},

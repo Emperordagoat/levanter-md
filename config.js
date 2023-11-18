@@ -75,4 +75,5 @@ module.exports = {
   WARN_KICK_MESSAGE: process.env.WARN_KICK_MESSAGE || '&mention kicked',
   TRUECALLER: process.env.TRUECALLER,
   DELETE_TYPE: (process.env.DELETE_TYPE || '').trim(),
+  LIST_TYPE: (process.env.LIST_TYPE || 'poll').trim(),
 }

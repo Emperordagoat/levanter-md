@@ -10,17 +10,17 @@ bot(
   async (message, match) => {
     if (!match) {
       const { result } = await getJson('https://levanter.onrender.com/news')
-      return await message.send(
-        generateList(
-          result.map(({ title, url, time }) => ({
-            text: `🆔 &id\n🗞${title}${time ? `\n🕒${time}` : ''}\n`,
-            id: `news ${url}`,
-          })),
-          'Malayalam News',
-          message.jid,
-          message.participant
-        )
+      const list = generateList(
+        result.map(({ title, url, time }) => ({
+          text: `🆔 &id\n🗞${title}${time ? `\n🕒${time}` : ''}\n`,
+          id: `news ${url}`,
+        })),
+        'Malayalam News',
+        message.jid,
+        message.participant
       )
+
+      return await message.send(list.message, {}, list.type)
     }
     if (match.startsWith('http')) {
       const { result } = await getJson(`https://levanter.onrender.com/news?url=${match}`)

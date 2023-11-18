@@ -16,17 +16,16 @@ bot(
         quoted: message.quoted,
       })
     if (result.length == 1) return await message.sendFromUrl(result[0].url)
-    return await message.send(
-      generateList(
-        result.map((e) => ({
-          id: `upload ${e.url}`,
-          text: e.quality,
-        })),
-        `*Choose Video Quality*`,
-        message.jid,
-        message.participant
-      )
+    const list = generateList(
+      result.map((e) => ({
+        id: `upload ${e.url}`,
+        text: e.quality,
+      })),
+      `*Choose Video Quality*`,
+      message.jid,
+      message.participant
     )
+    return await message.send(list.message, {}, list.type)
     // return await message.send(
     // 	await genButtonMessage(
     // 		result.map((e) => ({
