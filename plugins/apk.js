@@ -57,6 +57,6 @@ bot(
       // 	'button'
       // )
     }
-    return await message.sendFromUrl(result)
+    return await message.sendFromUrl(result, { quoted: message.data })
   }
 )

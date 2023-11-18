@@ -15,7 +15,8 @@ bot(
       return await message.send('*Not found*', {
         quoted: message.quoted,
       })
-    if (result.length == 1) return await message.sendFromUrl(result[0].url)
+    if (result.length == 1)
+      return await message.sendFromUrl(result[0].url, { quoted: message.data })
     const list = generateList(
       result.map((e) => ({
         id: `upload ${e.url}`,
