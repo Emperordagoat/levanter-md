@@ -12,7 +12,8 @@ bot(
       const { result } = await getJson('https://levanter.onrender.com/news')
       const list = generateList(
         result.map(({ title, url, time }) => ({
-          text: `🆔 &id\n🗞${title}${time ? `\n🕒${time}` : ''}\n`,
+          _id: `🆔 &id\n`,
+          text: `🗞${title}${time ? `\n🕒${time}` : ''}\n`,
           id: `news ${url}`,
         })),
         'Malayalam News',
