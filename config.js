@@ -76,4 +76,5 @@ module.exports = {
   TRUECALLER: process.env.TRUECALLER,
   DELETE_TYPE: (process.env.DELETE_TYPE || '').trim(),
   LIST_TYPE: (process.env.LIST_TYPE || 'poll').trim(),
+  BING_COOKIE: (process.env.BING_COOKIE || '').trim(),
 }

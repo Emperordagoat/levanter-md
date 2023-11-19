@@ -55,7 +55,11 @@ bot(
       const [result] = await yts(vid[1], true)
       const { author, title, thumbnail } = result
       const meta = title ? await addAudioMetaData(_song, title, author, '', thumbnail.url) : _song
-      return await message.send(meta, { quoted: message.data, mimetype: 'audio/mpeg' }, 'audio')
+      return await message.send(
+        meta,
+        { quoted: message.data, mimetype: 'audio/mpeg', fileName: `${title}.mp3` },
+        'audio'
+      )
     }
     const result = await yts(match, 0, 1)
     if (!result.length) return await message.send(`_Not result for_ *${match}*`)
@@ -111,6 +115,10 @@ bot(
       )
       return await message.send(msg.message, { quoted: message.data }, msg.type)
     }
-    return await message.send(await video(vid[1]), { quoted: message.data }, 'video')
+    return await message.send(
+      await video(vid[1]),
+      { quoted: message.data, fileName: `${vid[1]}.mp4` },
+      'video'
+    )
   }
 )
