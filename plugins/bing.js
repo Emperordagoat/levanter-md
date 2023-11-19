@@ -1,6 +1,5 @@
-const { config } = require('dotenv')
 const { bot, bing } = require('../lib/')
-
+const config = require('../config')
 bot(
   {
     pattern: 'bing ?(.*)',
