@@ -1,3 +1,4 @@
+const { config } = require('dotenv')
 const { bot, bing } = require('../lib/')
 
 bot(
