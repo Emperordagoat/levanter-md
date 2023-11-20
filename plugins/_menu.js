@@ -78,10 +78,11 @@ bot.addCommand(
     const commands = {}
     bot.commands.map(async (command, index) => {
       if (command.dontAddCommandList === false && command.pattern !== undefined) {
-        if (!commands[command.type]) commands[command.type] = []
-        const isDiabled = command.active === false
-        const cmd = command.name.trim()
-        commands[command.type].push(isDiabled ? cmd + ' [disabled]' : cmd)
+        let cmdType = command.type.toLowerCase()
+        if (!commands[cmdType]) commands[cmdType] = []
+        let isDiabled = command.active === false
+        let cmd = command.name.trim()
+        commands[cmdType].push(isDiabled ? cmd + ' [disabled]' : cmd)
       }
     })
     const date = new Date()

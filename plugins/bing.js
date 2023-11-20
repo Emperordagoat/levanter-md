@@ -14,7 +14,23 @@ bot(
       )
     match = match || message.reply_message.text
     if (!match) return await message.send('*Example : bing Hi*')
+    await message.send(
+      {
+        text: '⏳',
+        key: message.message.key,
+      },
+      {},
+      'react'
+    )
     const res = await bing(match)
+    await message.send(
+      {
+        text: '✅',
+        key: message.message.key,
+      },
+      {},
+      'react'
+    )
     return await message.send(res, { quoted: message.data })
   }
 )
