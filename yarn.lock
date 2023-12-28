@@ -819,8 +819,8 @@ b4a@^1.6.4:
   integrity sha512-fpWrvyVHEKyeEvbKZTVOeZF3VSKKWtJxFIxX/jaVPf+cLbGUSitjb49pHLqPV2BUNNZ0LcoeEGfE/YCpyDYHIw==
 
 "baileys@git+https://github.com/WhiskeySockets/Baileys.git#master":
-  version "6.4.1"
-  resolved "git+https://github.com/WhiskeySockets/Baileys.git#cd8542ff7c072b5e58d2d3de2396983a5304e5e1"
+  version "6.5.0"
+  resolved "git+https://github.com/WhiskeySockets/Baileys.git#b7463ea6c436dae2192add2f333e6f669c268ad9"
   dependencies:
     "@adiwajshing/keyed-db" "^0.2.4"
     "@hapi/boom" "^9.1.3"
