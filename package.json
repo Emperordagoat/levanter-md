@@ -1,10 +1,10 @@
 {
   "name": "levanter",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start . --attach --namespace levanter --name levanter",
+    "start": "pm2 start . --attach --name levanter",
     "stop": "pm2 stop levanter",
     "heroku-postbuild": "git clone https://github.com/lyfe00011/whatsapp-bot-md.git temp && mv temp/.git .git && rm -rf temp"
   },
