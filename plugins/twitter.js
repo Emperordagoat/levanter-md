@@ -38,5 +38,6 @@ bot(
       // 	'button'
       // )
     }
+    await message.sendFromUrl(result[0].url, { quoted: message.quoted })
   }
 )
