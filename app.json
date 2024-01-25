@@ -1,5 +1,5 @@
 {
-  "name": "levanter@5.0.0",
+  "name": "levanter@5.2.3",
   "description": "",
   "keywords": ["noedjs"],
   "success_url": "/",
@@ -129,10 +129,7 @@
     }
   ],
 
-  "buildpacks": [
-    { "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" },
-    { "url": "https://github.com/carlosdommor/heroku-buildpack-ffmpeg-latest" }
-  ],
+  "buildpacks": [{ "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" }],
   "formation": {
     "web": {
       "quantity": 1,
