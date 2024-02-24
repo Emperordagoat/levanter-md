@@ -1,38 +1,41 @@
 {
-  "name": "levanter@5.2.3",
-  "description": "",
-  "keywords": ["noedjs"],
-  "success_url": "/",
+  "name": "levanter-md@1.0.0",
+  "description": "Hi there, I am Levanter Bot Whatsapp Bot built in NodeJs to make experience better.\n\t Incase of Any Problem Whatsapp me on: +254728782591",
+  "logo": "https://telegra.ph/file/54efddccf41281ad7ec51.jpg",
+  "keywords": [""whatsappbot", "levanterMd", "levanter Md bot", "Levanter-Md", "LevanterMdWhatsaooBot", "LevanterWaBot","LevanterMD","Levanter Md Whatsapp Bot","multi device"],
+  "success_url": "/levanter-md/",
+  "app_url": "/qr/",
+  
   "env": {
     "ALWAYS_ONLINE": {
-      "description": "show bot number last seen as online",
-      "required": false,
-      "value": "false"
+      "description": "Show bot as always online",
+      "required": true,
+      "value": "true"
     },
     "LOG_MSG": {
-      "description": "Show whatsapp msgs in log",
-      "required": false,
+      "description": "Show msgs in log",
+      "required": true,
       "value": "false"
     },
     "SUDO": {
       "description": "admin",
-      "required": false,
+      "required": true,
       "value": ""
     },
     "PREFIX": {
       "description": "prefix, check for more",
-      "required": false,
+      "required": true,
       "value": "."
     },
     "SESSION_ID": {
-      "description": "session id",
+      "description": "Put your SESSION_ID here.",
       "required": true,
       "value": ""
     },
     "STICKER_PACKNAME": {
       "description": "sticker pack info",
-      "required": false,
-      "value": "❤️,LyFE"
+      "required": true,
+      "value": "GiftedTech"
     },
     "HEROKU_APP_NAME": {
       "description": "Heroku app name, same as above entered.",
@@ -40,86 +43,82 @@
     },
     "HEROKU_API_KEY": {
       "description": "Heroku account api key, https://dashboard.heroku.com/account",
-      "required": true
+      "required": true,
+      "value": "6e3c88bf-1cdd-4016-8641-96ff2aca4c73"
     },
     "RMBG_KEY": {
       "description": "API key from remove.bg, required for plugin rmbg",
-      "required": false,
-      "value": "null"
+      "required": true,
+      "value": "DJwc34NaWmhXmDxEeh6YUEmm"
     },
     "LANGUAG": {
       "description": "Default Language for tts or trt",
-      "required": false,
+      "required": true,
       "value": "en"
     },
     "WARN_LIMIT": {
       "description": "Maximum number of wanings to a person.",
-      "required": false,
-      "value": "3"
+      "required": true,
+      "value": "5"
     },
     "FORCE_LOGOUT": {
       "description": "In Some scenario have to logout web, Only such case make this true and back to false after logout.",
-      "required": false,
+      "required": true,
       "value": "false"
-    },
-    "DISABLE_BOT": {
-      "description": "Example : jid,jid,... where bot not works in both ways.",
-      "required": false,
-      "value": "null"
     },
     "ANTILINK_MSG": {
       "description": "Message send when antilink and action is kick.",
-      "required": false,
+      "required": true,
       "value": "_Antilink Detected &mention kicked_"
     },
     "ANTISPAM_MSG": {
       "description": "Message send when antispam.",
-      "required": false,
+      "required": true,
       "value": "_Antispam Detected &mention kicked_"
     },
     "ANTIWORDS_MSG": {
       "description": "Message send when antiword.",
-      "required": false,
+      "required": true,
       "value": "_Antiword Detected &mention kicked_"
     },
     "ANTIWORDS": {
-      "description": "words that not allowed in chats.",
-      "required": false,
-      "value": "word1,word2,word3"
+      "description": "Bad words that not allowed in chats.",
+      "required": true,
+      "value": "fuck,stupid,word3"
     },
     "SS_TOKEN": {
       "description": "token from https://app.screenshotapi.net/dashboard",
-      "required": false,
+      "required": true,
       "value": ""
     },
     "REJECT_CALL": {
       "description": "auto reject call, if set as true",
-      "required": false,
+      "required": true,
       "value": "false"
     },
     "AUTO_STATUS_VIEW": {
       "description": "view others status",
-      "required": false,
-      "value": "false"
+      "required": true,
+      "value": "true"
     },
     "SEND_READ": {
-      "description": "send blue tick",
-      "required": false,
+      "description": "Auto blue tick messages",
+      "required": true,
       "value": "false"
     },
     "AJOIN": {
       "description": "Accept Group join request(Group privacy)",
-      "required": false,
+      "required": true,
       "value": "true"
     },
     "PERSONAL_MESSAGE": {
       "description": "Send a Welcome message on personal chat",
-      "required": false,
+      "required": true,
       "value": "null"
     },
     "DISABLE_START_MESSAGE": {
       "description": "Disable start Message",
-      "required": false,
+      "required": true,
       "value": "false"
     }
   },
@@ -129,11 +128,14 @@
     }
   ],
 
-  "buildpacks": [{ "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" }],
+  "buildpacks": [
+    { "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" }
+   { "url": "https://github.com/carlosdommor/heroku-buildpack-ffmpeg-latest" }
+  ],
   "formation": {
     "web": {
       "quantity": 1,
-      "size": "basic"
+      "size": "standard-2x"
     }
   }
 }
