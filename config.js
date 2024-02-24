@@ -4,7 +4,8 @@ const { existsSync } = require('fs')
 const path = require('path')
 const configPath = path.join(__dirname, './config.env')
 const databasePath = path.join(__dirname, './database.db')
-if (existsSync(configPath)) require('dotenv').config({ path: configPath })
+const fs = require('fs-extra')
+if (fs.existsSync('.env')) require('dotenv').config({ path: __dirname+'/.env' })
 const DATABASE_URL =
   process.env.DATABASE_URL === undefined ? databasePath : process.env.DATABASE_URL
 module.exports = {
@@ -32,26 +33,26 @@ module.exports = {
   HEROKU_APP_NAME: process.env.HEROKU_APP_NAME,
   HEROKU_API_KEY: process.env.HEROKU_API_KEY,
   BRANCH: 'master',
-  STICKER_PACKNAME: process.env.STICKER_PACKNAME || '❤️,LyFE',
+  STICKER_PACKNAME: process.env.STICKER_PACKNAME || 'GiftedTech',
   ALWAYS_ONLINE: toBool(process.env.ALWAYS_ONLINE),
   LOG_MSG: toBool(process.env.LOG_MSG) || false,
-  RMBG_KEY: process.env.RMBG_KEY || 'null',
+  RMBG_KEY: process.env.RMBG_KEY || 'DJwc34NaWmhXmDxEeh6YUEmm',
   BAILEYS_LOG_LVL: process.env.BAILEYS_LOG_LVL || 'silent',
   LANG: (process.env.LANGUAG || 'en').toLowerCase(),
-  WARN_LIMIT: process.env.WARN_LIMIT || 3,
+  WARN_LIMIT: process.env.WARN_LIMIT || 5,
   FORCE_LOGOUT: toBool(process.env.FORCE_LOGOUT),
   BRAINSHOP: process.env.BRAINSHOP || '159501,6pq8dPiYt7PdqHz3',
   DIS_BOT: process.env.DISABLE_BOT || 'null',
   ANTILINK_MSG: process.env.ANTILINK_MSG || '_Antilink Detected &mention kicked_',
   ANTISPAM_MSG: process.env.ANTISPAM_MSG || '_Antispam Detected &mention kicked_',
   ANTIWORDS_MSG: process.env.ANTIWORDS_MSG || '_AntiWord Detected &mention kicked_',
-  ANTIWORDS: process.env.ANTIWORDS || 'word',
+  ANTIWORDS: process.env.ANTIWORDS || 'fuck',
   MENTION: process.env.MENTION || '',
   SS_TOKEN: process.env.SS_TOKEN || '',
-  MAX_UPLOAD: process.env.MAX_UPLOAD || 230,
+  MAX_UPLOAD: process.env.MAX_UPLOAD || 250,
   REJECT_CALL: toBool(process.env.REJECT_CALL),
   VPS: toBool(process.env.VPS),
-  AUTO_STATUS_VIEW: (process.env.AUTO_STATUS_VIEW || 'false').trim(),
+  AUTO_STATUS_VIEW: (process.env.AUTO_STATUS_VIEW || 'true').trim(),
   SEND_READ: toBool(process.env.SEND_READ),
   KOYEB: toBool(process.env.KOYEB),
   KOYEB_NAME: (process.env.KOYEB_NAME || '').trim(),
@@ -77,4 +78,6 @@ module.exports = {
   DELETE_TYPE: (process.env.DELETE_TYPE || '').trim(),
   LIST_TYPE: (process.env.LIST_TYPE || 'poll').trim(),
   BING_COOKIE: (process.env.BING_COOKIE || '').trim(),
+  
+  global.api_smd = "https://api-smd-1.vercel.app"
 }
