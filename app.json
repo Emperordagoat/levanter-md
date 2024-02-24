@@ -2,7 +2,6 @@
   "name": "levanter-md@1.0.0",
   "description": "Hi there, I am Levanter Bot Whatsapp Bot built in NodeJs to make experience better.\n\t Incase of Any Problem Whatsapp me on: +254728782591",
   "keywords": ["whatsappbot", "levanterMd", "levanter Md bot", "Levanter-Md", "LevanterMdWhatsaooBot", "LevanterWaBot","LevanterMD","Levanter Md Whatsapp Bot","multi device"],
-  "success_url": "/levanter-md/",
   
   "env": {
     "ALWAYS_ONLINE": {
