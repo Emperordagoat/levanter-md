@@ -4,7 +4,6 @@
   "logo": "https://telegra.ph/file/54efddccf41281ad7ec51.jpg",
   "keywords": ["whatsappbot", "levanterMd", "levanter Md bot", "Levanter-Md", "LevanterMdWhatsaooBot", "LevanterWaBot","LevanterMD","Levanter Md Whatsapp Bot","multi device"],
   "success_url": "/levanter-md/",
-  "app_url": "/qr/",
   
   "env": {
     "ALWAYS_ONLINE": {
