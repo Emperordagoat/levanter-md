@@ -2,12 +2,15 @@
   "name": "levanter-md",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/index.js",
+  "main": "lib/client.js",
+  "type": "commonjs",
+  "engines" : { "node": "v18.16.0", "npm": "9.5.1" },
   "scripts": {
     "start": "pm2 start lib/client.js --deep-monitoring --attach --name levanter-md",
     "stop": "pm2 stop levanter-md",
     "heroku-postbuild": "git clone https://github.com/Giftedmaurice/levanter-md.git temp && mv temp/.git .git && rm -rf temp"
   },
+  "keywords": ["whatsapp bot md","whatsapp bot","sc bot","sc wa bot","levanter md","levanter whatsapp bot","Levanter md bot","multidevice","baileys bot"],
   "author": "GiftedTech",
   "license": "ISC",
   "dependencies": {
@@ -43,5 +46,21 @@
     "sqlite3": "^5.0.11",
     "translate-google-api": "^1.0.4",
     "youtubei.js": "6.4.1"
+     },
+   "directories": {
+             "lib": "lib",
+             "assets": "temp"
+   },
+   "devDependencies": {
+             "pino": "^7.0.5"
+   },
+   "repository": {
+             "type": "git",
+             "url": "git+https://github.com/Giftedmaurice/levanter-md.git"
+   },
+   "bugs": {
+             "url": "https://github.com/Giftedmaurice/levanter-md/issues"
+   },
+   "homepage": "https://github.com/Giftedmaurice/levanter-md-md#readme"
   }
 }
