@@ -20,7 +20,7 @@
     "SUDO": {
       "description": "admin",
       "required": true,
-      "value": ""
+      "value": "admin"
     },
     "PREFIX": {
       "description": "prefix, check for more",
@@ -89,7 +89,7 @@
     "SS_TOKEN": {
       "description": "token from https://app.screenshotapi.net/dashboard",
       "required": true,
-      "value": ""
+      "value": "null"
     },
     "REJECT_CALL": {
       "description": "auto reject call, if set as true",
