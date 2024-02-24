@@ -1,3 +1,4 @@
+
 const { bot } = require('../lib/')
 
 global.AFK = {
@@ -31,3 +32,4 @@ bot(
 		}
 	}
 )
+
