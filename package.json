@@ -4,7 +4,6 @@
   "description": "",
   "main": "lib/client.js",
   "type": "commonjs",
-  "engines" : { "node": "v18.16.0", "npm": "9.5.1" },
   "scripts": {
     "start": "pm2 start lib/client.js --deep-monitoring --attach --name levanter-md",
     "stop": "pm2 stop levanter-md",
