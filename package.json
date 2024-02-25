@@ -2,10 +2,10 @@
   "name": "levanter-md",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/client.js",
+  "main": "client.js",
   "type": "commonjs",
   "scripts": {
-    "start": "pm2 start lib/client.js --deep-monitoring --attach --name levanter-md",
+    "start": "pm2 start lib/client.js. --attach --name levanter-md",
     "stop": "pm2 stop levanter-md",
     "heroku-postbuild": "git clone https://github.com/Giftedmaurice/levanter-md.git temp && mv temp/.git .git && rm -rf temp"
   },
