@@ -9,8 +9,6 @@
     "stop": "pm2 stop levanter-md",
     "heroku-postbuild": "git clone https://github.com/Giftedmaurice/levanter-md.git temp && mv temp/.git .git && rm -rf temp"
   },
-  "keywords": ["whatsapp bot md","whatsapp bot","sc bot","sc wa bot","levanter md","levanter whatsapp bot","Levanter md bot","multidevice","baileys bot"],
-  "author": "GiftedTech",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.3.3",
